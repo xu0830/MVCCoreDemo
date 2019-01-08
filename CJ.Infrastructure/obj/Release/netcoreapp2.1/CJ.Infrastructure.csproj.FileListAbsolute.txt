@@ -1,0 +1,9 @@
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\bin\Release\netcoreapp2.1\CJ.Infrastructure.deps.json
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\bin\Release\netcoreapp2.1\CJ.Infrastructure.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\bin\Release\netcoreapp2.1\CJ.Infrastructure.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\obj\Release\netcoreapp2.1\CJ.Infrastructure.csprojAssemblyReference.cache
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\obj\Release\netcoreapp2.1\CJ.Infrastructure.csproj.CoreCompileInputs.cache
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\obj\Release\netcoreapp2.1\CJ.Infrastructure.AssemblyInfoInputs.cache
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\obj\Release\netcoreapp2.1\CJ.Infrastructure.AssemblyInfo.cs
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\obj\Release\netcoreapp2.1\CJ.Infrastructure.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\obj\Release\netcoreapp2.1\CJ.Infrastructure.pdb

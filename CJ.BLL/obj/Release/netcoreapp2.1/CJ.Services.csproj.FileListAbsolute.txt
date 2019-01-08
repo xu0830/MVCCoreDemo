@@ -1,0 +1,14 @@
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\bin\Release\netcoreapp2.1\CJ.Services.deps.json
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\bin\Release\netcoreapp2.1\CJ.Services.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\bin\Release\netcoreapp2.1\CJ.Services.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\bin\Release\netcoreapp2.1\CJ.Models.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\bin\Release\netcoreapp2.1\CJ.Models.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\obj\Release\netcoreapp2.1\CJ.Services.csprojAssemblyReference.cache
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\obj\Release\netcoreapp2.1\CJ.Services.csproj.CoreCompileInputs.cache
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\obj\Release\netcoreapp2.1\CJ.Services.AssemblyInfoInputs.cache
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\obj\Release\netcoreapp2.1\CJ.Services.AssemblyInfo.cs
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\obj\Release\netcoreapp2.1\CJ.Services.csproj.CopyComplete
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\obj\Release\netcoreapp2.1\CJ.Services.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\obj\Release\netcoreapp2.1\CJ.Services.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\bin\Release\netcoreapp2.1\CJ.Infrastructure.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\bin\Release\netcoreapp2.1\CJ.Infrastructure.pdb

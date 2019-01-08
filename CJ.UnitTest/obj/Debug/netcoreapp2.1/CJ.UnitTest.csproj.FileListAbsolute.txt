@@ -1,0 +1,17 @@
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\bin\Debug\netcoreapp2.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\bin\Debug\netcoreapp2.1\xunit.runner.reporters.netcoreapp10.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\bin\Debug\netcoreapp2.1\xunit.runner.utility.netcoreapp10.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\bin\Debug\netcoreapp2.1\CJ.UnitTest.deps.json
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\bin\Debug\netcoreapp2.1\CJ.UnitTest.runtimeconfig.json
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\bin\Debug\netcoreapp2.1\CJ.UnitTest.runtimeconfig.dev.json
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\bin\Debug\netcoreapp2.1\CJ.UnitTest.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\bin\Debug\netcoreapp2.1\CJ.UnitTest.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\bin\Debug\netcoreapp2.1\CJ.Infrastructure.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\bin\Debug\netcoreapp2.1\CJ.Infrastructure.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\obj\Debug\netcoreapp2.1\CJ.UnitTest.csprojAssemblyReference.cache
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\obj\Debug\netcoreapp2.1\CJ.UnitTest.csproj.CoreCompileInputs.cache
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\obj\Debug\netcoreapp2.1\CJ.UnitTest.AssemblyInfoInputs.cache
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\obj\Debug\netcoreapp2.1\CJ.UnitTest.AssemblyInfo.cs
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\obj\Debug\netcoreapp2.1\CJ.UnitTest.csproj.CopyComplete
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\obj\Debug\netcoreapp2.1\CJ.UnitTest.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\obj\Debug\netcoreapp2.1\CJ.UnitTest.pdb

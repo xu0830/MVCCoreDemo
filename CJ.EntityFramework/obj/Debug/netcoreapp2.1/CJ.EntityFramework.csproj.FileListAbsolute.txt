@@ -1,0 +1,6 @@
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.EntityFramework\bin\Debug\netcoreapp2.1\CJ.EntityFramework.deps.json
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.EntityFramework\bin\Debug\netcoreapp2.1\CJ.EntityFramework.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.EntityFramework\obj\Debug\netcoreapp2.1\CJ.EntityFramework.csprojAssemblyReference.cache
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.EntityFramework\obj\Debug\netcoreapp2.1\CJ.EntityFramework.csproj.CoreCompileInputs.cache
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.EntityFramework\obj\Debug\netcoreapp2.1\CJ.EntityFramework.AssemblyInfoInputs.cache
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.EntityFramework\obj\Debug\netcoreapp2.1\CJ.EntityFramework.AssemblyInfo.cs

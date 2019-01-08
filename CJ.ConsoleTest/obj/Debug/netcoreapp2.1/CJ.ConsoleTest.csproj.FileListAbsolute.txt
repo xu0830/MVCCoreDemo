@@ -1,0 +1,14 @@
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\bin\Debug\netcoreapp2.1\CJ.ConsoleTest.deps.json
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\bin\Debug\netcoreapp2.1\CJ.ConsoleTest.runtimeconfig.json
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\bin\Debug\netcoreapp2.1\CJ.ConsoleTest.runtimeconfig.dev.json
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\bin\Debug\netcoreapp2.1\CJ.ConsoleTest.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\bin\Debug\netcoreapp2.1\CJ.ConsoleTest.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\bin\Debug\netcoreapp2.1\CJ.Infrastructure.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\bin\Debug\netcoreapp2.1\CJ.Infrastructure.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\obj\Debug\netcoreapp2.1\CJ.ConsoleTest.csproj.CoreCompileInputs.cache
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\obj\Debug\netcoreapp2.1\CJ.ConsoleTest.AssemblyInfoInputs.cache
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\obj\Debug\netcoreapp2.1\CJ.ConsoleTest.AssemblyInfo.cs
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\obj\Debug\netcoreapp2.1\CJ.ConsoleTest.csproj.CopyComplete
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\obj\Debug\netcoreapp2.1\CJ.ConsoleTest.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\obj\Debug\netcoreapp2.1\CJ.ConsoleTest.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\obj\Debug\netcoreapp2.1\CJ.ConsoleTest.csprojAssemblyReference.cache
