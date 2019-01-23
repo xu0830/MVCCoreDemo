@@ -1,73 +1,27 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Index";
     Layout = null;
 }
+<!DOCTYPE html>
 <html>
 <head>
-
+    <meta charset="UTF-8">
+    <!-- import CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 <body>
     <div id="app">
-        {{message}}
-        @*@ViewBag.Msg*@
+        <h1>Hello App!</h1>
+        <p>
+            <router-link to="/foo">Go to Foo</router-link>
+            <router-link to="/bar">Go to Bar</router-link>
+        </p>
+        <router-view></router-view>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue-resource"></script>
-    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-        var data = { searchword: "example", searchtype: 1 };
-        //data = JSON.stringify(data);
-        //console.log(data);
-        var app = new Vue({
-            el: '#app',
-            data: {
-                message: 'Hello!'
-            }
-        });
-        console.log(app.$http);
-
-        //var params = new URLSearchParams();
-        //params.append('searchword', '寅子');
-        //params.append('searchtype', 1);
-
-        axios({
-            url: '/Home/SearchApi',
-            method: 'post',
-            data: {
-                searchword: "example",
-                searchtype: 100
-            }
-            //headers: {
-            //    'content-type': 'application/x-www-form-urlencoded;charset=UTF-8'
-            //}
-        }).then(response => {
-            console.log(response.data);
-        });
-
-        //$.ajax({
-        //    url: '/Home/SearchApi',
-        //    type: 'post',
-        //    contentType: "application/json;charset=utf-8",
-        //    data: {
-        //        searchword: "example",
-        //        searchtype: 1
-        //    },
-        //    success: function (data) {
-        //        console.log(data);
-        //    }
-        //});
-
-            //fetch("/Home/SearchApi", {
-            //    method: 'post',
-            //    body: JSON.stringify(data),
-            //    headers: new Headers({
-            //        'Content-Type': 'application/json'
-            //    })
-            //}).then(res => res.json())
-            //.catch(error => console.error('Error:', error))
-            //.then(response => console.log('Success:', response));
-
-    </script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="~/js/main.js"></script>
 </body>
+
 </html>

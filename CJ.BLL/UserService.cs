@@ -10,11 +10,17 @@ namespace CJ.Services
     {
         private static DefaultDbContext context = new DefaultDbContext();
 
+        /// <summary>
+        /// 用户登录接口
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public static bool CheckUser(string username, string password)
         {
             try
             {
-                User user = context.Users.Where(c => c.UserName == username && c.Password == password).FirstOrDefault();
+                User user = context.Users.Where(c => c.UserName == username && c.Password == RSAHelper.Decrypt(RSAHelper.GetRSAKey().PrivateKey, password)).FirstOrDefault();
 
                 SessionHelper.SetSession("user", password);
 
@@ -25,7 +31,12 @@ namespace CJ.Services
                 return false;
             }
         }
-
+        
+        /// <summary>
+        /// 根据Id获取用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public static User GetUserById(int id)
         {
             try
@@ -39,6 +50,10 @@ namespace CJ.Services
             }
         }
 
+        /// <summary>
+        /// 用户登出
+        /// </summary>
+        /// <returns></returns>
         public static bool Logout()
         {
             try
@@ -52,6 +67,10 @@ namespace CJ.Services
             }
         }
 
+        /// <summary>
+        /// 判断登录状态
+        /// </summary>
+        /// <returns></returns>
         public static bool IsLogin()
         {
             var user = SessionHelper.GetSession("user");

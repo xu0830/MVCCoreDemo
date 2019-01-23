@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>20e44afa-6bd4-4ed6-998c-dcb9f11b18ef</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,5 +17,7 @@
     <ProjectReference Include="..\CJ.Infrastructure\CJ.Infrastructure.csproj" />
     <ProjectReference Include="..\CJ.Models\CJ.Models.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

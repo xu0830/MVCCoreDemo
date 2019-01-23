@@ -1,351 +1,225 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.Security.Cryptography;
+﻿using CJ.Infrastructure;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.IO;
-using System.Net;
-using System.Numerics;
-using CJ.Infrastructure;
-using RestSharp;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace GEEKiDoS.MusicPlayer.NeteaseCloudMusicApi
 {
     public class Program
     {
-        public static void Main(string[] para)
+          private static readonly string _privateKey = @"MIICWwIBAAKBgQCKdCeiDDVVRZNMOk0zZzK4v4CjoxhLmoWXuVhhKoRUUoQ/bRRA
+UdT+PKOMOFzPyALg6OM9dRo7e6VIWjJlgzJ3dy5ASdiXSyc1Ptl0Xvy8/BJPDlLp
+jLUFvcj2prdAxZtnKbVGNwPCTJ+exULXgw5ZTAucZOY37cDavaL5tiebTQIDAQAB
+AoGAfL0bvAatwk6137ajOU2fyA1Y85UMXYkxFTo6owgwQtw5I/+9gBl6AThWzQ02
+qUj1Nvb7TLKFWNQUXHRO9WBXhS/V97EnnXv97Un25Kf8a0pqPjIJYDn7Lr5lXmXe
+hn0hW0lc5T4mDEspxFh0MUrjGOUDjlMBmnl/tmYTdFjVry0CQQCremTHmm+yjNbR
+pHZQrO19PbMFSaTYRD/vOW7wae3jW6pKDOM79s2+SVnJLMv3Wpio05o4ybJqWrxV
+BklJmbvnAkEAzrKmXIwOKivqkbH8vQazfxEQQ8//TnR44phn+VPdYB1EcVt8iPKF
+6bhDIMokOnaA2t6cFhzNIAznbckAlK0oqwJAK1BNKIX/9M/Saz3pjNNBYcM19v31
+H5ONurV9Kkj3h9hdmTrMIxdiPNB2V3RzSNWfffWFHRcFdAvbSna+CFNGvQJAC7A6
+jB03Z9cX6qk/+4h3egYC/3Kxo0Qe2eF4b7b4W8kL58Ueo7fjLrZGxYHozo2I99eC
+yBVU3C0eoSyupbmtBQJAG8X+x5kMVvqKezyM7ppjpZCfS24jbDvQAEHS1dIirhXa
+PepCj2qOhtpQVDMPPzCOQN/qTE9AcYea/NECSh0s5Q==".Replace("\n", "");
+
+        //openssl rsa -pubout -in rsa_1024_priv.pem -out rsa_1024_pub.pem
+        private static readonly string _publicKey = @"".Replace("\n", "");
+
+        public static void Main(string[] args)
         {
-            string secretKey = NeteaseEncrypt.CreateSecretKey(16);
-
-            var requestdata = new
-            {
-                s = "寅子",
-                type = 1,
-                limit = 30,
-                offset = 0,
-            };
-
-            string aesEncrypt = NeteaseEncrypt.AESEncode(JsonConvert.SerializeObject(requestdata), NeteaseEncrypt._NONCE);
-
-            string _params = HttpHelper.CharEncode(NeteaseEncrypt.AESEncode(aesEncrypt, secretKey));
-            string rsaEncrypt = HttpHelper.CharEncode(NeteaseEncrypt.RSAEncode(secretKey));
-
-            string postData = $"params={_params}&encSecKey={rsaEncrypt}&undefined=";
-
-            var client = new RestClient("http://music.163.com/weapi/cloudsearch/get/web");
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("cache-control", "no-cache");
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddParameter("undefined", "params=x3L1F1bU1Daj7KDAydtQLymPg6JPUTDXlAf%2B8grKccV%2FrlGomjDfBmPsRtE7NvtNp3pBfJ6anLNLu3UX64foJfnpfTgY3EUs4pGlV0ZwCTY%3D&encSecKey=63f5b8ea368d2113c095e13660ed3455a9e6b4414e2c48a58b7c7ef64f242ec898176317da0217e4bee44cb23741ee5c975154a09f026293ccfd0741544d63d8e14213e48684cb80196d112d4994c1f0b06f7b84cdcc2174d980852a9ff2d1863dc39fd6efd4a37b10cabd07e4f9415b4365a87c8a5edd7ce6f0a2f61611b884&undefined=", ParameterType.RequestBody);
-            IRestResponse restResponse = client.Execute(request);
-
-            var client1 = new RestClient("http://music.163.com/weapi/cloudsearch/get/web");
-            var request1 = new RestRequest(Method.POST);
-            request1.AddHeader("cache-control", "no-cache");
-            request1.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request1.AddParameter("undefined", "params=" + _params + "&encSecKey=" + rsaEncrypt, ParameterType.RequestBody);
-            IRestResponse restResponse1 = client.Execute(request);
-        }
-    }
-
-
-    class NeteaseMusicAPI
-    {
-        // General
-        private string _MODULUS = "00e0b509f6259df8642dbc35662901477df22677ec152b5ff68ace615bb7b725152b3ab17a876aea8a5aa76d2e417629ec4ee341f56135fccf695280104e0312ecbda92557c93870114af6c9d05c4f7f0c3685b7a46bee255932575cce10b424d813cfe4875d3e82047b97ddef52741d546b8e289dc6935b3ece0462db0a22b8e7";
-        private string _NONCE = "0CoJUm6Qyw8W8jud";
-        private string _PUBKEY = "010001";
-        private string _VI = "0102030405060708";
-        private string _USERAGENT = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36";
-        private string _COOKIE = "os=pc;osver=Microsoft-Windows-10-Professional-build-16299.125-64bit;appver=2.0.3.131777;channel=netease;__remember_me=true";
-        private string _REFERER = "http://music.163.com/";
-        // use keygen in c#
-        private string _secretKey;
-        private string _encSecKey;
-        private string _params;
-
-
-        public NeteaseMusicAPI()
-        {
-            _secretKey = CreateSecretKey(16);
-            _encSecKey = RSAEncode(_secretKey);
+            var jsonObj = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
+            string publicKey = jsonObj.GetSection("privateKey").Value;
+            string privateKey = jsonObj.GetSection("publicKey").Value;
+            string plainText = "xucanjie";
+            Console.WriteLine(publicKey);
+            Console.WriteLine(privateKey);
+            var cipher = RSAHelper.Encrypt(publicKey, plainText);
+            Console.WriteLine($"密文: {cipher}");
+            var plainStr = RSAHelper.Decrypt(privateKey, cipher);
+            Console.WriteLine($"解密后的明文: {plainStr}");
         }
 
-        private string CreateSecretKey(int length)
+
+        private static RSA CreateRsaFromPrivateKey(string privateKey)
         {
-            var str = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            var r = "";
-            var rnd = new Random();
-            for (int i = 0; i < length; i++)
+            var privateKeyBits = System.Convert.FromBase64String(privateKey);
+            var rsa = RSA.Create();
+            var RSAparams = new RSAParameters();
+
+            using (var binr = new BinaryReader(new MemoryStream(privateKeyBits)))
             {
-                r += str[rnd.Next(0, str.Length)];
+                byte bt = 0;
+                ushort twobytes = 0;
+                twobytes = binr.ReadUInt16();
+                if (twobytes == 0x8130)
+                    binr.ReadByte();
+                else if (twobytes == 0x8230)
+                    binr.ReadInt16();
+                else
+                    throw new Exception("Unexpected value read binr.ReadUInt16()");
+
+                twobytes = binr.ReadUInt16();
+                if (twobytes != 0x0102)
+                    throw new Exception("Unexpected version");
+
+                bt = binr.ReadByte();
+                if (bt != 0x00)
+                    throw new Exception("Unexpected value read binr.ReadByte()");
+
+                RSAparams.Modulus = binr.ReadBytes(GetIntegerSize(binr));
+                RSAparams.Exponent = binr.ReadBytes(GetIntegerSize(binr));
+                RSAparams.D = binr.ReadBytes(GetIntegerSize(binr));
+                RSAparams.P = binr.ReadBytes(GetIntegerSize(binr));
+                RSAparams.Q = binr.ReadBytes(GetIntegerSize(binr));
+                RSAparams.DP = binr.ReadBytes(GetIntegerSize(binr));
+                RSAparams.DQ = binr.ReadBytes(GetIntegerSize(binr));
+                RSAparams.InverseQ = binr.ReadBytes(GetIntegerSize(binr));
             }
-            return r;
+
+            rsa.ImportParameters(RSAparams);
+            return rsa;
         }
 
-        private Dictionary<string, string> Prepare(string raw)
+        private static int GetIntegerSize(BinaryReader binr)
         {
-            Dictionary<string, string> data = new Dictionary<string, string>();
-            data["params"] = AESEncode(raw, _NONCE);
-            data["params"] = AESEncode(data["params"], _secretKey);
-            data["encSecKey"] = _encSecKey;
-            _params = data["params"];
-            return data;
-        }
+            byte bt = 0;
+            byte lowbyte = 0x00;
+            byte highbyte = 0x00;
+            int count = 0;
+            bt = binr.ReadByte();
+            if (bt != 0x02)
+                return 0;
+            bt = binr.ReadByte();
 
-        // encrypt mod
-        private string RSAEncode(string text)
-        {
-            string srtext = new string(text.Reverse().ToArray()); ;
-            var a = BCHexDec(BitConverter.ToString(Encoding.Default.GetBytes(srtext)).Replace("-", ""));
-            var b = BCHexDec(_PUBKEY);
-            var c = BCHexDec(_MODULUS);
-            var key = BigInteger.ModPow(a, b, c).ToString("x");
-            key = key.PadLeft(256, '0');
-            if (key.Length > 256)
-                return key.Substring(key.Length - 256, 256);
+            if (bt == 0x81)
+                count = binr.ReadByte();
             else
-                return key;
-        }
-
-        private BigInteger BCHexDec(string hex)
-        {
-            BigInteger dec = new BigInteger(0);
-            int len = hex.Length;
-            for (int i = 0; i < len; i++)
+                if (bt == 0x82)
             {
-                dec += BigInteger.Multiply(new BigInteger(Convert.ToInt32(hex[i].ToString(), 16)), BigInteger.Pow(new BigInteger(16), len - i - 1));
+                highbyte = binr.ReadByte();
+                lowbyte = binr.ReadByte();
+                byte[] modint = { lowbyte, highbyte, 0x00, 0x00 };
+                count = BitConverter.ToInt32(modint, 0);
             }
-            return dec;
+            else
+            {
+                count = bt;
+            }
+
+            while (binr.ReadByte() == 0x00)
+            {
+                count -= 1;
+            }
+            binr.BaseStream.Seek(-1, SeekOrigin.Current);
+            return count;
         }
 
-        private string AESEncode(string secretData, string secret = "TA3YiYCfY2dDJQgg") 
+        private static RSA CreateRsaFromPublicKey(string publicKeyString)
         {
-            byte[] encrypted;
-            byte[] IV = Encoding.UTF8.GetBytes(_VI);
+            byte[] SeqOID = { 0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05, 0x00 };
+            byte[] x509key;
+            byte[] seq = new byte[15];
+            int x509size;
 
-            using (var aes = Aes.Create())
+            x509key = Convert.FromBase64String(publicKeyString);
+            x509size = x509key.Length;
+
+            using (var mem = new MemoryStream(x509key))
             {
-                aes.Key = Encoding.UTF8.GetBytes(secret);
-                aes.IV = IV;
-                aes.Mode = CipherMode.CBC;
-                using (var encryptor = aes.CreateEncryptor())
+                using (var binr = new BinaryReader(mem))
                 {
-                    using (var stream = new MemoryStream())
+                    byte bt = 0;
+                    ushort twobytes = 0;
+
+                    twobytes = binr.ReadUInt16();
+                    if (twobytes == 0x8130)
+                        binr.ReadByte();
+                    else if (twobytes == 0x8230)
+                        binr.ReadInt16();
+                    else
+                        return null;
+
+                    seq = binr.ReadBytes(15);
+                    if (!CompareBytearrays(seq, SeqOID))
+                        return null;
+
+                    twobytes = binr.ReadUInt16();
+                    if (twobytes == 0x8103)
+                        binr.ReadByte();
+                    else if (twobytes == 0x8203)
+                        binr.ReadInt16();
+                    else
+                        return null;
+
+                    bt = binr.ReadByte();
+                    if (bt != 0x00)
+                        return null;
+
+                    twobytes = binr.ReadUInt16();
+                    if (twobytes == 0x8130)
+                        binr.ReadByte();
+                    else if (twobytes == 0x8230)
+                        binr.ReadInt16();
+                    else
+                        return null;
+
+                    twobytes = binr.ReadUInt16();
+                    byte lowbyte = 0x00;
+                    byte highbyte = 0x00;
+
+                    if (twobytes == 0x8102)
+                        lowbyte = binr.ReadByte();
+                    else if (twobytes == 0x8202)
                     {
-                        using (var cstream = new CryptoStream(stream, encryptor, CryptoStreamMode.Write))
-                        {
-                            using (var sw = new StreamWriter(cstream))
-                            {
-                                sw.Write(secretData);
-                            }
-                            encrypted = stream.ToArray();
-                        }
+                        highbyte = binr.ReadByte();
+                        lowbyte = binr.ReadByte();
                     }
+                    else
+                        return null;
+                    byte[] modint = { lowbyte, highbyte, 0x00, 0x00 };
+                    int modsize = BitConverter.ToInt32(modint, 0);
+
+                    int firstbyte = binr.PeekChar();
+                    if (firstbyte == 0x00)
+                    {
+                        binr.ReadByte();
+                        modsize -= 1;
+                    }
+
+                    byte[] modulus = binr.ReadBytes(modsize);
+
+                    if (binr.ReadByte() != 0x02)
+                        return null;
+                    int expbytes = (int)binr.ReadByte();
+                    byte[] exponent = binr.ReadBytes(expbytes);
+
+                    var rsa = RSA.Create();
+                    var rsaKeyInfo = new RSAParameters
+                    {
+                        Modulus = modulus,
+                        Exponent = exponent
+                    };
+                    rsa.ImportParameters(rsaKeyInfo);
+                    return rsa;
                 }
+
             }
-            return Convert.ToBase64String(encrypted);
         }
 
-        // fake curl
-        private string CURL(string url, Dictionary<string, string> parms, string method = "POST")
+        private static bool CompareBytearrays(byte[] a, byte[] b)
         {
-            string result;
-            using (var wc = new WebClient())
+            if (a.Length != b.Length)
+                return false;
+            int i = 0;
+            foreach (byte c in a)
             {
-                wc.Headers.Add(HttpRequestHeader.ContentType, "application/x-www-form-urlencoded");
-                wc.Headers.Add(HttpRequestHeader.Referer, _REFERER);
-                wc.Headers.Add(HttpRequestHeader.UserAgent, _USERAGENT);
-                wc.Headers.Add(HttpRequestHeader.Cookie, _COOKIE);
-                var reqparm = new System.Collections.Specialized.NameValueCollection();
-                foreach (var keyPair in parms)
-                {
-                    reqparm.Add(keyPair.Key, keyPair.Value);
-                }
-
-                byte[] responsebytes = wc.UploadValues(url, method, reqparm);
-                result = Encoding.UTF8.GetString(responsebytes);
+                if (c != b[i])
+                    return false;
+                i++;
             }
-            return result;
+            return true;
         }
-
-        // api start
-        private class SearchJson
-        {
-            public string s;
-            public int type;
-            public int limit;
-            public string total = "true";
-            public int offset;
-            public string csrf_token = "";
-        }
-
-        public enum SearchType
-        {
-            Song = 1,
-            Album = 10,
-            Artist = 100,
-            PlayList = 1000,
-            User = 1002,
-            Radio = 1009,
-        }
-
-        public string Search(string keyword, int limit = 30, int offset = 0, SearchType type = SearchType.Song)
-        {
-            var url = "http://music.163.com/weapi/cloudsearch/get/web";
-            var data = new SearchJson
-            {
-                s = keyword,
-                type = (int)type,
-                limit = limit,
-                offset = offset,
-            };
-
-            //string raw = CURL(url, Prepare(JsonConvert.SerializeObject(data)));
-            return CURL(url, Prepare(JsonConvert.SerializeObject(data)));
-
-            //var DeserialedObj = JsonConvert.DeserializeObject<SearchResult>(raw);
-
-            //return DeserialedObj;
-        }
-
-
-        //public ArtistResult Artist(long artist_id)
-        //{
-        //    var url = "http://music.163.com/weapi/v1/artist/" + artist_id.ToString() + "?csrf_token=";
-        //    var data = new Dictionary<string, string>
-        //    {
-        //        {"csrf_token",""}
-        //    };
-        //    var raw = CURL(url, Prepare(JsonConvert.SerializeObject(data)));
-
-        //    var deserialedObj = JsonConvert.DeserializeObject<ArtistResult>(raw);
-        //    return deserialedObj;
-        //}
-
-        //public AlbumResult Album(long album_id)
-        //{
-        //    string url = "http://music.163.com/weapi/v1/album/" + album_id.ToString() + "?csrf_token=";
-        //    var data = new Dictionary<string, string> {
-        //        { "csrf_token","" },
-        //    };
-        //    string raw = CURL(url, Prepare(JsonConvert.SerializeObject(data)));
-        //    var deserialedObj = JsonConvert.DeserializeObject<AlbumResult>(raw);
-        //    return deserialedObj;
-        //}
-
-        //public DetailResult Detail(long song_id)
-        //{
-        //    string url = "http://music.163.com/weapi/v3/song/detail?csrf_token=";
-        //    var data = new Dictionary<string, string> {
-        //        { "c",
-        //            "[" + JsonConvert.SerializeObject(new Dictionary<string, string> { //神tm 加密的json里套json mdzz (说不定一次可以查多首歌?)
-        //                { "id", song_id.ToString() }
-        //            }) + "]"
-        //        },
-        //        {"csrf_token",""},
-        //    };
-        //    string raw = CURL(url, Prepare(JsonConvert.SerializeObject(data)));
-
-        //    var deserialedObj = JsonConvert.DeserializeObject<DetailResult>(raw);
-        //    return deserialedObj;
-        //}
-
-        //private class GetSongUrlJson
-        //{
-        //    public long[] ids;
-        //    public long br;
-        //    public string csrf_token = "";
-        //}
-
-        //public SongUrls GetSongsUrl(long[] song_id, long bitrate = 999000)
-        //{
-        //    string url = "http://music.163.com/weapi/song/enhance/player/url?csrf_token=";
-
-
-        //    var data = new GetSongUrlJson
-        //    {
-        //        ids = song_id,
-        //        br = bitrate
-        //    };
-
-        //    string raw = CURL(url, Prepare(JsonConvert.SerializeObject(data)));
-
-        //    var deserialedObj = JsonConvert.DeserializeObject<SongUrls>(raw);
-        //    return deserialedObj;
-        //}
-
-
-
-        //public PlayListResult Playlist(long playlist_id)
-        //{
-        //    string url = "http://music.163.com/weapi/v3/playlist/detail?csrf_token=";
-        //    var data = new Dictionary<string, string> {
-        //        { "id",playlist_id.ToString() },
-        //        { "n" , "1000" },
-        //        { "csrf_token" , "" },
-        //    };
-        //    string raw = CURL(url, Prepare(JsonConvert.SerializeObject(data)));
-
-        //    var deserialedObj = JsonConvert.DeserializeObject<PlayListResult>(raw);
-        //    return deserialedObj;
-        //}
-
-        //public LyricResult Lyric(long song_id)
-        //{
-        //    string url = "http://music.163.com/weapi/song/lyric?csrf_token=";
-        //    var data = new Dictionary<string, string> {
-        //        { "id",song_id.ToString()},
-        //        { "os","pc" },
-        //        { "lv","-1" },
-        //        { "kv","-1" },
-        //        { "tv","-1" },
-        //        { "csrf_token","" }
-        //    };
-
-        //    string raw = CURL(url, Prepare(JsonConvert.SerializeObject(data)));
-        //    var deserialedObj = JsonConvert.DeserializeObject<LyricResult>(raw);
-        //    return deserialedObj;
-        //}
-
-        //public MVResult MV(int mv_id)
-        //{
-        //    string url = "http://music.163.com/weapi/mv/detail?csrf_token=";
-        //    var data = new Dictionary<string, string> {
-        //        { "id",mv_id.ToString() },
-        //        { "csrf_token","" },
-        //    };
-        //    string raw = CURL(url, Prepare(JsonConvert.SerializeObject(data)));
-        //    var deserialedObj = JsonConvert.DeserializeObject<MVResult>(
-        //        raw.Replace("\"720\"", "\"the720\"")
-        //           .Replace("\"480\"", "\"the480\"")
-        //           .Replace("\"240\"", "\"the240\"")); //不能解析数字key的解决方案
-        //    return deserialedObj;
-        //}
-
-        ////static url encrypt, use for pic
-
-        //public string Id2Url(int id)
-        //{
-        //    byte[] magic = Encoding.ASCII.GetBytes("3go8&8*3*3h0k(2)2");
-        //    byte[] song_id = Encoding.ASCII.GetBytes(id.ToString());
-
-        //    for (int i = 0; i < song_id.Length; i++)
-        //        song_id[i] = Convert.ToByte(song_id[i] ^ magic[i % magic.Length]);
-
-        //    string result;
-
-        //    using (var md5 = MD5.Create())
-        //    {
-        //        md5.ComputeHash(song_id);
-        //        result = Convert.ToBase64String(md5.Hash);
-        //    }
-
-        //    result = result.Replace("/", "_");
-        //    result = result.Replace("+", "-");
-        //    return result;
-        //}
     }
+
 }

@@ -1,10 +1,82 @@
 ﻿@{
     ViewData["Title"] = "Index";
+    Layout = null;
 }
 
-<h2>@ViewBag.User</h2>
-<form action="/Login/Login" method="post">
-    <input name="UserName" type="text"/>
-    <input name="Password" type="password"/>
-    <input type="submit" value="登录"/>
-</form>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="~/css/reset.css" />
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="~/css/Login.css" />
+</head>
+<body>
+    <div id="app" @@mouseup="mouseUp" @@mousemove="sliderMousemove">
+        <el-container>
+            <el-header></el-header>
+            <el-main>
+                <div class="loginForm">
+                    <el-form ref="loginForm" :rules="loginRules" :model="loginForm" label-width="80px" size="large" :label-position="labelPosition">
+                        <el-form-item label="账户" class="el-account" prop="userName">
+                            <el-input v-model="loginForm.userName" placeholder="请输入您的账户" autocomplete="off">
+                                <i slot="prefix" class="el-input__icon"></i>
+                            </el-input>
+                        </el-form-item>
+                        <el-form-item label="密码" class="el-password" prop="password">
+                            <el-input v-model="loginForm.password" type="password" placeholder="请输入您的密码" autocomplete="off">
+                                <i slot="prefix" class="el-input__icon "></i>
+                            </el-input>
+                        </el-form-item>
+                        <div class="picBlockContainer" @@mouseover="picContainerFocus" :style="{display: picBlockFocus ? 'block' : 'none'}">
+                            <transition name="fade"
+                                        enter-class="fade-in-enter"
+                                        enter-active-class="fade-in-active"
+                                        leave-class="fade-out-enter"
+                                        leave-active-class="fade-out-active">
+                                <div v-show="picBlockFocus">
+                                    <div class="verifyPicBlock" @@mouseover="verifyPicShow" @@mouseout="verifyPicHide">
+                                        <span @@click="verifyPicDraw"></span>
+                                        <canvas id="canvas_bot" width="250" height="140" style="position:absolute; top: 0; left: 0; z-index: 2; border-radius:4px;"></canvas>
+                                        <canvas id="canvas_move" width="250" height="140" style="position:absolute; top: 0; left: 0; z-index: 3; border-radius:4px;"></canvas>
+                                    </div>
+                                </div>
+                            </transition>
+                        </div>
+                        <el-form-item label="滑动验证" prop="slideVerify" >
+                            <div class="slider" @@mouseover="verifyPicShow" @@mouseout="verifyPicHide">
+                                {{ dragX > 0 ? '&nbsp;' : '向右拖动滑块完成拼图' }}
+                                <div class="slide_Indicator" :style="{ width: dragX + 'px', borderColor: validationComplete ? '#52ccba': validationError ? '#f57a7a' : dragX > 0 ? '#1991fa' : '', backgroundColor: validationComplete ? '#d2f4ef': validationError ? '#fce1e1' : '#d1e9fe'}"></div>
+                                <a class="sliderCtrl" :class="[sliderStatus]" @@mouseover="sliderActive" @@mouseout="sliderBlur" @@mousedown.stop.prevent="sliderClick" :style="{left:dragX + 'px'}">
+                                    <span></span>
+                                </a>
+                            </div>
+                        </el-form-item>
+                        <el-form-item :style="{marginBottom: '10px' }">
+                            <el-checkbox-group v-model="loginForm.remember">
+                                <el-checkbox label="记住密码" name="remember">
+                                </el-checkbox>
+                                <el-form-item class="pwdForgetLink">
+                                    <a href="javascript:void(0)"> 忘记密码?</a>
+                                </el-form-item>
+                            </el-checkbox-group>
+                        </el-form-item>
+                        <el-form-item>
+                            <el-button type="primary" @@click="onSubmit('loginForm')" :style="{width: '250px'}">登录</el-button>
+                        </el-form-item>
+                    </el-form>
+                </div>
+            </el-main>
+        </el-container>
+    </div>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <!-- import JavaScript -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://cdn.staticfile.org/vue-resource/1.5.1/vue-resource.min.js"></script>
+    <script src="~/js/jsencrypt/jsencrypt.min.js"></script>
+    <script src="~/js/login.js"></script>
+
+</body>
+
+</html>

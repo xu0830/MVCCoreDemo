@@ -18,7 +18,7 @@ namespace MVCCoreDemo
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args).UseUrls("http://localhost:7654")
-                .UseStartup<Startup>();
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>().UseUrls("http://localhost:7654");
     }
 }

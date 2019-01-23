@@ -27,7 +27,6 @@ namespace MVCCoreDemo.Controllers
                 context.Result = new RedirectResult("/Login/Index");
                 return;
             }
-            
         }
     }
 }

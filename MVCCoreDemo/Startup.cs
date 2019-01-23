@@ -30,6 +30,8 @@ namespace MVCCoreDemo
         {
             services.AddHttpContextAccessor();
             services.AddSession();
+            services.AddMemoryCache();
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             //services.Configure<CookiePolicyOptions>(options =>
             //{
@@ -61,7 +63,6 @@ namespace MVCCoreDemo
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
             
             app.UseSession();
