@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1/linux-x64",
-    "signature": "52deda6605cffa0bf28fabc6be22bfcf5ca6845c"
+    "signature": "c076e2bd1aa4611ca9f934e95cb1267e60c6533e"
   },
   "compilationOptions": {
     "defines": [
@@ -35,11 +35,6 @@
         },
         "compile": {
           "MVCCoreDemo.dll": {}
-        }
-      },
-      "BouncyCastle.Crypto/1.8.0-beta4": {
-        "compile": {
-          "lib/net40/crypto.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.4": {
@@ -3121,7 +3116,6 @@
       },
       "CJ.Infrastructure/1.0.0": {
         "dependencies": {
-          "BouncyCastle.Crypto": "1.8.0-beta4",
           "Microsoft.AspNetCore.Http.Extensions": "2.1.0",
           "Microsoft.AspNetCore.Http.Features": "2.1.0",
           "Microsoft.AspNetCore.Session": "2.1.0",
@@ -3165,14 +3159,6 @@
         },
         "runtime": {
           "MVCCoreDemo.dll": {}
-        }
-      },
-      "BouncyCastle.Crypto/1.8.0-beta4": {
-        "runtime": {
-          "lib/net40/crypto.dll": {
-            "assemblyVersion": "1.8.5520.19156",
-            "fileVersion": "1.8.5520.19156"
-          }
         }
       },
       "Microsoft.CodeAnalysis.CSharp.Workspaces/2.8.0": {
@@ -3547,7 +3533,6 @@
       },
       "CJ.Infrastructure/1.0.0": {
         "dependencies": {
-          "BouncyCastle.Crypto": "1.8.0-beta4",
           "Microsoft.AspNetCore.Http.Extensions": "2.1.0",
           "Microsoft.AspNetCore.Http.Features": "2.1.0",
           "Microsoft.AspNetCore.Session": "2.1.0",
@@ -3583,13 +3568,6 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
-    },
-    "BouncyCastle.Crypto/1.8.0-beta4": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-k2BCGtyvAPa5UAN4EqPNKDurPUvE0H/O4vZu0lixuMDAzbYaHGh35UsgGDT8ETay5z4wLN9hIeQ7PAL4YWTUtQ==",
-      "path": "bouncycastle.crypto/1.8.0-beta4",
-      "hashPath": "bouncycastle.crypto.1.8.0-beta4.nupkg.sha512"
     },
     "Microsoft.CodeAnalysis.CSharp.Workspaces/2.8.0": {
       "type": "package",

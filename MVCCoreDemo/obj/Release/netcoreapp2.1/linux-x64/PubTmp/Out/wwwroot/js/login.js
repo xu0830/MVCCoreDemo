@@ -18,11 +18,15 @@
         var validateSlide = (rule, value, callback) => {
             if (!_this.validationComplete) {
                 callback(new Error('请完成滑块验证'));
-            } else {
+            } else if (_this.submitError) {
+                callback(new Error('账号或密码错误'));
+            }
+            else {
                 callback();
             }
         };
         return {
+            submitError: false,
             loginForm: {
                 userName: '',
                 password: '',
@@ -40,6 +44,7 @@
                     { validator: validateSlide, trigger: 'blur' }
                 ]
             },
+            submitError: false,
             sliderStatus: "",
             isSliderDragActive: false,
             IsSliderActive: false,
@@ -57,13 +62,6 @@
             validationError: false
         }
     },
-    computed: {
-        slideCtrlObj: function () {
-            return {
-                sliderCtrl: true,
-            }
-        }
-    },
     created: function () {
         let encrypt = new JSEncrypt();
         this.verifyPicDraw();
@@ -71,11 +69,13 @@
     methods: {
         onSubmit: function (formName) {
             let _this = this;
+            _this.submitError = false;
             this.$refs[formName].validate((valid) => {
                 if (valid) {
                     let encrypt = new JSEncrypt();
                     _this.$http.post('/Login/GetRsaPublicKey', {}).then(function (data) {
                         if (data.body.code == 200) {
+                            encrypt.setPublicKey(data.body.rsaPublicKey);
                             _this.$http.post('/Login/Login', {
                                 UserName: _this.loginForm.userName,
                                 Password: encrypt.encrypt(_this.loginForm.password),
@@ -83,9 +83,20 @@
                             }).then(function (data) {
                                 if (data.body.code == 200) {
                                     window.location.href = "/Home/Index"
+                                } else {
+                                    _this.submitError = true;
+                                    _this.$refs.loginForm.validateField('slideVerify');
+                                    _this.validationComplete = false;
+                                    _this.validationError = false;
+                                    _this.dragX = 0;
+                                    _this.sliderStatus = "";
+                                    _this.verifyPicDraw();
+                                    _this.$refs[formName].fields[1].resetField();
                                 }
                             });
-                            this.$refs[formName].resetFields();
+                            
+                        } else {
+                            
                         }
                     });
                 } else {
@@ -94,7 +105,6 @@
             });
         },
         sliderClick: function (event) {
-           
             if (!this.validationComplete) {
                 this.isSliderDragActive = true;
                 this.initX = event.pageX;
@@ -126,7 +136,6 @@
                 this.$http.post('/Login/CheckVerifyPic', {
                     pointX: this.picDragX
                 }).then(function (data) {
-                    
                     flagCode = data.body.code;
                     if (flagCode == 200) {
                         this.validationComplete = true;
