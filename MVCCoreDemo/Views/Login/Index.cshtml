@@ -43,7 +43,7 @@
                                 </div>
                             </transition>
                         </div>
-                        <el-form-item label="滑动验证" prop="slideVerify" >
+                        <el-form-item label="滑动验证" prop="slideVerify">
                             <div class="slider" @@mouseover="verifyPicShow" @@mouseout="verifyPicHide">
                                 {{ dragX > 0 ? '&nbsp;' : '向右拖动滑块完成拼图' }}
                                 <div class="slide_Indicator" :style="{ width: dragX + 'px', borderColor: validationComplete ? '#52ccba': validationError ? '#f57a7a' : dragX > 0 ? '#1991fa' : '', backgroundColor: validationComplete ? '#d2f4ef': validationError ? '#fce1e1' : '#d1e9fe'}"></div>

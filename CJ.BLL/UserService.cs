@@ -20,7 +20,7 @@ namespace CJ.Services
         {
             try
             {
-                User user = context.Users.Where(c => c.UserName == username && c.Password == RSAHelper.Decrypt(RSAHelper.GetRSAKey().PrivateKey, password)).FirstOrDefault();
+                User user = context.Users.Where(c => c.UserName == username && c.Password == MD5Encrypt.Getmd5(RSAHelper.Decrypt(RSAHelper.GetRSAKey().PrivateKey, password))).FirstOrDefault();
 
                 SessionHelper.SetSession("user", password);
 
@@ -75,6 +75,14 @@ namespace CJ.Services
         {
             var user = SessionHelper.GetSession("user");
             return String.IsNullOrEmpty(user) || user == "" ? false: true;
+        }
+
+        /// <summary>
+        /// 重置密码
+        /// </summary>
+        public static void ResetPassword()
+        {
+
         }
     }
 }

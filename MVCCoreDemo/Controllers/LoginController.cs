@@ -168,5 +168,10 @@ namespace MVCCoreDemo.Controllers
                 });
             }
         }
+
+        public IActionResult ResetPassword()
+        {
+            return View();
+        }
     }
 }
