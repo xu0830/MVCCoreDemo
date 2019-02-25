@@ -8,7 +8,7 @@ namespace CJ.Services
 {
     public interface IUserService : ITransientDependency
     {
-        bool CheckUser(string username, string password, string token = "");
+        bool CheckUser(UserDto userDto);
         UserDto GetUserById(int id);
         bool Logout();
         bool IsLogin();

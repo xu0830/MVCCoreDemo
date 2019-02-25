@@ -134,7 +134,7 @@ namespace MVCCoreDemo.ApiControllers
                 return response;
             }
 
-            //response.Data = _userService.GetUserById(1);
+            response.Data = _userService.GetUserById(1);
 
             return response;
         }

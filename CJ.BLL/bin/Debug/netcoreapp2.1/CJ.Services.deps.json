@@ -1,13 +1,14 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "0bc2a50d7d002ace647f7c755583bc0857134d8b"
+    "signature": "e99741ccbcb2efaf575f1a2fd9eebcb851fd1de4"
   },
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.1": {
       "CJ.Services/1.0.0": {
         "dependencies": {
+          "AutoMapper": "8.0.0",
           "CJ.Infrastructure": "1.0.0",
           "CJ.Models": "1.0.0",
           "Castle.Windsor": "4.1.0",
@@ -17,6 +18,18 @@
         },
         "runtime": {
           "CJ.Services.dll": {}
+        }
+      },
+      "AutoMapper/8.0.0": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.0.0"
+          }
         }
       },
       "Castle.Core/4.2.0": {
@@ -1579,6 +1592,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoMapper/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kcbje0Y71XkvzPn8k6OROZGOn2SKaWimon3Bu1WUTVoV5GTJVym+k+zQuKApyyFVRfk7bisumj/qUX4xIIXS+Q==",
+      "path": "automapper/8.0.0",
+      "hashPath": "automapper.8.0.0.nupkg.sha512"
     },
     "Castle.Core/4.2.0": {
       "type": "package",

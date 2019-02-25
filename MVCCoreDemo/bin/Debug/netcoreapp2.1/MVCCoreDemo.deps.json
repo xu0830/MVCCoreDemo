@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "f24247908a69e8f45809f595d64ce0b3814d06e0"
+    "signature": "20207c3780441cc0bde2e9a719e525705ff0b6cd"
   },
   "compilationOptions": {
     "defines": [
@@ -25,6 +25,7 @@
       "MVCCoreDemo/1.0.0": {
         "dependencies": {
           "AutoMapper": "8.0.0",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "6.0.0",
           "CJ.Infrastructure": "1.0.0",
           "CJ.Models": "1.0.0",
           "CJ.Services": "1.0.0",
@@ -55,6 +56,21 @@
         },
         "compile": {
           "lib/netstandard2.0/AutoMapper.dll": {}
+        }
+      },
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/6.0.0": {
+        "dependencies": {
+          "AutoMapper": "8.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "6.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
       "Castle.Core/4.2.0": {
@@ -1035,6 +1051,7 @@
       },
       "CJ.Services/1.0.0": {
         "dependencies": {
+          "AutoMapper": "8.0.0",
           "CJ.Infrastructure": "1.0.0",
           "CJ.Models": "1.0.0",
           "Castle.Windsor": "4.1.0",
@@ -4000,6 +4017,13 @@
       "sha512": "sha512-kcbje0Y71XkvzPn8k6OROZGOn2SKaWimon3Bu1WUTVoV5GTJVym+k+zQuKApyyFVRfk7bisumj/qUX4xIIXS+Q==",
       "path": "automapper/8.0.0",
       "hashPath": "automapper.8.0.0.nupkg.sha512"
+    },
+    "AutoMapper.Extensions.Microsoft.DependencyInjection/6.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-EHxmLh6OuTuiGU3U+pHhNHwWOq1juK+Wbvr2n7Oj8/L819+DCnr7dtVtIGmBYHrle6foukEXqT5rcbRS9+CFyA==",
+      "path": "automapper.extensions.microsoft.dependencyinjection/6.0.0",
+      "hashPath": "automapper.extensions.microsoft.dependencyinjection.6.0.0.nupkg.sha512"
     },
     "Castle.Core/4.2.0": {
       "type": "package",

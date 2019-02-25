@@ -29,27 +29,21 @@ namespace CJ.Services
         /// <returns></returns>
         public bool CheckUser(UserDto userDto)
         {
-            if (userDto.token != "")
+            try
             {
-                return token.CompareTo(SessionHelper.GetSession("token")) == 0;
+                User user = _userRepository.GetAll().Where(c => c.UserName == userDto.UserName && c.Password == MD5Encrypt.Getmd5(RSAHelper.Decrypt(WebConfig.PrivateKey, userDto.Password))).FirstOrDefault();
+                string Token = Guid.NewGuid().ToString();
+                SessionHelper.SetSession("user", userDto.Password);
+                SessionHelper.SetSession("token", userDto.Token);
+
+                return user == null ? false : true;
             }
-            else
+            catch (Exception ex)
             {
-                try
-                {
-                    User user = _userRepository.GetAll().Where(c => c.UserName == username && c.Password == MD5Encrypt.Getmd5(RSAHelper.Decrypt(WebConfig.PrivateKey, password))).FirstOrDefault();
-                    token = Guid.NewGuid().ToString();
-                    SessionHelper.SetSession("user", password);
-                    SessionHelper.SetSession("token", token);
-
-                    return user == null ? false : true;
-                }
-                catch (Exception ex)
-                {
-                    return false;
-                }
-
+                return false;
             }
+
+            
         }
         
         /// <summary>
@@ -62,7 +56,8 @@ namespace CJ.Services
             try
             {
                 User user = _userRepository.Get(id);
-                return user;
+                UserDto userDto = _mapper.Map<UserDto>(user);
+                return userDto;
             }
             catch (Exception ex)
             {
