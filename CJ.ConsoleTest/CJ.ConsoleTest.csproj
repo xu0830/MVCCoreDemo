@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CJ.BLL\CJ.Services.csproj" />
+    <ProjectReference Include="..\CJ.Services\CJ.Services.csproj" />
   </ItemGroup>
 
 </Project>

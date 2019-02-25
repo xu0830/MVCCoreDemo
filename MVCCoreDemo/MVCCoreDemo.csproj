@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CJ.BLL\CJ.Services.csproj" />
+    <ProjectReference Include="..\CJ.Services\CJ.Services.csproj" />
     <ProjectReference Include="..\CJ.Infrastructure\CJ.Infrastructure.csproj" />
     <ProjectReference Include="..\CJ.Models\CJ.Models.csproj" />
   </ItemGroup>
