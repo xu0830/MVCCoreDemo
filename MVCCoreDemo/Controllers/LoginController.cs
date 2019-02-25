@@ -14,16 +14,14 @@ namespace MVCCoreDemo.Controllers
 {
     public class LoginController : Controller
     {
+        [HttpGet]
         /// <summary>
         /// 登录UI页面
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
         {
-            //if (UserService.IsLogin())
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
+            int a = 0;
             return View();
         }
 
@@ -37,7 +35,7 @@ namespace MVCCoreDemo.Controllers
             return Json(new
             {
                 code = 200,
-                RsaPublicKey = RSAHelper.GetRSAKey().PublicKey,
+                RsaPublicKey = WebConfig.PublicKey,
             });
         }
 
@@ -87,8 +85,8 @@ namespace MVCCoreDemo.Controllers
             if (!int.TryParse(points[0], out currentX) || !int.TryParse(points[1], out currentY)) {
                 return Json(new
                 {
-                    code = "404",
-                    msg = "session lost"
+                    code = "203",
+                    msg = "validation error"
                 });
             }
             else
@@ -119,27 +117,31 @@ namespace MVCCoreDemo.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Login([FromBody]LoginModelInput input)
+        public IActionResult Login([FromBody]LoginInputModel input)
         {
-            if(UserService.CheckUser(input.UserName, input.Password))
-            {
-                if (input.Remember)
-                {
-                    HttpContext.Response.Cookies.Append("DemoUser", input.UserName);
-                }
-                return Json(new {
-                    code = 200,
-                    msg = "success"
-                });
-            }
-            else
-            {
-                return Json(new LoginModelOutput()
-                {
-                    Msg = "fail",
-                    Code = 401
-                });
-            }
+            //if(_service.CheckUser(input.UserName, input.Password))
+            //{
+            //    if (input.Remember)
+            //    {
+            //        HttpContext.Response.Cookies.Append("DemoUser", input.UserName);
+            //    }
+            //    return Json(new {
+            //        code = 200,
+            //        msg = "success"
+            //    });
+            //}
+            //else
+            //{
+            //    return Json(new LoginModelOutput()
+            //    {
+            //        Msg = "fail",
+            //        Code = 401
+            //    });
+            //}
+            return Json(new LoginOutputModel() {
+                Msg = "fail",
+                Code = 401
+            });
         }
 
         [HttpPost]
@@ -149,24 +151,27 @@ namespace MVCCoreDemo.Controllers
         /// <returns></returns>
         public IActionResult Logout()
         {
-            if (UserService.Logout())
-            {
-                return Json(new LoginModelOutput()
-                {
-                    Msg = "success",
-                    Code = 200,
-                    Url = "/Login/Index"
-                });
-            }
-            else
-            {
-                return Json(new LoginModelOutput()
-                {
-                    Msg = "退出异常",
-                    Code = 401,
-                    Url = "/Login/Index"
-                });
-            }
+            //if (_service.Logout())
+            //{
+            //    return Json(new LoginModelOutput()
+            //    {
+            //        Msg = "success",
+            //        Code = 200,
+            //        Url = "/Login/Index"
+            //    });
+            //}
+            //else
+            //{
+            //    return Json(new LoginModelOutput()
+            //    {
+            //        Msg = "退出异常",
+            //        Code = 401,
+            //        Url = "/Login/Index"
+            //    });
+            //}
+            return Json(new LoginOutputModel() {
+                Msg = "登出异常"
+            });
         }
 
         public IActionResult ResetPassword()

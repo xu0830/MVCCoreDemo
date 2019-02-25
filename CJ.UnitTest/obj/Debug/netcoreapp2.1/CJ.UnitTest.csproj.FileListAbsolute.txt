@@ -15,3 +15,5 @@ F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\obj\Debug\netcoreapp2.1\CJ.Un
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\obj\Debug\netcoreapp2.1\CJ.UnitTest.csproj.CopyComplete
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\obj\Debug\netcoreapp2.1\CJ.UnitTest.dll
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\obj\Debug\netcoreapp2.1\CJ.UnitTest.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\bin\Debug\netcoreapp2.1\CJ.Models.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.UnitTest\bin\Debug\netcoreapp2.1\CJ.Models.pdb

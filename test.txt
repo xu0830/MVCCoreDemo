@@ -4,4 +4,5 @@ branch master second modified
 dev branch
 dev branch checkout
 dev brench second modified
+dev branch third modified
 

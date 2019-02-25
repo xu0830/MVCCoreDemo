@@ -7,3 +7,6 @@ F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\bin\Debug\netcoreapp2.1
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\obj\Debug\netcoreapp2.1\CJ.Infrastructure.dll
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\obj\Debug\netcoreapp2.1\CJ.Infrastructure.pdb
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\obj\Debug\netcoreapp2.1\CJ.Infrastructure.csprojAssemblyReference.cache
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\bin\Debug\netcoreapp2.1\CJ.Models.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\bin\Debug\netcoreapp2.1\CJ.Models.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\obj\Debug\netcoreapp2.1\CJ.Infrastructure.csproj.CopyComplete

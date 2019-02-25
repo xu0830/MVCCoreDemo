@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CJ.Infrastructure.Cache;
+using Newtonsoft.Json;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace CJ.Infrastructure
             request.AddHeader("cache-control", "no-cache");
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
 
-            IList<RestResponseCookie> cookies = (IList<RestResponseCookie>)CacheHelper.GetKey("xucanjie");
+            IList<RestResponseCookie> cookies = (IList<RestResponseCookie>)CacheHelper.GetCache("NeteaseCookies");
 
             if (cookies != null && cookies.Count > 0)
             {
@@ -43,7 +44,7 @@ namespace CJ.Infrastructure
             IRestResponse response = client.Execute(request);
             if (addCookies)
             {
-                CacheHelper.SetKey("xucanjie", response.Cookies) ;
+                CacheHelper.SetCache("NeteaseCookies", response.Cookies) ;
             }
             return response.Content;
 

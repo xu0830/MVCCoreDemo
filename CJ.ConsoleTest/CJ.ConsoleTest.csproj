@@ -8,6 +8,7 @@
   <ItemGroup>
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
+    <None Remove="log4net.config" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CJ.Infrastructure\CJ.Infrastructure.csproj" />
+    <ProjectReference Include="..\CJ.BLL\CJ.Services.csproj" />
   </ItemGroup>
 
 </Project>

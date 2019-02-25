@@ -39,3 +39,6 @@ F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\lin
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\linux-x64\MVCCoreDemo.pdb
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\linux-x64\UserSecretsAssemblyInfo.cs
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\linux-x64\Razor\Views\Login\ResetPassword.g.cshtml.cs
+F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\linux-x64\MVCCoreDemo
+F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\linux-x64\CJ.ConsoleTest.dll
+F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\linux-x64\CJ.ConsoleTest.pdb

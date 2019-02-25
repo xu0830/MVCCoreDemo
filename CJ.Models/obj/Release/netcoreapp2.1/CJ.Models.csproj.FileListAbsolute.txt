@@ -7,3 +7,8 @@ F:\vs_projects\my_projects\MVCCoreDemo\CJ.Models\obj\Release\netcoreapp2.1\CJ.Mo
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.Models\obj\Release\netcoreapp2.1\CJ.Models.AssemblyInfo.cs
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.Models\obj\Release\netcoreapp2.1\CJ.Models.dll
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.Models\obj\Release\netcoreapp2.1\CJ.Models.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Models\bin\Release\netcoreapp2.1\CJ.ConsoleTest.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Models\bin\Release\netcoreapp2.1\CJ.Infrastructure.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Models\bin\Release\netcoreapp2.1\CJ.ConsoleTest.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Models\bin\Release\netcoreapp2.1\CJ.Infrastructure.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.Models\obj\Release\netcoreapp2.1\CJ.Models.csproj.CopyComplete

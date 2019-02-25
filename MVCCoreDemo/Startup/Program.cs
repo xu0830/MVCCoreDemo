@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace MVCCoreDemo
+namespace MVCCoreDemo.Startup
 {
     public class Program
     {
@@ -19,6 +19,6 @@ namespace MVCCoreDemo
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>().UseUrls("http://localhost:7654");
+                .UseStartup<Startup>().UseUrls("http://*:8085");
     }
 }

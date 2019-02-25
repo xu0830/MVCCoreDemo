@@ -203,31 +203,6 @@ namespace CJ.Infrastructure
             return Convert.ToBase64String(b);
         }
 
-        public static RSAKey GetRSAKey()
-        {
-            try
-            {
-                var jsonObj = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build();
-
-                return new RSAKey
-                {
-                    PublicKey = jsonObj.GetSection("publicKey").Value,
-                    PrivateKey = jsonObj.GetSection("privateKey").Value
-                };
-            }
-            catch (Exception ex)
-            {
-                return new RSAKey
-                {
-                    PublicKey = "",
-                    PrivateKey = ""
-                };
-            }
-
-
-          
-        }
-
         public static string Encrypt(string publicKey, string plainText)
         {
             RSA rsa = CreateRsaFromPublicKey(publicKey);

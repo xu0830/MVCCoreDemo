@@ -7,7 +7,7 @@ using MVCCoreDemo.Models;
 
 namespace MVCCoreDemo.Controllers
 {
-    public class SearchController : BaseController
+    public class SearchController : Controller
     {
         [HttpPost]
         public IActionResult SearchApi([FromBody]SearchModelInput input)

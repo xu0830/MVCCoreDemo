@@ -1,14 +1,25 @@
 ﻿using CJ.Infrastructure;
 using CJ.Models;
+using CJ.Infrastructure.Repositories;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
+using CJ.Services.Dtos;
+using AutoMapper;
 
 namespace CJ.Services
 {
-    public static class UserService
+    public class UserService : IUserService
     {
         private static DefaultDbContext context = new DefaultDbContext();
+
+        private IRepository<User> _userRepository;
+
+        private IMapper _mapper;
+
+        public UserService(IRepository<User> userRepository, IMapper mapper)
+        {
+            _userRepository = userRepository;
+        }
 
         /// <summary>
         /// 用户登录接口
@@ -16,19 +27,28 @@ namespace CJ.Services
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static bool CheckUser(string username, string password)
+        public bool CheckUser(UserDto userDto)
         {
-            try
+            if (userDto.token != "")
             {
-                User user = context.Users.Where(c => c.UserName == username && c.Password == MD5Encrypt.Getmd5(RSAHelper.Decrypt(RSAHelper.GetRSAKey().PrivateKey, password))).FirstOrDefault();
-
-                SessionHelper.SetSession("user", password);
-
-                return user == null ? false : true;
+                return token.CompareTo(SessionHelper.GetSession("token")) == 0;
             }
-            catch (Exception ex)
+            else
             {
-                return false;
+                try
+                {
+                    User user = _userRepository.GetAll().Where(c => c.UserName == username && c.Password == MD5Encrypt.Getmd5(RSAHelper.Decrypt(WebConfig.PrivateKey, password))).FirstOrDefault();
+                    token = Guid.NewGuid().ToString();
+                    SessionHelper.SetSession("user", password);
+                    SessionHelper.SetSession("token", token);
+
+                    return user == null ? false : true;
+                }
+                catch (Exception ex)
+                {
+                    return false;
+                }
+
             }
         }
         
@@ -37,11 +57,11 @@ namespace CJ.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public static User GetUserById(int id)
+        public UserDto GetUserById(int id)
         {
             try
             {
-                User user = context.Users.Where(c => c.Id == id).FirstOrDefault();
+                User user = _userRepository.Get(id);
                 return user;
             }
             catch (Exception ex)
@@ -54,7 +74,7 @@ namespace CJ.Services
         /// 用户登出
         /// </summary>
         /// <returns></returns>
-        public static bool Logout()
+        public bool Logout()
         {
             try
             {
@@ -71,7 +91,7 @@ namespace CJ.Services
         /// 判断登录状态
         /// </summary>
         /// <returns></returns>
-        public static bool IsLogin()
+        public bool IsLogin()
         {
             var user = SessionHelper.GetSession("user");
             return String.IsNullOrEmpty(user) || user == "" ? false: true;
@@ -80,9 +100,11 @@ namespace CJ.Services
         /// <summary>
         /// 重置密码
         /// </summary>
-        public static void ResetPassword()
+        public void ResetPassword()
         {
 
         }
+
+     
     }
 }

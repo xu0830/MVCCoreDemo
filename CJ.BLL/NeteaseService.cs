@@ -6,13 +6,15 @@ using System.Text;
 using CJ.Models;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
+using Castle.MicroKernel.SubSystems.Configuration;
+using Castle.Windsor;
 
 namespace CJ.Services
 {
     /// <summary>
     /// web服务
     /// </summary>
-    public class NeteaseService
+    public class NeteaseService : ITransientDependency
     {
         /// <summary>
         /// 登录接口
@@ -82,7 +84,15 @@ namespace CJ.Services
             return JsonConvert.DeserializeObject<NeteaseRecommendSong>(data);
         }
 
+        public bool CheckUser(string username, string password)
+        {
+            throw new NotImplementedException();
+        }
 
+        public void Install(IWindsorContainer container, IConfigurationStore store)
+        {
+            throw new NotImplementedException();
+        }
     }
 
    

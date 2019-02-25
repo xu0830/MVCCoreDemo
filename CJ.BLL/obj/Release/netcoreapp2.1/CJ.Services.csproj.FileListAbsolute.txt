@@ -12,3 +12,5 @@ F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\obj\Release\netcoreapp2.1\CJ.Servi
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\obj\Release\netcoreapp2.1\CJ.Services.pdb
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\bin\Release\netcoreapp2.1\CJ.Infrastructure.dll
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\bin\Release\netcoreapp2.1\CJ.Infrastructure.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\bin\Release\netcoreapp2.1\CJ.ConsoleTest.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.BLL\bin\Release\netcoreapp2.1\CJ.ConsoleTest.pdb

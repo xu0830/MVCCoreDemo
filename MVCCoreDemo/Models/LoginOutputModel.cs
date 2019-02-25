@@ -10,7 +10,7 @@ namespace MVCCoreDemo.Models
     /// <summary>
     /// 登录接口输入model
     /// </summary>
-    public class LoginModelInput
+    public class LoginInputModel
     {
         public string UserName { get; set; }
         public string Password { get; set; }
@@ -20,7 +20,7 @@ namespace MVCCoreDemo.Models
     /// <summary>
     /// 登录接口输出model
     /// </summary>
-    public class LoginModelOutput
+    public class LoginOutputModel
     {
         public string Msg { get; set; }
         public int Code { get; set; }

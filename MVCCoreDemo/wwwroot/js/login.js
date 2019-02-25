@@ -76,6 +76,7 @@
                     _this.$http.post('/Login/GetRsaPublicKey', {}).then(function (data) {
                         if (data.body.code == 200) {
                             encrypt.setPublicKey(data.body.rsaPublicKey);
+                            console.log(encrypt.encrypt("xucanjie"));
                             _this.$http.post('/Login/Login', {
                                 UserName: _this.loginForm.userName,
                                 Password: encrypt.encrypt(_this.loginForm.password),
@@ -208,11 +209,13 @@
             var minY = radius + 0.5 * 1.8 * radius;
 
             this.$http.get('/Login/GetVerifyPicPosition').then(function (res) {
+                console.log(res.body);
                 let data = res.body;
                 this.randomX = data.pointX;
                 this.randomY = data.pointY;
                 var _this = this;
                 img.onload = function () {
+                    console.log("on load");
                     var canvas_bot = document.getElementById('canvas_bot').getContext('2d');
                     canvas_bot.drawImage(img, 0, 0, 250, 140);
                     canvas_bot.save();

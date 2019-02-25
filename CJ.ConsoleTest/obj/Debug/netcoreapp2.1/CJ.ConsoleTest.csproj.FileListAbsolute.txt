@@ -12,3 +12,7 @@ F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\obj\Debug\netcoreapp2.1\CJ
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\obj\Debug\netcoreapp2.1\CJ.ConsoleTest.dll
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\obj\Debug\netcoreapp2.1\CJ.ConsoleTest.pdb
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\obj\Debug\netcoreapp2.1\CJ.ConsoleTest.csprojAssemblyReference.cache
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\bin\Debug\netcoreapp2.1\CJ.Models.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\bin\Debug\netcoreapp2.1\CJ.Services.dll
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\bin\Debug\netcoreapp2.1\CJ.Services.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\CJ.ConsoleTest\bin\Debug\netcoreapp2.1\CJ.Models.pdb

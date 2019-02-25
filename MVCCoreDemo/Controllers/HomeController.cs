@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 
 namespace MVCCoreDemo.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         public IActionResult Index()
         {
@@ -28,6 +28,7 @@ namespace MVCCoreDemo.Controllers
             
             return View();
         }
+
 
         public IActionResult About()
         {

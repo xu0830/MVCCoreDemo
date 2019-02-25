@@ -39,3 +39,5 @@ F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\CJ.
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\Razor\Views\Login\Index.g.cshtml.cs
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\UserSecretsAssemblyInfo.cs
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\Razor\Views\Login\ResetPassword.g.cshtml.cs
+F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\CJ.ConsoleTest.dll
+F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\CJ.ConsoleTest.pdb
