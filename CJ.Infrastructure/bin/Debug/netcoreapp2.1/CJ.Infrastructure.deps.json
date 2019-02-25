@@ -1426,6 +1426,10 @@
         }
       },
       "CJ.Models/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Extensions": "2.1.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0"
+        },
         "runtime": {
           "CJ.Models.dll": {}
         }

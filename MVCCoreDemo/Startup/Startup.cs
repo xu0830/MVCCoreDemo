@@ -40,6 +40,10 @@ namespace MVCCoreDemo.Startup
             //services.AddTransient<IUserService, UserService>();
             //services.AddTransient<IRepository<User>, Repository<User>>();
 
+            ModelModule.Startup(services);
+
+            InfrastructureModule.Startup(services);
+
             ServiceModule.Startup(services);
 
             services.AddAutoMapper();

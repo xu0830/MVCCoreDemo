@@ -14,7 +14,7 @@ namespace CJ.Services
     /// <summary>
     /// web服务
     /// </summary>
-    public class NeteaseService : ITransientDependency
+    public class NeteaseService
     {
         /// <summary>
         /// 登录接口

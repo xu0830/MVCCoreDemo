@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace CJ.Services
+namespace CJ.Infrastructure
 {
     public class DefaultDbContext : DbContext
     {

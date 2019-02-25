@@ -57,11 +57,14 @@ namespace MVCCoreDemo.ApiControllers
             outputModel.Data = new
             {
                 Token = picGuid,
-                Point = new {
+                Point = new
+                {
                     x,
                     y
                 },
             };
+
+            outputModel.Data = _userService.GetUserById(1);
 
             CacheHelper.SetCache(picGuid, x, DateTime.Now + TimeSpan.FromMinutes(1));
 
@@ -134,7 +137,7 @@ namespace MVCCoreDemo.ApiControllers
                 return response;
             }
 
-            response.Data = _userService.GetUserById(1);
+            //response.Data = _userService.GetUserById(1);
 
             return response;
         }

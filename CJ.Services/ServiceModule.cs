@@ -17,19 +17,19 @@ namespace CJ.Services
         /// <param name="service"></param>
         public static void Startup(IServiceCollection services)
         {
-            //Assembly assembly = Assembly.GetExecutingAssembly();
-            //List<Type> ts = assembly.GetTypes().ToList();
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            List<Type> ts = assembly.GetTypes().ToList();
 
-            //var result = new Dictionary<Type, Type[]>();
+            var result = new Dictionary<Type, Type[]>();
 
-            //foreach (var item in ts.Where(s => !s.IsInterface))
-            //{
-            //    var interfaceTypes = item.GetInterfaces();
-            //    foreach (var interfaceType in interfaceTypes)
-            //    {
-            //        service.AddScoped(interfaceType, item);
-            //    }
-            //}
+            foreach (var item in ts.Where(s => !s.IsInterface))
+            {
+                var interfaceTypes = item.GetInterfaces();
+                foreach (var interfaceType in interfaceTypes)
+                {
+                    services.AddScoped(interfaceType, item);
+                }
+            }
 
 
             //foreach (var item in GetClassName("CJ.Services"))
@@ -40,10 +40,10 @@ namespace CJ.Services
             //    }
             //}
             //return services;
-            var classNames = GetClassName("CJ.Services");
-            services.AddScoped<IRepository<User>, Repository<User>>();
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            List<Type> ts = assembly.GetTypes().ToList();
+            //var classNames = GetClassName("CJ.Services");
+            //services.AddScoped<IRepository<User>, Repository<User>>();
+            //Assembly assembly = Assembly.GetExecutingAssembly();
+            //List<Type> ts = assembly.GetTypes().ToList();
         }
 
         public static Dictionary<Type, Type[]> GetClassName(string assemblyName)

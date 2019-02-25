@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CJ.Services
 {
-    public interface IUserService : ITransientDependency
+    public interface IUserService
     {
         bool CheckUser(UserDto userDto);
         UserDto GetUserById(int id);

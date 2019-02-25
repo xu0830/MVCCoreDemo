@@ -17,7 +17,7 @@ namespace CJ.ConsoleTest
     {
         public static void Main(string[] args)
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
+            Assembly assembly = Assembly.Load("CJ.ConsoleTest");
 
             var types = assembly.GetTypes().ToList();
 
