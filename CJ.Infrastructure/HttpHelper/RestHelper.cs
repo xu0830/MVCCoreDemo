@@ -49,5 +49,14 @@ namespace CJ.Infrastructure
             return response.Content;
 
         }
+
+        public static IRestResponse SendGetRequest(string url)
+        {
+            var client = new RestClient(url);
+            var request = new RestRequest(Method.GET);
+
+            return client.Execute(request);
+        }
+
     }
 }

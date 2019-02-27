@@ -99,7 +99,7 @@ namespace CJ.Infrastructure
             return retString;
         }
 
-        public static string SendGetRequest(string url)
+        public static string SendGetRequest(string url, CookieContainer cookieContainer)
         {
             string result = string.Empty;
             try
@@ -107,6 +107,7 @@ namespace CJ.Infrastructure
                 HttpWebRequest wbRequest = (HttpWebRequest)WebRequest.Create(url);
                 wbRequest.Method = "GET";
                 HttpWebResponse wbResponse = (HttpWebResponse)wbRequest.GetResponse();
+                cookieContainer.GetCookies(wbResponse.ResponseUri);
                 using (Stream responseStream = wbResponse.GetResponseStream())
                 {
                     using (StreamReader sReader = new StreamReader(responseStream))

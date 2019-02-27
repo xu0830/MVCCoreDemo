@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using CJ.Infrastructure;
 using CJ.Infrastructure.Cache;
 using CJ.Infrastructure.Log;
-using CJ.Services;
+using CJ.Services.Roles;
+using CJ.Services.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
@@ -20,8 +21,11 @@ namespace MVCCoreDemo.ApiControllers
     {
         private IUserService _userService;
 
-        public CheckController(IUserService userService)
+        private IRoleService _roleService;
+
+        public CheckController(IUserService userService, IRoleService roleService)
         {
+            _roleService = roleService;
             _userService = userService;
         }
 
@@ -64,11 +68,7 @@ namespace MVCCoreDemo.ApiControllers
                 },
             };
 
-            outputModel.Data = _userService.GetUserById(1);
-
             CacheHelper.SetCache(picGuid, x, DateTime.Now + TimeSpan.FromMinutes(1));
-
-
 
             return outputModel;
         }
@@ -137,6 +137,22 @@ namespace MVCCoreDemo.ApiControllers
                 return response;
             }
 
+            UserDto userDto = new UserDto() {
+                UserName = user.UserName,
+                Password = MD5Encrypt.Getmd5(user.Password)
+            };
+
+            if (_userService.CheckUser(userDto))
+            {
+                string Token = Guid.NewGuid().ToString();
+                response.Code = 200;
+                response.Result = "success";
+            }
+            else
+            {
+                response.Code = 502;
+                response.Result = "fail";
+            }
             //response.Data = _userService.GetUserById(1);
 
             return response;

@@ -1,4 +1,4 @@
-﻿using CJ.Models;
+﻿using CJ.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -12,6 +12,8 @@ namespace CJ.Infrastructure
     {
         public virtual DbSet<User> Users { get; set; }
 
+        public virtual DbSet<Role> Roles { get; set; }
+
         public DefaultDbContext()
         {
 
@@ -23,15 +25,8 @@ namespace CJ.Infrastructure
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json");
-
-            var configurationRoot = builder.Build();
-
-            var nameSection = configurationRoot.GetSection("AllowedHosts");
-
             //注入MySql链接字符串
-            optionsBuilder.UseMySql(
-                new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build().GetSection("DBConnectionString").Value);
+            optionsBuilder.UseMySql(WebConfig.DBConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
