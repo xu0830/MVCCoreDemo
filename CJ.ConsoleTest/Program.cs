@@ -17,22 +17,12 @@ namespace CJ.ConsoleTest
     {
         public static void Main(string[] args)
         {
-            Assembly assembly = Assembly.Load("CJ.ConsoleTest");
+            string response_1 = HttpHelper.SendGetRequest("https://kyfw.12306.cn/passport/captcha/captcha-image64?login_site=E&module=login&rand=sjrand&1551194559244&callback=jQuery191018701156729533341_1551193310268&_=1551193310271");
+            string response_1_1 = HttpHelper.SendGetRequest("https://kyfw.12306.cn/passport/captcha/captcha-image64?login_site=E&module=login&rand=sjrand&1551194559244&callback=jQuery191018701156729533341_1551193310268&_=1551193310271");
 
-            var types = assembly.GetTypes().ToList();
-
-
-            DateTime now = DateTime.Now ;
-
-
-            System.Timers.Timer timer = new System.Timers.Timer();
-            timer.Enabled = true;
-            timer.Interval = 1000;
-            int second = 1;
-            timer.Elapsed += new System.Timers.ElapsedEventHandler((obj, eventArg) =>
-            {
-                
-            });
+            Console.WriteLine(response_1);
+            Console.WriteLine();
+            Console.WriteLine(response_1_1);
 
             Console.ReadKey();
             

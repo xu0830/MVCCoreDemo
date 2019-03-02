@@ -1,13 +1,14 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "e99741ccbcb2efaf575f1a2fd9eebcb851fd1de4"
+    "signature": "7aede7c9241184bbddacc20ef363c03fafe51dae"
   },
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.1": {
       "CJ.ConsoleTest/1.0.0": {
         "dependencies": {
+          "Baidu.AI": "3.6.6",
           "CJ.Services": "1.0.0",
           "Microsoft.Extensions.Configuration.Json": "2.1.0",
           "Newtonsoft.Json": "12.0.1",
@@ -26,6 +27,17 @@
           "lib/netstandard2.0/AutoMapper.dll": {
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.0.0"
+          }
+        }
+      },
+      "Baidu.AI/3.6.6": {
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AipSdk.dll": {
+            "assemblyVersion": "3.6.6.0",
+            "fileVersion": "3.6.6.0"
           }
         }
       },
@@ -1614,6 +1626,13 @@
       "sha512": "sha512-px8ZMtIq84dxciB29V+ZYOtsRLZP4JlflDDMW13LyeRdwsnIInzlcSHSxpWmVD6U3bbOl2FeLlgomnVtm0jvXw==",
       "path": "automapper/8.0.0",
       "hashPath": "automapper.8.0.0.nupkg.sha512"
+    },
+    "Baidu.AI/3.6.6": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cZIe0z5Hi46lucMiSLNGJbJEfLrfe0ABl2I88d6fgxZkH/d5Xk4Pdip4HT7X43V15oq2vQLLovh1/qbuf9UeVA==",
+      "path": "baidu.ai/3.6.6",
+      "hashPath": "baidu.ai.3.6.6.nupkg.sha512"
     },
     "Castle.Core/4.2.0": {
       "type": "package",
