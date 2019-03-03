@@ -1,4 +1,5 @@
 ﻿using CJ.Infrastructure.Cache;
+using CJ.Infrastructure.Log;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace CJ.Infrastructure
                 }
                 catch (Exception ex)
                 {
-                    
+                    LogHelper.Error("读取配置文件失败");
                 }
             }
             return configurationRoot;
@@ -50,6 +51,7 @@ namespace CJ.Infrastructure
                 }
                 catch (Exception ex)
                 {
+                    LogHelper.Error("读取配置文件失败");
                     return "";
                 }
             }
@@ -68,6 +70,7 @@ namespace CJ.Infrastructure
                 }
                 catch (Exception ex)
                 {
+                    LogHelper.Error("读取配置文件失败");
                     return "";
                 }
             }
@@ -83,6 +86,7 @@ namespace CJ.Infrastructure
                 }
                 catch (Exception ex)
                 {
+                    LogHelper.Error("读取配置文件失败");
                     return "";
                 }
             }
@@ -101,6 +105,7 @@ namespace CJ.Infrastructure
                 }
                 catch(Exception ex)
                 {
+                    LogHelper.Error("读取配置文件失败");
                     return "";
                 }
             }
@@ -119,6 +124,7 @@ namespace CJ.Infrastructure
                 }
                 catch (Exception ex)
                 {
+                    LogHelper.Error("读取配置文件失败");
                     return "";
                 }
             }
@@ -128,9 +134,17 @@ namespace CJ.Infrastructure
         {
             get
             {
-                bool result;
-                bool.TryParse(GetConfigurationRoot().GetSection("RefererVerify").Value, out result);
-                return result;
+                try
+                {
+                    bool result;
+                    bool.TryParse(GetConfigurationRoot().GetSection("RefererVerify").Value, out result);
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.Error("读取配置文件失败");
+                    return false;
+                }
             }
         }
     }

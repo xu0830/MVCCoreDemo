@@ -1,4 +1,4 @@
-﻿using CJ.Models;
+﻿using CJ.Entities;
 using CJ.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using System;

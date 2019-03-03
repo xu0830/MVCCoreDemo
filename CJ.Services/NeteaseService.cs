@@ -3,7 +3,7 @@ using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using CJ.Models;
+using CJ.Entities;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
 using Castle.MicroKernel.SubSystems.Configuration;

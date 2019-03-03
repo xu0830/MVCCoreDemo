@@ -5,17 +5,17 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVCCoreDemo", "MVCCoreDemo\MVCCoreDemo.csproj", "{8FD7D662-0897-469A-A5E6-8357CFEA5969}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CJ.Models", "CJ.Models\CJ.Models.csproj", "{57713BE3-2FC2-4700-AFC9-3B7C57435A37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CJ.Entities", "CJ.Entities\CJ.Entities.csproj", "{57713BE3-2FC2-4700-AFC9-3B7C57435A37}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CJ.Services", "CJ.Services\CJ.Services.csproj", "{F423D9C6-AA93-4376-95D6-D56893838FE1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CJ.WebApi", "CJ.WebApi\CJ.WebApi.csproj", "{86139D50-9F46-44E9-95AF-0CF64830DA5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CJ.Infrastructure", "CJ.Infrastructure\CJ.Infrastructure.csproj", "{3598441D-7649-4EC8-970E-456BF76CD0E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CJ.Infrastructure", "CJ.Infrastructure\CJ.Infrastructure.csproj", "{3598441D-7649-4EC8-970E-456BF76CD0E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CJ.UnitTest", "CJ.UnitTest\CJ.UnitTest.csproj", "{DF734734-C196-4965-B5A0-A40E381B3B4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CJ.UnitTest", "CJ.UnitTest\CJ.UnitTest.csproj", "{DF734734-C196-4965-B5A0-A40E381B3B4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CJ.ConsoleTest", "CJ.ConsoleTest\CJ.ConsoleTest.csproj", "{7D5EDE1D-AC18-4B4E-AE4E-2900DCBA29D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CJ.ConsoleTest", "CJ.ConsoleTest\CJ.ConsoleTest.csproj", "{7D5EDE1D-AC18-4B4E-AE4E-2900DCBA29D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

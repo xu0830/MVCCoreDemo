@@ -1,4 +1,4 @@
-﻿using CJ.Models.Entities;
+﻿using CJ.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace CJ.Infrastructure.Repositories
 {
-    public interface IRepository { }
-
     /// <summary>
     /// 仓储CRUD接口
     /// </summary>
     /// <typeparam name="Entity"></typeparam>
-    public interface IRepository<Entity> : IRepository  where Entity : IEntity
+    public interface IRepository<Entity> where Entity : IEntity
     {
         //public virtual DbSet<TEntity> Table => Context.Set<TEntity>();
 

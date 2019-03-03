@@ -215,7 +215,16 @@ namespace CJ.Infrastructure
         public static string Decrypt(string privateKey, string cipher)
         {
             RSA rsa = CreateRsaFromPrivateKey(privateKey);
-            return Encoding.UTF8.GetString(rsa.Decrypt(System.Convert.FromBase64String(cipher), RSAEncryptionPadding.Pkcs1));
+            string decryptStr;
+            try
+            {
+                decryptStr = Encoding.UTF8.GetString(rsa.Decrypt(System.Convert.FromBase64String(cipher), RSAEncryptionPadding.Pkcs1));
+            }
+            catch (Exception ex)
+            {
+                decryptStr = "";
+            }
+            return decryptStr;
         }
     }
     public struct RSAKey

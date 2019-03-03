@@ -5165,11 +5165,24 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
+      "CJ.Entities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0"
+        },
+        "compile": {
+          "bin/placeholder/CJ.Entities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CJ.Entities.dll": {}
+        }
+      },
       "CJ.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
-          "CJ.Models": "1.0.0",
+          "CJ.Entities": "1.0.0",
           "Microsoft.AspNetCore.Http.Extensions": "2.1.0",
           "Microsoft.AspNetCore.Http.Features": "2.1.0",
           "Microsoft.AspNetCore.Session": "2.1.0",
@@ -5187,27 +5200,13 @@
           "bin/placeholder/CJ.Infrastructure.dll": {}
         }
       },
-      "CJ.Models/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.1",
-        "dependencies": {
-          "Microsoft.AspNetCore.Http.Extensions": "2.1.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0"
-        },
-        "compile": {
-          "bin/placeholder/CJ.Models.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/CJ.Models.dll": {}
-        }
-      },
       "CJ.Services/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
           "AutoMapper": "8.0.0",
+          "CJ.Entities": "1.0.0",
           "CJ.Infrastructure": "1.0.0",
-          "CJ.Models": "1.0.0",
           "Castle.Windsor": "4.1.0",
           "Microsoft.Extensions.Configuration.Json": "2.1.0",
           "Pomelo.EntityFrameworkCore.MySql": "2.1.0",
@@ -5258,8 +5257,6 @@
       "type": "package",
       "path": "castle.core/4.2.0",
       "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
         "ASL - Apache Software Foundation License.txt",
         "CHANGELOG.md",
         "LICENSE",
@@ -5277,8 +5274,6 @@
       "type": "package",
       "path": "castle.windsor/4.1.0",
       "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
         "ASL - Apache Software Foundation License.txt",
         "CHANGELOG.md",
         "LICENSE",
@@ -9921,8 +9916,6 @@
       "type": "package",
       "path": "system.diagnostics.tracesource/4.3.0",
       "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -12182,8 +12175,6 @@
       "type": "package",
       "path": "system.runtime.loader/4.3.0",
       "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -13970,15 +13961,15 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
+    "CJ.Entities/1.0.0": {
+      "type": "project",
+      "path": "../CJ.Entities/CJ.Entities.csproj",
+      "msbuildProject": "../CJ.Entities/CJ.Entities.csproj"
+    },
     "CJ.Infrastructure/1.0.0": {
       "type": "project",
       "path": "../CJ.Infrastructure/CJ.Infrastructure.csproj",
       "msbuildProject": "../CJ.Infrastructure/CJ.Infrastructure.csproj"
-    },
-    "CJ.Models/1.0.0": {
-      "type": "project",
-      "path": "../CJ.Models/CJ.Models.csproj",
-      "msbuildProject": "../CJ.Models/CJ.Models.csproj"
     },
     "CJ.Services/1.0.0": {
       "type": "project",
@@ -13991,7 +13982,6 @@
       "AutoMapper >= 8.0.0",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 6.0.0",
       "CJ.Infrastructure >= 1.0.0",
-      "CJ.Models >= 1.0.0",
       "CJ.Services >= 1.0.0",
       "Microsoft.AspNetCore.App >= 2.1.0",
       "Microsoft.NETCore.App >= 2.1.0",
@@ -14033,9 +14023,6 @@
           "projectReferences": {
             "C:\\projects\\vsprojects\\MVCCoreDemo\\CJ.Infrastructure\\CJ.Infrastructure.csproj": {
               "projectPath": "C:\\projects\\vsprojects\\MVCCoreDemo\\CJ.Infrastructure\\CJ.Infrastructure.csproj"
-            },
-            "C:\\projects\\vsprojects\\MVCCoreDemo\\CJ.Models\\CJ.Models.csproj": {
-              "projectPath": "C:\\projects\\vsprojects\\MVCCoreDemo\\CJ.Models\\CJ.Models.csproj"
             },
             "C:\\projects\\vsprojects\\MVCCoreDemo\\CJ.Services\\CJ.Services.csproj": {
               "projectPath": "C:\\projects\\vsprojects\\MVCCoreDemo\\CJ.Services\\CJ.Services.csproj"

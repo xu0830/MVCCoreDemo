@@ -27,7 +27,6 @@
           "AutoMapper": "8.0.0",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "6.0.0",
           "CJ.Infrastructure": "1.0.0",
-          "CJ.Models": "1.0.0",
           "CJ.Services": "1.0.0",
           "Microsoft.AspNetCore.App": "2.1.0",
           "Microsoft.NETCore.App": "2.1.0",
@@ -1021,9 +1020,20 @@
           "System.Runtime": "4.3.0"
         }
       },
+      "CJ.Entities/1.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0"
+        },
+        "runtime": {
+          "CJ.Entities.dll": {}
+        },
+        "compile": {
+          "CJ.Entities.dll": {}
+        }
+      },
       "CJ.Infrastructure/1.0.0": {
         "dependencies": {
-          "CJ.Models": "1.0.0",
+          "CJ.Entities": "1.0.0",
           "Microsoft.AspNetCore.Http.Extensions": "2.1.0",
           "Microsoft.AspNetCore.Http.Features": "2.1.0",
           "Microsoft.AspNetCore.Session": "2.1.0",
@@ -1041,23 +1051,11 @@
           "CJ.Infrastructure.dll": {}
         }
       },
-      "CJ.Models/1.0.0": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Http.Extensions": "2.1.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0"
-        },
-        "runtime": {
-          "CJ.Models.dll": {}
-        },
-        "compile": {
-          "CJ.Models.dll": {}
-        }
-      },
       "CJ.Services/1.0.0": {
         "dependencies": {
           "AutoMapper": "8.0.0",
+          "CJ.Entities": "1.0.0",
           "CJ.Infrastructure": "1.0.0",
-          "CJ.Models": "1.0.0",
           "Castle.Windsor": "4.1.0",
           "Microsoft.Extensions.Configuration.Json": "2.1.0",
           "Pomelo.EntityFrameworkCore.MySql": "2.1.0",
@@ -4400,12 +4398,12 @@
       "path": "system.threading.timer/4.0.1",
       "hashPath": "system.threading.timer.4.0.1.nupkg.sha512"
     },
-    "CJ.Infrastructure/1.0.0": {
+    "CJ.Entities/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "CJ.Models/1.0.0": {
+    "CJ.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -10,6 +10,7 @@ namespace CJ.Infrastructure.Log
     public class LogHelper
     {
         private static ILog logger;
+
         static LogHelper()
         {
             if (logger == null)

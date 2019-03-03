@@ -4,7 +4,8 @@ using System.Linq;
 using System.Reflection;
 using AutoMapper;
 using CJ.Infrastructure;
-using CJ.Models;
+using CJ.Infrastructure.Repositories;
+using CJ.Entities;
 using CJ.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,38 +35,26 @@ namespace MVCCoreDemo.Startup
             services.AddScoped<DbContext, DefaultDbContext>();
            
             services.AddSession();
+
             services.AddMemoryCache();
-
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            //services.AddTransient<IUserService, UserService>();
-            //services.AddTransient<IRepository<User>, Repository<User>>();
-
-            ModelModule.Startup(services);
-
-            InfrastructureModule.Startup(services);
-
-            ServiceModule.Startup(services);
 
             services.AddAutoMapper();
 
-            //  允许跨域
-            //services.AddCors(
-            //    options => options.AddPolicy(_defaultCorsPolicyName, builder => builder
-            //           .WithOrigins(
-            //               new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json").Build().GetSection("CorsOrigins").Value
-            //                   .Split(",", StringSplitOptions.RemoveEmptyEntries)
-            //                   .ToArray()
-            //           )
-            //           .AllowAnyHeader()
-            //           .AllowAnyMethod()
-            //           .AllowCredentials())
-            //    );
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+            EntitiesModule.Startup(services);
+
+            ServiceModule.Startup(services);
+
             services.AddCors(options => options.AddPolicy(_defaultCorsPolicyName,
                 builder => 
                 builder.AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowCredentials()));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSwaggerGen( options =>
@@ -96,7 +85,6 @@ namespace MVCCoreDemo.Startup
             app.UseCookiePolicy();
 
             app.UseSwagger();
-
             
             app.UseSwaggerUI(c =>
             {

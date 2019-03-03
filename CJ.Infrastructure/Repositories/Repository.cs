@@ -1,4 +1,4 @@
-﻿using CJ.Models.Entities;
+﻿using CJ.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +10,14 @@ namespace CJ.Infrastructure.Repositories
     {
         private DbContext Context { get; }
 
+        public virtual DbSet<Entity> Table => Context.Set<Entity>();
+
         public Repository(DbContext _Context)
         {
             Context = _Context;
         }
 
-        public virtual DbSet<Entity> Table => Context.Set<Entity>();
+        
 
         public void Delete(Entity entity)
         {
@@ -60,13 +62,6 @@ namespace CJ.Infrastructure.Repositories
 
         public Entity Update(Entity entity)
         {
-            //AttachIfNot(entity);
-            //var entry = Context.ChangeTracker.Entries().FirstOrDefault(ent => ent.Entity == entity);
-            //if (entry!=null )
-            //{
-            //  Table.Attach(entity);
-            //}
-
             Context.Entry(entity).State = EntityState.Modified;
             return entity;
         }

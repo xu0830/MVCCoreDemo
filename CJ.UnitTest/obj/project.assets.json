@@ -2826,11 +2826,24 @@
           "build/netcoreapp1.0/xunit.runner.visualstudio.props": {}
         }
       },
+      "CJ.Entities/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0"
+        },
+        "compile": {
+          "bin/placeholder/CJ.Entities.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CJ.Entities.dll": {}
+        }
+      },
       "CJ.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
-          "CJ.Models": "1.0.0",
+          "CJ.Entities": "1.0.0",
           "Microsoft.AspNetCore.Http.Extensions": "2.1.0",
           "Microsoft.AspNetCore.Http.Features": "2.1.0",
           "Microsoft.AspNetCore.Session": "2.1.0",
@@ -2846,20 +2859,6 @@
         },
         "runtime": {
           "bin/placeholder/CJ.Infrastructure.dll": {}
-        }
-      },
-      "CJ.Models/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.1",
-        "dependencies": {
-          "Microsoft.AspNetCore.Http.Extensions": "2.1.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0"
-        },
-        "compile": {
-          "bin/placeholder/CJ.Models.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/CJ.Models.dll": {}
         }
       }
     }
@@ -8802,15 +8801,15 @@
         "xunit.runner.visualstudio.nuspec"
       ]
     },
+    "CJ.Entities/1.0.0": {
+      "type": "project",
+      "path": "../CJ.Entities/CJ.Entities.csproj",
+      "msbuildProject": "../CJ.Entities/CJ.Entities.csproj"
+    },
     "CJ.Infrastructure/1.0.0": {
       "type": "project",
       "path": "../CJ.Infrastructure/CJ.Infrastructure.csproj",
       "msbuildProject": "../CJ.Infrastructure/CJ.Infrastructure.csproj"
-    },
-    "CJ.Models/1.0.0": {
-      "type": "project",
-      "path": "../CJ.Models/CJ.Models.csproj",
-      "msbuildProject": "../CJ.Models/CJ.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {

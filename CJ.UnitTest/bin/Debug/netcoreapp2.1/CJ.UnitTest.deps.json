@@ -1953,9 +1953,17 @@
           "Microsoft.NET.Test.Sdk": "15.7.0"
         }
       },
+      "CJ.Entities/1.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0"
+        },
+        "runtime": {
+          "CJ.Entities.dll": {}
+        }
+      },
       "CJ.Infrastructure/1.0.0": {
         "dependencies": {
-          "CJ.Models": "1.0.0",
+          "CJ.Entities": "1.0.0",
           "Microsoft.AspNetCore.Http.Extensions": "2.1.0",
           "Microsoft.AspNetCore.Http.Features": "2.1.0",
           "Microsoft.AspNetCore.Session": "2.1.0",
@@ -1968,15 +1976,6 @@
         },
         "runtime": {
           "CJ.Infrastructure.dll": {}
-        }
-      },
-      "CJ.Models/1.0.0": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Http.Extensions": "2.1.0",
-          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0"
-        },
-        "runtime": {
-          "CJ.Models.dll": {}
         }
       }
     }
@@ -3044,12 +3043,12 @@
       "path": "xunit.runner.visualstudio/2.3.1",
       "hashPath": "xunit.runner.visualstudio.2.3.1.nupkg.sha512"
     },
-    "CJ.Infrastructure/1.0.0": {
+    "CJ.Entities/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "CJ.Models/1.0.0": {
+    "CJ.Infrastructure/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

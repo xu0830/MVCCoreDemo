@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CJ.Entities\CJ.Entities.csproj" />
     <ProjectReference Include="..\CJ.Infrastructure\CJ.Infrastructure.csproj" />
-    <ProjectReference Include="..\CJ.Models\CJ.Models.csproj" />
   </ItemGroup>
 
 </Project>

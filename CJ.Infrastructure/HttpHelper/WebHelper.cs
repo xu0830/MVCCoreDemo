@@ -99,7 +99,7 @@ namespace CJ.Infrastructure
             return retString;
         }
 
-        public static string SendGetRequest(string url)
+        public static string SendGetRequest(string url, CookieContainer cookieContainer)
         {
             string result = string.Empty;
             try
@@ -112,6 +112,7 @@ namespace CJ.Infrastructure
                 //wbRequest.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36");
                 //wbRequest.Headers.Add("X-Requested-With", "XMLHttpRequest");
                 HttpWebResponse wbResponse = (HttpWebResponse)wbRequest.GetResponse();
+                cookieContainer.GetCookies(wbResponse.ResponseUri);
                 using (Stream responseStream = wbResponse.GetResponseStream())
                 {
                     using (StreamReader sReader = new StreamReader(responseStream))

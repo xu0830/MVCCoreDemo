@@ -2175,18 +2175,17 @@
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
       },
-      "CJ.Models/1.0.0": {
+      "CJ.Entities/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
-          "Microsoft.AspNetCore.Http.Extensions": "2.1.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0"
         },
         "compile": {
-          "bin/placeholder/CJ.Models.dll": {}
+          "bin/placeholder/CJ.Entities.dll": {}
         },
         "runtime": {
-          "bin/placeholder/CJ.Models.dll": {}
+          "bin/placeholder/CJ.Entities.dll": {}
         }
       }
     }
@@ -7150,15 +7149,15 @@
         "system.xml.xmldocument.nuspec"
       ]
     },
-    "CJ.Models/1.0.0": {
+    "CJ.Entities/1.0.0": {
       "type": "project",
-      "path": "../CJ.Models/CJ.Models.csproj",
-      "msbuildProject": "../CJ.Models/CJ.Models.csproj"
+      "path": "../CJ.Entities/CJ.Entities.csproj",
+      "msbuildProject": "../CJ.Entities/CJ.Entities.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
-      "CJ.Models >= 1.0.0",
+      "CJ.Entities >= 1.0.0",
       "Microsoft.AspNetCore.Http.Extensions >= 2.1.0",
       "Microsoft.AspNetCore.Http.Features >= 2.1.0",
       "Microsoft.AspNetCore.Session >= 2.1.0",
@@ -7201,8 +7200,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\projects\\vsprojects\\MVCCoreDemo\\CJ.Models\\CJ.Models.csproj": {
-              "projectPath": "C:\\projects\\vsprojects\\MVCCoreDemo\\CJ.Models\\CJ.Models.csproj"
+            "C:\\projects\\vsprojects\\MVCCoreDemo\\CJ.Entities\\CJ.Entities.csproj": {
+              "projectPath": "C:\\projects\\vsprojects\\MVCCoreDemo\\CJ.Entities\\CJ.Entities.csproj"
             }
           }
         }

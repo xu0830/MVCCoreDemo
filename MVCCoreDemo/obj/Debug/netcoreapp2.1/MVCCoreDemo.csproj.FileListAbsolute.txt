@@ -3,10 +3,8 @@ F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\MVCCo
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\MVCCoreDemo.runtimeconfig.dev.json
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\MVCCoreDemo.dll
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\MVCCoreDemo.pdb
-F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.Models.dll
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.Services.dll
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.Services.pdb
-F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.Models.pdb
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\MVCCoreDemo.csprojAssemblyReference.cache
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\MVCCoreDemo.csproj.CoreCompileInputs.cache
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\MVCCoreDemo.AssemblyInfoInputs.cache
@@ -49,11 +47,9 @@ C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\MVCCoreDe
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\MVCCoreDemo.Views.dll
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\MVCCoreDemo.Views.pdb
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.Infrastructure.dll
-C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.Models.dll
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.Services.dll
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.Services.pdb
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.Infrastructure.pdb
-C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.Models.pdb
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\MVCCoreDemo.csprojAssemblyReference.cache
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\MVCCoreDemo.csproj.CoreCompileInputs.cache
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\MVCCoreDemo.RazorAssemblyInfo.cache
@@ -80,3 +76,7 @@ C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\MVCCoreDe
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\MVCCoreDemo.RazorTargetAssemblyInfo.cs
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\MVCCoreDemo.Views.pdb
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\MVCCoreDemo.csproj.CopyComplete
+F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.Entities.dll
+F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.Entities.pdb
+C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.Entities.dll
+C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.Entities.pdb
