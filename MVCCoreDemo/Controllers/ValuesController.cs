@@ -39,7 +39,7 @@ namespace MVCCoreDemo
 
         // POST api/<controller>
         [HttpPost]
-        public string Post([FromBody]string value)
+        public string Post(string value)
         {
             return value;
         }
