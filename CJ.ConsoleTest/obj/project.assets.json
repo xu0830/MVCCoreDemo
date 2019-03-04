@@ -15,6 +15,18 @@
           "lib/netstandard2.0/AutoMapper.dll": {}
         }
       },
+      "Baidu.AI/3.6.6": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "10.0.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/AipSdk.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AipSdk.dll": {}
+        }
+      },
       "Castle.Core/4.2.0": {
         "type": "package",
         "dependencies": {
@@ -2436,6 +2448,21 @@
         "lib/netstandard2.0/AutoMapper.dll",
         "lib/netstandard2.0/AutoMapper.pdb",
         "lib/netstandard2.0/AutoMapper.xml"
+      ]
+    },
+    "Baidu.AI/3.6.6": {
+      "sha512": "dEDK1UpY/TMsdgYrxKDEESdR1hdsFaYTrCV8+UubmAqVCqhuAAt7ExhLC8R4ywIAbF75REkatxfGiHSPh9AUnA==",
+      "type": "package",
+      "path": "baidu.ai/3.6.6",
+      "files": [
+        ".signature.p7s",
+        "baidu.ai.3.6.6.nupkg.sha512",
+        "baidu.ai.nuspec",
+        "lib/net35/AipSdk.dll",
+        "lib/net35/AipSdk.xml",
+        "lib/net40/AipSdk.dll",
+        "lib/net45/AipSdk.dll",
+        "lib/netstandard2.0/AipSdk.dll"
       ]
     },
     "Castle.Core/4.2.0": {
@@ -7720,6 +7747,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
+      "Baidu.AI >= 3.6.6",
       "CJ.Services >= 1.0.0",
       "Microsoft.Extensions.Configuration.Json >= 2.1.0",
       "Microsoft.NETCore.App >= 2.1.0",
@@ -7772,6 +7800,10 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
+          "Baidu.AI": {
+            "target": "Package",
+            "version": "[3.6.6, )"
+          },
           "Microsoft.Extensions.Configuration.Json": {
             "target": "Package",
             "version": "[2.1.0, )"

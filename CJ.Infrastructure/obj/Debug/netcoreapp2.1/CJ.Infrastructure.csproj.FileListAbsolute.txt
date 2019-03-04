@@ -11,8 +11,6 @@ F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\obj\Debug\netcoreapp2.1
 C:\projects\vsprojects\MVCCoreDemo\CJ.Infrastructure\bin\Debug\netcoreapp2.1\CJ.Infrastructure.deps.json
 C:\projects\vsprojects\MVCCoreDemo\CJ.Infrastructure\bin\Debug\netcoreapp2.1\CJ.Infrastructure.dll
 C:\projects\vsprojects\MVCCoreDemo\CJ.Infrastructure\bin\Debug\netcoreapp2.1\CJ.Infrastructure.pdb
-C:\projects\vsprojects\MVCCoreDemo\CJ.Infrastructure\bin\Debug\netcoreapp2.1\CJ.Models.dll
-C:\projects\vsprojects\MVCCoreDemo\CJ.Infrastructure\bin\Debug\netcoreapp2.1\CJ.Models.pdb
 C:\projects\vsprojects\MVCCoreDemo\CJ.Infrastructure\obj\Debug\netcoreapp2.1\CJ.Infrastructure.csprojAssemblyReference.cache
 C:\projects\vsprojects\MVCCoreDemo\CJ.Infrastructure\obj\Debug\netcoreapp2.1\CJ.Infrastructure.csproj.CoreCompileInputs.cache
 C:\projects\vsprojects\MVCCoreDemo\CJ.Infrastructure\obj\Debug\netcoreapp2.1\CJ.Infrastructure.AssemblyInfoInputs.cache
@@ -22,3 +20,5 @@ C:\projects\vsprojects\MVCCoreDemo\CJ.Infrastructure\obj\Debug\netcoreapp2.1\CJ.
 C:\projects\vsprojects\MVCCoreDemo\CJ.Infrastructure\obj\Debug\netcoreapp2.1\CJ.Infrastructure.pdb
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\bin\Debug\netcoreapp2.1\CJ.Entities.dll
 F:\vs_projects\my_projects\MVCCoreDemo\CJ.Infrastructure\bin\Debug\netcoreapp2.1\CJ.Entities.pdb
+C:\projects\vsprojects\MVCCoreDemo\CJ.Infrastructure\bin\Debug\netcoreapp2.1\CJ.Entities.dll
+C:\projects\vsprojects\MVCCoreDemo\CJ.Infrastructure\bin\Debug\netcoreapp2.1\CJ.Entities.pdb

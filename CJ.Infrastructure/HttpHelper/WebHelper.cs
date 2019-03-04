@@ -106,6 +106,11 @@ namespace CJ.Infrastructure
             {
                 HttpWebRequest wbRequest = (HttpWebRequest)WebRequest.Create(url);
                 wbRequest.Method = "GET";
+                //wbRequest.Headers.Add("Accept", "text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01");
+                //wbRequest.Headers.Add("Referer", "https://kyfw.12306.cn/otn/resources/login.html");
+                //wbRequest.Headers.Add("Cookie", "_passport_session=963c80ba94024c0cad070cab0e7500492880; route=6f50b51faa11b987e576cdb301e545c4; BIGipServerotn=384827914.64545.0000; BIGipServerpool_passport=200081930.50215.0000");
+                //wbRequest.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36");
+                //wbRequest.Headers.Add("X-Requested-With", "XMLHttpRequest");
                 HttpWebResponse wbResponse = (HttpWebResponse)wbRequest.GetResponse();
                 cookieContainer.GetCookies(wbResponse.ResponseUri);
                 using (Stream responseStream = wbResponse.GetResponseStream())
@@ -155,6 +160,7 @@ namespace CJ.Infrastructure
             this.method = "POST";
             this.userAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2.0.50727; .NET CLR 3.0.04506.648; .NET CLR 3.5.21022)";
             this.maxTry = 300;
+            
         }
     }
 }
