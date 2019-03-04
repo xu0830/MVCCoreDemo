@@ -31,6 +31,8 @@ namespace CJ.Infrastructure
             request.AddHeader("cache-control", "no-cache");
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
 
+
+
             IList<RestResponseCookie> cookies = (IList<RestResponseCookie>)CacheHelper.GetCache("NeteaseCookies");
 
             if (cookies != null && cookies.Count > 0)
