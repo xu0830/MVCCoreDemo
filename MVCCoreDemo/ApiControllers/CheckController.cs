@@ -7,6 +7,7 @@ using CJ.Infrastructure.Cache;
 using CJ.Infrastructure.Log;
 using CJ.Services.Roles;
 using CJ.Services.Users;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
@@ -38,6 +39,7 @@ namespace MVCCoreDemo.ApiControllers
         public OutputModel Get()
         {
             OutputModel outputModel = new OutputModel();
+            var origins = WebConfig.CorsOrigins;
 
             int entireX = 240;
             int entireY = 140;
@@ -66,6 +68,7 @@ namespace MVCCoreDemo.ApiControllers
                     x,
                     y
                 },
+                Msg = WebConfig.CorsOrigins
             };
 
             CacheHelper.SetCache(picGuid, x, DateTime.Now + TimeSpan.FromMinutes(1));

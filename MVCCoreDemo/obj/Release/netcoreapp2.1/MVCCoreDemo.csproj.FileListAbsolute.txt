@@ -30,14 +30,12 @@ F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\MVC
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\MVCCoreDemo.pdb
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\MVCCoreDemo.csproj.CopyComplete
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\MVCCoreDemo.csprojAssemblyReference.cache
-F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\CJ.Models.dll
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\CJ.Services.dll
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\CJ.Services.pdb
-F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\CJ.Models.pdb
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\CJ.Infrastructure.dll
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\CJ.Infrastructure.pdb
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\Razor\Views\Login\Index.g.cshtml.cs
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\UserSecretsAssemblyInfo.cs
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\Razor\Views\Login\ResetPassword.g.cshtml.cs
-F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\CJ.ConsoleTest.dll
-F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\CJ.ConsoleTest.pdb
+F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\CJ.Entities.dll
+F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\CJ.Entities.pdb

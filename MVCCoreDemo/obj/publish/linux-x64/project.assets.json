@@ -2,6 +2,32 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.1": {
+      "AutoMapper/8.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.dll": {}
+        }
+      },
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "AutoMapper": "8.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
       "Castle.Core/4.2.0": {
         "type": "package",
         "dependencies": {
@@ -5139,32 +5165,31 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "CJ.ConsoleTest/1.0.0": {
+      "CJ.Entities/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
-          "CJ.Infrastructure": "1.0.0",
-          "Microsoft.Extensions.Configuration.Json": "2.1.0",
-          "Newtonsoft.Json": "12.0.1",
-          "RestSharp": "106.6.3"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0"
         },
         "compile": {
-          "bin/placeholder/CJ.ConsoleTest.dll": {}
+          "bin/placeholder/CJ.Entities.dll": {}
         },
         "runtime": {
-          "bin/placeholder/CJ.ConsoleTest.dll": {}
+          "bin/placeholder/CJ.Entities.dll": {}
         }
       },
       "CJ.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
+          "CJ.Entities": "1.0.0",
           "Microsoft.AspNetCore.Http.Extensions": "2.1.0",
           "Microsoft.AspNetCore.Http.Features": "2.1.0",
           "Microsoft.AspNetCore.Session": "2.1.0",
           "Microsoft.Extensions.Caching.Memory": "2.1.0",
           "Microsoft.Extensions.Configuration.Json": "2.1.0",
           "Newtonsoft.Json": "12.0.1",
+          "Pomelo.EntityFrameworkCore.MySql": "2.1.0",
           "RestSharp": "106.6.3",
           "log4net": "2.0.8"
         },
@@ -5175,25 +5200,13 @@
           "bin/placeholder/CJ.Infrastructure.dll": {}
         }
       },
-      "CJ.Models/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.1",
-        "dependencies": {
-          "CJ.ConsoleTest": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/CJ.Models.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/CJ.Models.dll": {}
-        }
-      },
       "CJ.Services/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
+          "AutoMapper": "8.0.0",
+          "CJ.Entities": "1.0.0",
           "CJ.Infrastructure": "1.0.0",
-          "CJ.Models": "1.0.0",
           "Castle.Windsor": "4.1.0",
           "Microsoft.Extensions.Configuration.Json": "2.1.0",
           "Pomelo.EntityFrameworkCore.MySql": "2.1.0",
@@ -5208,6 +5221,32 @@
       }
     },
     ".NETCoreApp,Version=v2.1/linux-x64": {
+      "AutoMapper/8.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.dll": {}
+        }
+      },
+      "AutoMapper.Extensions.Microsoft.DependencyInjection/6.0.0": {
+        "type": "package",
+        "dependencies": {
+          "AutoMapper": "8.0.0",
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
+        }
+      },
       "Castle.Core/4.2.0": {
         "type": "package",
         "dependencies": {
@@ -10298,32 +10337,31 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "CJ.ConsoleTest/1.0.0": {
+      "CJ.Entities/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
-          "CJ.Infrastructure": "1.0.0",
-          "Microsoft.Extensions.Configuration.Json": "2.1.0",
-          "Newtonsoft.Json": "12.0.1",
-          "RestSharp": "106.6.3"
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0"
         },
         "compile": {
-          "bin/placeholder/CJ.ConsoleTest.dll": {}
+          "bin/placeholder/CJ.Entities.dll": {}
         },
         "runtime": {
-          "bin/placeholder/CJ.ConsoleTest.dll": {}
+          "bin/placeholder/CJ.Entities.dll": {}
         }
       },
       "CJ.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
+          "CJ.Entities": "1.0.0",
           "Microsoft.AspNetCore.Http.Extensions": "2.1.0",
           "Microsoft.AspNetCore.Http.Features": "2.1.0",
           "Microsoft.AspNetCore.Session": "2.1.0",
           "Microsoft.Extensions.Caching.Memory": "2.1.0",
           "Microsoft.Extensions.Configuration.Json": "2.1.0",
           "Newtonsoft.Json": "12.0.1",
+          "Pomelo.EntityFrameworkCore.MySql": "2.1.0",
           "RestSharp": "106.6.3",
           "log4net": "2.0.8"
         },
@@ -10334,25 +10372,13 @@
           "bin/placeholder/CJ.Infrastructure.dll": {}
         }
       },
-      "CJ.Models/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v2.1",
-        "dependencies": {
-          "CJ.ConsoleTest": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/CJ.Models.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/CJ.Models.dll": {}
-        }
-      },
       "CJ.Services/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.1",
         "dependencies": {
+          "AutoMapper": "8.0.0",
+          "CJ.Entities": "1.0.0",
           "CJ.Infrastructure": "1.0.0",
-          "CJ.Models": "1.0.0",
           "Castle.Windsor": "4.1.0",
           "Microsoft.Extensions.Configuration.Json": "2.1.0",
           "Pomelo.EntityFrameworkCore.MySql": "2.1.0",
@@ -10368,6 +10394,34 @@
     }
   },
   "libraries": {
+    "AutoMapper/8.0.0": {
+      "sha512": "kcbje0Y71XkvzPn8k6OROZGOn2SKaWimon3Bu1WUTVoV5GTJVym+k+zQuKApyyFVRfk7bisumj/qUX4xIIXS+Q==",
+      "type": "package",
+      "path": "automapper/8.0.0",
+      "files": [
+        ".signature.p7s",
+        "automapper.8.0.0.nupkg.sha512",
+        "automapper.nuspec",
+        "lib/net461/AutoMapper.dll",
+        "lib/net461/AutoMapper.pdb",
+        "lib/net461/AutoMapper.xml",
+        "lib/netstandard2.0/AutoMapper.dll",
+        "lib/netstandard2.0/AutoMapper.pdb",
+        "lib/netstandard2.0/AutoMapper.xml"
+      ]
+    },
+    "AutoMapper.Extensions.Microsoft.DependencyInjection/6.0.0": {
+      "sha512": "EHxmLh6OuTuiGU3U+pHhNHwWOq1juK+Wbvr2n7Oj8/L819+DCnr7dtVtIGmBYHrle6foukEXqT5rcbRS9+CFyA==",
+      "type": "package",
+      "path": "automapper.extensions.microsoft.dependencyinjection/6.0.0",
+      "files": [
+        ".signature.p7s",
+        "automapper.extensions.microsoft.dependencyinjection.6.0.0.nupkg.sha512",
+        "automapper.extensions.microsoft.dependencyinjection.nuspec",
+        "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll",
+        "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.pdb"
+      ]
+    },
     "Castle.Core/4.2.0": {
       "sha512": "1TtKHYYVfox7aUZ0akCqkULmAjpG8X5ZRzTzTiONY34xtvvaPuUSSdVL1VaF/1/ljRhOkpy+uKOGn6XoFGvorw==",
       "type": "package",
@@ -19219,31 +19273,27 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
-    "CJ.ConsoleTest/1.0.0": {
+    "CJ.Entities/1.0.0": {
       "type": "project",
-      "path": "../CJ.ConsoleTest/CJ.ConsoleTest.csproj",
-      "msbuildProject": "../CJ.ConsoleTest/CJ.ConsoleTest.csproj"
+      "path": "../CJ.Entities/CJ.Entities.csproj",
+      "msbuildProject": "../CJ.Entities/CJ.Entities.csproj"
     },
     "CJ.Infrastructure/1.0.0": {
       "type": "project",
       "path": "../CJ.Infrastructure/CJ.Infrastructure.csproj",
       "msbuildProject": "../CJ.Infrastructure/CJ.Infrastructure.csproj"
     },
-    "CJ.Models/1.0.0": {
-      "type": "project",
-      "path": "../CJ.Models/CJ.Models.csproj",
-      "msbuildProject": "../CJ.Models/CJ.Models.csproj"
-    },
     "CJ.Services/1.0.0": {
       "type": "project",
-      "path": "../CJ.BLL/CJ.Services.csproj",
-      "msbuildProject": "../CJ.BLL/CJ.Services.csproj"
+      "path": "../CJ.Services/CJ.Services.csproj",
+      "msbuildProject": "../CJ.Services/CJ.Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
+      "AutoMapper >= 8.0.0",
+      "AutoMapper.Extensions.Microsoft.DependencyInjection >= 6.0.0",
       "CJ.Infrastructure >= 1.0.0",
-      "CJ.Models >= 1.0.0",
       "CJ.Services >= 1.0.0",
       "Microsoft.AspNetCore.App >= 2.1.0",
       "Microsoft.NETCore.App >= 2.1.7",
@@ -19283,14 +19333,11 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "F:\\vs_projects\\my_projects\\MVCCoreDemo\\CJ.BLL\\CJ.Services.csproj": {
-              "projectPath": "F:\\vs_projects\\my_projects\\MVCCoreDemo\\CJ.BLL\\CJ.Services.csproj"
-            },
             "F:\\vs_projects\\my_projects\\MVCCoreDemo\\CJ.Infrastructure\\CJ.Infrastructure.csproj": {
               "projectPath": "F:\\vs_projects\\my_projects\\MVCCoreDemo\\CJ.Infrastructure\\CJ.Infrastructure.csproj"
             },
-            "F:\\vs_projects\\my_projects\\MVCCoreDemo\\CJ.Models\\CJ.Models.csproj": {
-              "projectPath": "F:\\vs_projects\\my_projects\\MVCCoreDemo\\CJ.Models\\CJ.Models.csproj"
+            "F:\\vs_projects\\my_projects\\MVCCoreDemo\\CJ.Services\\CJ.Services.csproj": {
+              "projectPath": "F:\\vs_projects\\my_projects\\MVCCoreDemo\\CJ.Services\\CJ.Services.csproj"
             }
           }
         }
@@ -19304,6 +19351,14 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
+          "AutoMapper": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+            "target": "Package",
+            "version": "[6.0.0, )"
+          },
           "Microsoft.AspNetCore.App": {
             "target": "Package",
             "version": "[2.1.0, )"
