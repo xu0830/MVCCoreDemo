@@ -33,6 +33,7 @@ namespace CJ.ConsoleTest
             //});
             #endregion
 
+
             #region 获取火车站编码Json格式数据
             //string response = HttpHelper.SendGetRequest("https://kyfw.12306.cn/otn/resources/js/framework/station_name.js?station_version=1.9094", new CookieContainer());
 
@@ -100,8 +101,11 @@ namespace CJ.ConsoleTest
             //}
 
             //Console.WriteLine("文件输出成功");
+
             #endregion
 
+            string Path = Directory.GetCurrentDirectory() + "\\json\\station.json";
+            var obj = JsonHelper.Import(Path);
             Console.ReadKey();
         }
     }
