@@ -11,11 +11,18 @@ namespace CJ.Infrastructure
 {
     /// <summary>
     /// 网站配置
+    ///     appsetting.json文件依赖
     /// </summary>
     public class WebConfig
     {
+        /// <summary>
+        /// 缓存键名
+        /// </summary>
         private static string settingKey = "appsetting";
 
+        /// <summary>
+        /// 配置文件名
+        /// </summary>
         private static string jsonFileName = "appsettings.json";
 
         private static IConfigurationRoot GetConfigurationRoot()
