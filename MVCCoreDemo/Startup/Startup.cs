@@ -15,6 +15,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.Extensions.Caching.Redis;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace MVCCoreDemo.Startup
 {
@@ -33,7 +35,7 @@ namespace MVCCoreDemo.Startup
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<DbContext, DefaultDbContext>();
-           
+
             services.AddSession();
 
             services.AddMemoryCache();

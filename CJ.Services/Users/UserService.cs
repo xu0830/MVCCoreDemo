@@ -2,9 +2,9 @@
 using CJ.Infrastructure.Repositories;
 using System;
 using System.Linq;
-using CJ.Services.Dtos;
 using AutoMapper;
 using CJ.Entities;
+using CJ.Services.Users.Dtos;
 
 namespace CJ.Services.Users
 {

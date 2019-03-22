@@ -7,6 +7,7 @@ using CJ.Infrastructure.Cache;
 using CJ.Infrastructure.Log;
 using CJ.Services.Roles;
 using CJ.Services.Users;
+using CJ.Services.Users.Dtos;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -160,7 +161,6 @@ namespace MVCCoreDemo.ApiControllers
 
             return response;
         }
-
 
 
         //// PUT api/<controller>/5

@@ -1,5 +1,5 @@
 ﻿using CJ.Entities;
-using CJ.Services.Dtos;
+using CJ.Services.Users.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Text;

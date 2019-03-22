@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CJ.Services.Stations;
+using CJ.Services.Stations.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using MVCCoreDemo.Controllers;
+using MVCCoreDemo.Models;
+using MVCCoreDemo.Models.Station;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -13,6 +17,13 @@ namespace MVCCoreDemo.ApiControllers
     public class StationController : BaseController
     {
         // GET: api/<controller>
+        private readonly IStationService stationService;
+
+        public StationController(IStationService _stationService)
+        {
+            stationService = _stationService;
+        }
+
         [HttpGet]
         public IEnumerable<string> Get()
         {
@@ -31,6 +42,16 @@ namespace MVCCoreDemo.ApiControllers
         public void Post([FromBody]string value)
         {
             
+        }
+
+        [HttpPost("ticketQuery")]
+        public OutputModel TicketQuery([FromBody]TicketQueryInput input)
+        {
+            OutputModel response = new OutputModel();
+            response.Code = 200;
+            response.Result = "success";
+            response.Data = stationService.TicketQuery(new StationServiceInput());
+            return response;
         }
 
         // PUT api/<controller>/5

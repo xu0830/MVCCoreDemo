@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using CJ.Services.Users;
 using CJ.Services.Roles;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using CJ.Entities;
+using CJ.Services.Users.Dtos;
 
 namespace CJ.Services.AutoMapper
 {
