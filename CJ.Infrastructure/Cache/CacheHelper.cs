@@ -76,6 +76,7 @@ namespace CJ.Infrastructure.Cache
             var fileProvider = new PhysicalFileProvider(filePath);
             var fileToken = fileProvider.Watch(fileName);
             _cache.Set(CacheKey, value, fileToken);
+
         }
     }
 }

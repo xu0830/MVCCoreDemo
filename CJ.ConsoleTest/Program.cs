@@ -23,17 +23,24 @@ namespace CJ.ConsoleTest
         public static void Main(string[] args)
         {
             #region 定时器
-            //System.Timers.Timer timer = new System.Timers.Timer();
-            //timer.Enabled = true;
-            //timer.Interval = 1000;
-            //int second = 1;
-            //timer.Elapsed += new System.Timers.ElapsedEventHandler((obj, eventArg) =>
-            //{
 
-            //});
+            System.Timers.Timer timer = new System.Timers.Timer();
+            timer.Enabled = true;
+            timer.Interval = 60000;//执行间隔时间,单位为毫秒;此时时间间隔为1分钟  
+            timer.Start();
+            timer.Elapsed += new System.Timers.ElapsedEventHandler((obj, eventArg) =>
+            {
+                Console.WriteLine(DateTime.Now.Second);
+                if (DateTime.Now.Hour == 16 && DateTime.Now.Minute == 19 && DateTime.Now.DayOfWeek != 0
+                && (int)(DateTime.Now.DayOfWeek) != 6)
+                {
+                    Console.WriteLine(DateTime.Now);
+                }
+            });
             #endregion
 
-            #region 输出json文件
+
+            #region 获取火车站编码Json格式数据
             //string response = HttpHelper.SendGetRequest("https://kyfw.12306.cn/otn/resources/js/framework/station_name.js?station_version=1.9094", new CookieContainer());
 
             //string jsonData = response.Substring(response.IndexOf("@") + 1, response.LastIndexOf("'") - response.IndexOf("@"));
@@ -100,9 +107,11 @@ namespace CJ.ConsoleTest
             //}
 
             //Console.WriteLine("文件输出成功");
+
             #endregion
-            string Path = Directory.GetCurrentDirectory() + "\\json\\station.json";
-            var obj = JsonHelper.Import(Path);
+
+            //string Path = Directory.GetCurrentDirectory() + "\\json\\station.json";
+            //var obj = JsonHelper.Import(Path);
             Console.ReadKey();
         }
     }
@@ -126,11 +135,5 @@ namespace CJ.ConsoleTest
         public string Code { get; set; }
         public string CNPhoneticAlpha { get; set; }
         public string Index { get; set; }
-
-        public override string ToString()
-        {
-            return this.CNAbbr + " " + this.CNName
-                + " " + this.Code + " " + this.CNPhoneticAlpha + " " + this.Index;
-        }
     }
 }

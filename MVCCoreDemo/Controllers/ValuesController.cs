@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace MVCCoreDemo
 {
     [Route("api/[controller]")]
+    [EnableCors("localhost")]
     public class ValuesController : Controller
     {
         private IHttpContextAccessor _accessor;
@@ -23,11 +26,17 @@ namespace MVCCoreDemo
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2",
-                 _accessor.HttpContext.Connection.LocalIpAddress.ToString() 
-                 + _accessor.HttpContext.Connection.LocalPort.ToString(),
-                _accessor.HttpContext.Connection.RemoteIpAddress.ToString() + ":"
-                + _accessor.HttpContext.Connection.RemotePort.ToString() };
+            List<string> list = new List<string>();
+            foreach(var item in _accessor.HttpContext.Request.Headers)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(item.Key);
+                sb.Append(": ");
+                sb.Append(item.Value);
+                list.Add(sb.ToString());
+            }
+            return list;
+                 
         }
 
         // GET api/<controller>/5

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CJ.Services.Users
+namespace CJ.Services.Users.Dtos
 {
     public class UserDto : IEntityDto
     {

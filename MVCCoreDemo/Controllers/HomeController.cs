@@ -8,6 +8,7 @@ using CJ.Infrastructure;
 using CJ.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using MVCCoreDemo.Models;
 using Newtonsoft.Json;
 
@@ -15,6 +16,13 @@ namespace MVCCoreDemo.Controllers
 {
     public class HomeController : Controller
     {
+        private IDistributedCache cache;
+
+        public HomeController(IDistributedCache _cache)
+        {
+            cache = _cache;
+        }
+
         public IActionResult Index()
         {
             //var user = UserService.GetUserById(1);
@@ -25,7 +33,7 @@ namespace MVCCoreDemo.Controllers
             //ViewBag.Msg = obj.Msg;
             //new WebService().LoginApi("13428108149","xucanjie88!?");
             //new WebService().RecommendDaily();
-            
+            var vc = cache.GetString("test");
             return View();
         }
 

@@ -2,12 +2,15 @@
 using CJ.Infrastructure.Repositories;
 using System;
 using System.Linq;
-using CJ.Services.Dtos;
 using AutoMapper;
 using CJ.Entities;
+using CJ.Services.Users.Dtos;
 
 namespace CJ.Services.Users
 {
+    /// <summary>
+    /// 用户操作实现类
+    /// </summary>
     public class UserService : IUserService
     {
         private IRepository<User> _userRepository;
@@ -21,7 +24,7 @@ namespace CJ.Services.Users
         }
 
         /// <summary>
-        /// 用户登录接口
+        /// 用户校验
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>

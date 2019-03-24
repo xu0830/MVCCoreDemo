@@ -15,6 +15,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.Extensions.Caching.Redis;
+using Microsoft.Extensions.Caching.Distributed;
 
 namespace MVCCoreDemo.Startup
 {
@@ -33,7 +35,7 @@ namespace MVCCoreDemo.Startup
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<DbContext, DefaultDbContext>();
-           
+
             services.AddSession();
 
             services.AddMemoryCache();
@@ -50,10 +52,12 @@ namespace MVCCoreDemo.Startup
 
             services.AddCors(options => options.AddPolicy(_defaultCorsPolicyName,
                 builder => 
-                builder.AllowAnyOrigin()
+                builder.WithOrigins(WebConfig.CorsOrigins)
                     .AllowAnyHeader()
                     .AllowAnyMethod()
-                    .AllowCredentials()));
+                    .AllowCredentials()
+                )
+            );
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -67,6 +71,7 @@ namespace MVCCoreDemo.Startup
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider svp)
         {
             MyHttpContext.ServiceProvider = app.ApplicationServices;
+            app.UseCors(_defaultCorsPolicyName);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -77,7 +82,7 @@ namespace MVCCoreDemo.Startup
                 app.UseHsts();
             }
 
-            app.UseCors(_defaultCorsPolicyName);
+           
 
             app.UseStaticFiles();
 

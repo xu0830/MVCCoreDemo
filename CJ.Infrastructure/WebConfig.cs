@@ -4,17 +4,25 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace CJ.Infrastructure
 {
     /// <summary>
     /// 网站配置
+    ///     appsetting.json文件依赖
     /// </summary>
     public class WebConfig
     {
+        /// <summary>
+        /// 缓存键名
+        /// </summary>
         private static string settingKey = "appsetting";
 
+        /// <summary>
+        /// 配置文件名
+        /// </summary>
         private static string jsonFileName = "appsettings.json";
 
         private static IConfigurationRoot GetConfigurationRoot()
@@ -144,6 +152,21 @@ namespace CJ.Infrastructure
                 {
                     LogHelper.Error("读取配置文件失败");
                     return false;
+                }
+            }
+        }
+
+        public static string[] CorsOrigins
+        {
+            get {
+                try
+                {
+                    return GetConfigurationRoot().GetSection("CorsOrigins").Value.Split(",", StringSplitOptions.RemoveEmptyEntries);
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.Error("读取配置文件失败");
+                    return null;
                 }
             }
         }

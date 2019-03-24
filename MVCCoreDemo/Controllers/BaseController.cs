@@ -14,6 +14,11 @@ using MVCCoreDemo.Models;
 
 namespace MVCCoreDemo.Controllers
 {
+    /// <summary>
+    /// 控制器父类
+    ///     判断referer是否合法
+    ///         以及是否登录
+    /// </summary>
     public class BaseController : Controller
     {
         /// <summary>
