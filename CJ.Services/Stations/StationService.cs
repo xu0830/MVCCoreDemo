@@ -1,6 +1,7 @@
 ﻿using CJ.Infrastructure.Json;
 using CJ.Services.Stations.Dtos;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -50,25 +51,28 @@ namespace CJ.Services.Stations
                     To_station_no = props[17],
                     Is_support_card = props[18],
                     Controlled_train_flag = props[19],
-                    Gg_num = props[20],
-                    Gr_num = props[21],
-                    Qt_num = props[22],
-                    Rw_num = props[23],
-                    Rz_num = props[24],
-                    Tz_num = props[25],
-                    Wz_num = props[26],
-                    Yb_num = props[27],
-                    Yw_num = props[28],
-                    Yz_num = props[29],
-                    Ze_num = props[30],
-                    Zy_num = props[31],
-                    Swz_num = props[32],
-                    Srrb_num = props[33],
+                    Gg_num = !string.IsNullOrEmpty(props[20]) ? props[20] : "--",
+                    Gr_num = !string.IsNullOrEmpty(props[21]) ? props[21] : "--",
+                    Qt_num = !string.IsNullOrEmpty(props[22]) ? props[22] : "--",
+                    Rw_num = !string.IsNullOrEmpty(props[23]) ? props[23] : "--",
+                    Rz_num = !string.IsNullOrEmpty(props[24]) ? props[24] : "--",
+                    Tz_num = !string.IsNullOrEmpty(props[25]) ? props[25] : "--",
+                    Wz_num = !string.IsNullOrEmpty(props[26]) ? props[26] : "--",
+                    Yb_num = !string.IsNullOrEmpty(props[27]) ? props[27] : "--",
+                    Yw_num = !string.IsNullOrEmpty(props[28]) ? props[28] : "--",
+                    Yz_num = !string.IsNullOrEmpty(props[29]) ? props[29] : "--",
+                    Ze_num = !string.IsNullOrEmpty(props[30]) ? props[30] : "--",
+                    Zy_num = !string.IsNullOrEmpty(props[31]) ? props[31] : "--",
+                    Swz_num = !string.IsNullOrEmpty(props[32]) ? props[32] : "--",
+                    Srrb_num = !string.IsNullOrEmpty(props[33]) ? props[33] : "--",
                     Yp_ex = props[34],
                     Seat_types = props[35],
                     Exchange_train_flag = props[36],
                     Houbu_train_flag = props[37],
-                };
+                    From_station_name = ticketsResponse.Data.Map.GetValue(props[6]).ToString(),
+                    To_station_name = ticketsResponse.Data.Map.GetValue(props[7]).ToString()
+                //To_station_name = props[];
+            };
                 if (props.Length > 38)
                 {
                     ticket.Houbu_seat_limit = props[38];

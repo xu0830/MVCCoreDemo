@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -22,8 +23,9 @@ namespace CJ.Services.Stations.Dtos
     {
         public int Flag { get; set; }
 
-        public object Map { get; set; }
+        public JObject Map { get; set; }
 
         public List<string> Result { get; set; }
     }
+
 }
