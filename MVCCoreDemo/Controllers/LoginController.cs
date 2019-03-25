@@ -79,7 +79,7 @@ namespace MVCCoreDemo.Controllers
         /// <returns></returns>
         public IActionResult CheckVerifyPic([FromBody]PicPositionModel picPositionModelInput)
         {
-            string[] points = SessionHelper.GetSession("picPosition").Split(',');
+            string[] points = SessionHelper.GetSession<string>("picPosition").Split(',');
             int currentX = 0;
             int currentY = 0;
             if (!int.TryParse(points[0], out currentX) || !int.TryParse(points[1], out currentY)) {

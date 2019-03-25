@@ -89,7 +89,7 @@ namespace CJ.Services.Users
         /// <returns></returns>
         public bool IsLogin()
         {
-            var user = SessionHelper.GetSession("user");
+            var user = SessionHelper.GetSession<string>("user");
             return String.IsNullOrEmpty(user) || user == "" ? false: true;
         }
 

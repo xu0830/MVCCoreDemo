@@ -28,4 +28,28 @@ namespace CJ.Services.Stations.Dtos
         public List<string> Result { get; set; }
     }
 
+    public class TrainInfo
+    {
+        public string Start_station_name { get; set; }
+
+        public string Arrive_time { get; set; }
+
+        public string Station_train_code { get; set; }
+
+        public string Station_name { get; set; }
+
+        public string Train_class_name { get; set; }
+
+        public int Service_type { get; set; }
+
+        public string Start_time { get; set; }
+
+        public string Stopover_time { get; set; }
+
+        public string End_station_name { get; set; }
+
+        public string Station_no { get; set; }
+
+        public bool IsEnabled { get; set; }
+    }
 }

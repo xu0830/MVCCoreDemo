@@ -22,10 +22,21 @@ namespace MVCCoreDemo.Models.Station
         /// </summary>
         public string To_station_code { get; set; }
 
+        public string Token { get; set; }
+
         /// <summary>
-        /// 车票类型 
-        ///     成人票、学生票
+        /// 用户名
         /// </summary>
-        public string Purpose_codes { get; set; }
+        public string UserName { get; set; }
+
+        /// <summary>
+        /// 密码
+        /// </summary>
+        public string Password { get; set; }
+
+        /// <summary>
+        /// 验证码点数据
+        /// </summary>
+        public List<int> PointsData { get; set; }
     }
 }

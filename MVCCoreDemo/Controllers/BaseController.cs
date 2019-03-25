@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using CJ.Infrastructure;
 using Microsoft.Net.Http.Headers;
 using MVCCoreDemo.Models;
+using CJ.Services.Users.Dtos;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -47,7 +48,7 @@ namespace MVCCoreDemo.Controllers
         {
             base.OnActionExecuting(context);
 
-            var user = SessionHelper.GetSession("user");
+            var user = SessionHelper.GetSession<UserDto>("user");
       
             //if (String.IsNullOrEmpty(user) || "".Equals(user))
             //{
