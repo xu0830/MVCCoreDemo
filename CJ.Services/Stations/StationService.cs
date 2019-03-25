@@ -72,6 +72,7 @@ namespace CJ.Services.Stations
             var request = new RestRequest(Method.POST);
             request.AddHeader("cache-control", "no-cache");
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("Connection", "true");
 
             if (cookieContainer.Count > 0)
             {
@@ -88,10 +89,12 @@ namespace CJ.Services.Stations
             var loginAnswer = answer.Replace(",", "%2C");
             var client_2 = new RestClient("https://kyfw.12306.cn/passport/web/login");
             var request_2 = new RestRequest(Method.POST);
+            request_2.AddHeader("Accept", "application/json");
             request_2.AddHeader("cache-control", "no-cache");
-            request_2.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request_2.AddParameter("application/x-www-form-urlencoded", "username=" + input.UserName +
-                "&password=" + input.Password + "&answer=" + answer + "&appid=otn", ParameterType.RequestBody);
+            request_2.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+            request_2.AddHeader("Connection", "true");
+            request_2.AddParameter("", $"username={input.UserName}&password={input.Password}&answer={answer}&appid=otn",
+                ParameterType.RequestBody);
 
             if (cookieContainer.Count > 0)
             {
