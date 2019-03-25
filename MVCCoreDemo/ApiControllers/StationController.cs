@@ -50,7 +50,12 @@ namespace MVCCoreDemo.ApiControllers
             OutputModel response = new OutputModel();
             response.Code = 200;
             response.Result = "success";
-            response.Data = stationService.TicketQuery(new StationServiceInput());
+            response.Data = stationService.TicketQuery(new StationServiceInput() {
+                From_station_code = input.From_station_code,
+                To_station_code = input.To_station_code,
+                Purpose_codes = "ADULT",
+                Train_date = input.Train_date
+            });
             return response;
         }
 

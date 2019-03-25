@@ -17,7 +17,7 @@ namespace CJ.Services.Stations
         /// <returns></returns>
         public List<TicketDto> TicketQuery(StationServiceInput input)
         {
-            var client_8 = new RestClient("https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.train_date=2019-04-08&leftTicketDTO.from_station=IOQ&leftTicketDTO.to_station=PEQ&purpose_codes=ADULT");
+            var client_8 = new RestClient($"https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.train_date={input.Train_date}&leftTicketDTO.from_station={input.From_station_code}&leftTicketDTO.to_station=${input.To_station_code}&purpose_codes={input.Purpose_codes}");
             var request_8 = new RestRequest(Method.GET);
             request_8.AddHeader("cache-control", "no-cache");
             IRestResponse response_8 = client_8.Execute(request_8);
