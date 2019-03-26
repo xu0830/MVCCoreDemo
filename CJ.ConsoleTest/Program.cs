@@ -30,13 +30,16 @@ namespace CJ.ConsoleTest
             timer.Start();
             timer.Elapsed += new System.Timers.ElapsedEventHandler((obj, eventArg) =>
             {
-                Console.WriteLine(DateTime.Now.Second);
-                if (DateTime.Now.Hour == 16 && DateTime.Now.Minute == 19 && DateTime.Now.DayOfWeek != 0
-                && (int)(DateTime.Now.DayOfWeek) != 6)
-                {
-                    Console.WriteLine(DateTime.Now);
-                }
+                //Console.WriteLine(DateTime.Now.Second);
+                //if (DateTime.Now.Hour == 16 && DateTime.Now.Minute == 19 && DateTime.Now.DayOfWeek != 0
+                //&& (int)(DateTime.Now.DayOfWeek) != 6)
+                //{
+                //    Console.WriteLine(DateTime.Now);
+                //}
             });
+
+            Console.WriteLine((DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000);
+
             #endregion
 
 

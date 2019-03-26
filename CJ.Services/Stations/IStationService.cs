@@ -25,5 +25,7 @@ namespace CJ.Services.Stations
         /// <param name="input"></param>
         /// <returns></returns>
         List<TicketDto> TicketQuery(StationServiceInput input);
+
+        void GetPassengerDto();
     }
 }

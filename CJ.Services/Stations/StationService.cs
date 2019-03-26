@@ -22,7 +22,6 @@ namespace CJ.Services.Stations
         {
             var client = new RestClient("https://kyfw.12306.cn/passport/captcha/captcha-image64");
             var request = new RestRequest(Method.POST);
-            request.AddHeader("Postman-Token", "328540e8-54d7-4061-9e1b-ec284dbd0352");
             request.AddHeader("cache-control", "no-cache");
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
 
@@ -36,11 +35,12 @@ namespace CJ.Services.Stations
             sb.Append(captchaImage.Image);
 
             string token = Guid.NewGuid().ToString();
-            CacheHelper.SetCache(token, response.Cookies, DateTime.Now.AddMinutes(3));
+            CacheHelper.SetCache(token, response.Cookies);
 
             return new {
                 token,
-                ImgUrl = sb.ToString()
+                ImgUrl = sb.ToString(),
+                Cookie = response.Cookies
             };
         }
 
@@ -56,7 +56,7 @@ namespace CJ.Services.Stations
 
             string answer = string.Join(",", input.PointsData.ToArray());
 
-            IList< RestResponseCookie> cookieContainer = (IList<RestResponseCookie>) CacheHelper.GetCache(input.Token);
+            IList<RestResponseCookie> cookieContainer = (IList<RestResponseCookie>) CacheHelper.GetCache(input.Token);
 
             if (cookieContainer == null)
             {
@@ -67,13 +67,35 @@ namespace CJ.Services.Stations
                 };
             }
 
+            #region logdevice回调函数
+            var client_0 = new RestClient("https://kyfw.12306.cn/otn/HttpZF/logdevice?algID=ozy7Gbfya4&hashCode=WfH7dJnFd1fsVPyp7w5waSpXKQX_Mz9Eg7kEMgvMQ6I&FMQw=0&q4f3=zh-CN&VySQ=FGEbgvFhJ2TiuUR5kdZvKllDSsfJHQJZ&VPIf=1&custID=133&VEek=unknown&dzuS=0&yD16=0&EOQP=4902a61a235fbb59700072139347967d&lEnu=3232235642&jp76=52d67b2a5aa5e031084733d5006cc664&hAqN=Win32&platform=WEB&ks0Q=d22ca0b81584fbea62237b14bd04c866&TeRS=1040x1920&tOHY=24xx1080x1920&Fvje=i1l1o1s1&q5aJ=-8&wNLf=99115dfb07133750ba677d055874de87&0aew=Mozilla/5.0%20(Windows%20NT%2010.0;%20Win64;%20x64)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/71.0.3578.98%20Safari/537.36&E3gR=556abc357c181c7e407b7183cd421c5c&timestamp=" + (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000);
+            var request_0 = new RestRequest(Method.GET);
+            request_0.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            IRestResponse response_0 = client_0.Execute(request_0);
+
+            string resJsonStr = response_0.Content.Substring(response_0.Content.IndexOf("'") + 1, response_0.Content.LastIndexOf("'") - response_0.Content.IndexOf("'") - 1);
+
+            CallBackResponse callBackFunction = JsonConvert.DeserializeObject<CallBackResponse>(resJsonStr);
+            cookieContainer.Add(new RestResponseCookie {
+                Name = "RAIL_DEVICEID",
+                Value = callBackFunction.Dfp
+            });
+            cookieContainer.Add(new RestResponseCookie
+            {
+                Name = "RAIL_EXPIRATION",
+                Value = callBackFunction.Exp
+            });
+
+            #endregion
+
+
             #region 验证码校验
             var client = new RestClient("https://kyfw.12306.cn/passport/captcha/captcha-check?answer=" + answer + "&rand=sjran&login_site=E");
             var request = new RestRequest(Method.POST);
             request.AddHeader("cache-control", "no-cache");
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
             request.AddHeader("Connection", "true");
-
             if (cookieContainer.Count > 0)
             {
                 foreach (var cookie in cookieContainer)
@@ -83,6 +105,16 @@ namespace CJ.Services.Stations
             }
 
             IRestResponse response = client.Execute(request);
+
+            ImgValidateResponse imgValidateResponse = JsonConvert.DeserializeObject<ImgValidateResponse>(response.Content);
+            if (imgValidateResponse.Result_code != 4)
+            {
+                return new LoginServiceDto
+                {
+                    LoginStatus = false,
+                    Result = "验证码错误"
+                };
+            }
             #endregion
 
             #region 登录接口
@@ -91,10 +123,11 @@ namespace CJ.Services.Stations
             var request_2 = new RestRequest(Method.POST);
             request_2.AddHeader("Accept", "application/json");
             request_2.AddHeader("cache-control", "no-cache");
-            request_2.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+            request_2.AddHeader("Content-Type", "application/x-www-form-urlencoded");
             request_2.AddHeader("Connection", "true");
-            request_2.AddParameter("", $"username={input.UserName}&password={input.Password}&answer={answer}&appid=otn",
+            request_2.AddParameter("application/x-www-form-urlencoded", "username=" + input.UserName + "&password=" + input.Password + "&answer=" + loginAnswer + "&appid=otn&undefined=",
                 ParameterType.RequestBody);
+            request.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
 
             if (cookieContainer.Count > 0)
             {
@@ -107,16 +140,21 @@ namespace CJ.Services.Stations
             LoginResponseDto loginResponseDto = null;
 
             IRestResponse response_2 = client_2.Execute(request_2);
+
             try
             {
                 loginResponseDto = JsonConvert.DeserializeObject<LoginResponseDto>(response_2.Content);
             }
             catch (Exception ex)
             {
-
+                return new LoginServiceDto
+                {
+                    LoginStatus = false,
+                    Result = "登录异常"
+                };
             }
 
-            if (loginResponseDto == null)
+            if (loginResponseDto.Result_code != 0)
             {
                 return new LoginServiceDto
                 {
@@ -124,15 +162,7 @@ namespace CJ.Services.Stations
                     Result = "密码错误"
                 };
             }
-            else if(loginResponseDto.Result_code != 0)
-            {
-                return new LoginServiceDto
-                {
-                    LoginStatus = false,
-                    Result = "验证码校验失败"
-                };
-            }
-            
+
             #endregion
 
             #region 获取标识登录状态的cookie
@@ -192,6 +222,39 @@ namespace CJ.Services.Stations
                 Result = "登录成功"
             };
         } 
+
+        /// <summary>
+        /// 获取用户信息
+        /// </summary>
+        public void GetPassengerDto()
+        {
+            var client = new RestClient("https://kyfw.12306.cn/otn/confirmPassenger/getPassengerDTOs");
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("cache-control", "no-cache");
+            request.AddHeader("Host", "kyfw.12306.cn");
+            request.AddHeader("Origin", "https://kyfw.12306.cn");
+            request.AddHeader("Referer", "https://kyfw.12306.cn/otn/confirmPassenger/initDc");
+            request.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0");
+
+            request.AddParameter("_jc_save_fromDate", "2019-04-08", ParameterType.Cookie);
+            request.AddParameter("_jc_save_fromStation", "%u6DF1%u5733%u5317%2CIOQ", ParameterType.Cookie);
+            request.AddParameter("_jc_save_toDate", "2019-04-08", ParameterType.Cookie);
+            request.AddParameter("_jc_save_toStation", "%u666E%u5B81%2CPEQ", ParameterType.Cookie);
+            request.AddParameter("_jc_save_wfdc_flag", "dc", ParameterType.Cookie);
+
+            IList<RestResponseCookie> cookieContainer = (IList<RestResponseCookie>)CacheHelper.GetCache("13428108149_loginStatus");
+
+            if (cookieContainer.Count > 0)
+            {
+                foreach (var cookie in cookieContainer)
+                {
+                    request.AddParameter(cookie.Name, cookie.Value, ParameterType.Cookie);
+                }
+            }
+
+            IRestResponse response = client.Execute(request);
+            //PassengerDTOResponse passengerDTOResponse = JsonConvert.DeserializeObject<PassengerDTOResponse>(response.Content);
+        }
 
         /// <summary>
         /// 车票查询

@@ -71,6 +71,16 @@ namespace MVCCoreDemo.ApiControllers
             return response;
         }
 
+        [HttpPost("GetPassengerDto")]
+        public OutputModel GetPassengerDto()
+        {
+            stationService.GetPassengerDto();
+            return new OutputModel()
+            {
+
+            };
+        }
+
         // GET api/<controller>/5
         [HttpGet("{id}")]
         public string Get(int id)
