@@ -58,34 +58,18 @@ namespace MVCCoreDemo.ApiControllers
                 Token = input.Token
             });
 
-            if (loginServiceDto.LoginStatus) {
-                response.Code = 200;
-                response.Result = "登录成功";
-            }
-            else
-            {
-                response.Code = 204;
-                response.Result = loginServiceDto.Result;
-            }
-            
-            return response;
-        }
-
-        [HttpPost("GetPassengerDto")]
-        public OutputModel GetPassengerDto()
-        {
-            stationService.GetPassengerDto();
-            return new OutputModel()
-            {
-
+            return new OutputModel {
+                Code = loginServiceDto.LoginStatus ? 200 : 204,
+                Result = loginServiceDto.Result,
+                Data = loginServiceDto.passenger
             };
         }
 
         // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{userName}")]
+        public PassengerResponse Get(string userName)
         {
-            return "value";
+            return (PassengerResponse)CacheHelper.GetCache("passenger_" + userName);
         }
 
         // POST api/<controller>

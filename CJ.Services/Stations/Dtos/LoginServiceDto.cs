@@ -9,5 +9,7 @@ namespace CJ.Services.Stations.Dtos
         public bool LoginStatus { get; set; }
 
         public string Result { get; set; }
+
+        public Passenger passenger { get; set; }
     }
 }

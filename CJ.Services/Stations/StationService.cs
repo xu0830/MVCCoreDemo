@@ -88,7 +88,6 @@ namespace CJ.Services.Stations
 
             #endregion
 
-
             #region 验证码校验
             var client = new RestClient("https://kyfw.12306.cn/passport/captcha/captcha-check?answer=" + answer + "&rand=sjran&login_site=E");
             var request = new RestRequest(Method.POST);
@@ -197,6 +196,17 @@ namespace CJ.Services.Stations
             {
                 cookieContainer.Add(item);
             }
+            cookieContainer.Add(new RestResponseCookie
+            {
+                Name = "RAIL_DEVICEID",
+                Value = callBackFunction.Dfp
+            });
+            cookieContainer.Add(new RestResponseCookie
+            {
+                Name = "RAIL_EXPIRATION",
+                Value = callBackFunction.Exp
+            });
+
             CacheHelper.SetCache(input.UserName + "_loginStatus", cookieContainer);
 
             #endregion
@@ -216,17 +226,22 @@ namespace CJ.Services.Stations
             IRestResponse response_5 = client_5.Execute(request_5);
             #endregion
 
+            PassengerResponse passengerResponse = GetPassengerDto(input.UserName);
+
             return new LoginServiceDto
             {
                 LoginStatus = true,
-                Result = "登录成功"
+                Result = "登录成功",
+                passenger = new Passenger() {
+                    Name = passengerResponse.Data.Normal_passengers[0].Passenger_name
+                }
             };
         } 
 
         /// <summary>
         /// 获取用户信息
         /// </summary>
-        public void GetPassengerDto()
+        public PassengerResponse GetPassengerDto(string userName)
         {
             var client = new RestClient("https://kyfw.12306.cn/otn/confirmPassenger/getPassengerDTOs");
             var request = new RestRequest(Method.POST);
@@ -253,7 +268,9 @@ namespace CJ.Services.Stations
             }
 
             IRestResponse response = client.Execute(request);
-            //PassengerDTOResponse passengerDTOResponse = JsonConvert.DeserializeObject<PassengerDTOResponse>(response.Content);
+            PassengerResponse passengerResponse = JsonConvert.DeserializeObject<PassengerResponse>(response.Content);
+            CacheHelper.SetCache("passenger_" + userName, passengerResponse);
+            return passengerResponse;
         }
 
         /// <summary>
