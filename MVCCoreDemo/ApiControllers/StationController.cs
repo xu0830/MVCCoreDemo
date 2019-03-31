@@ -15,7 +15,7 @@ using MVCCoreDemo.Models.Station;
 namespace MVCCoreDemo.ApiControllers
 {
     [Route("api/[controller]")]
-    public class StationController : BaseController
+    public class StationController : Controller
     {
         // GET: api/<controller>
         private readonly IStationService stationService;
@@ -33,9 +33,13 @@ namespace MVCCoreDemo.ApiControllers
         public OutputModel GetValidateImage()
         {
             OutputModel response = new OutputModel();
-            response.Code = 200;
-            response.Result = "success";
-            response.Data = stationService.GetValidatePicUrl();
+            var data = stationService.GetValidatePicUrl(); 
+            response.Code = data.Flag ? 200 : 204;
+            response.Result = data.Msg;
+            response.Data = new{
+                data.Token,
+                data.ImgUrl
+            };
             
             return response;
         }
@@ -62,6 +66,16 @@ namespace MVCCoreDemo.ApiControllers
                 Code = loginServiceDto.LoginStatus ? 200 : 204,
                 Result = loginServiceDto.Result,
                 Data = loginServiceDto.passenger
+            };
+        }
+
+        [HttpPost("submitOrder")]
+        public OutputModel SubmitOrder([FromBody]TicketTaskDto dto)
+        {
+            stationService.SubmitOrder(dto);
+            return new OutputModel()
+            {
+
             };
         }
 

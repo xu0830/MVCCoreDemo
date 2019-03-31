@@ -16,7 +16,7 @@ namespace CJ.Services.Users
         /// </summary>
         /// <param name="userDto"></param>
         /// <returns></returns>
-        bool CheckUser(UserDto userDto);
+        UserOutput Login(UserDto userDto);
 
         /// <summary>
         /// 获取UserDto
@@ -35,11 +35,14 @@ namespace CJ.Services.Users
         /// 是否登录
         /// </summary>
         /// <returns></returns>
-        bool IsLogin();
+        int IsLogin(string token);
 
         /// <summary>
         /// 重设密码
         /// </summary>
         void ResetPassword();
+
+
+        bool AddUser();
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using AutoMapper;
 using CJ.Entities;
 using CJ.Services.Users.Dtos;
+using CJ.Infrastructure.Cache;
 
 namespace CJ.Services.Users
 {
@@ -13,14 +14,14 @@ namespace CJ.Services.Users
     /// </summary>
     public class UserService : IUserService
     {
-        private IRepository<User> _userRepository;
+        private IRepository<User> userRepository;
 
-        private IMapper _mapper;
+        private IMapper mapper;
 
-        public UserService(IRepository<User> userRepository, IMapper mapper)
+        public UserService(IRepository<User> _userRepository, IMapper _mapper)
         {
-            _mapper = mapper;
-            _userRepository = userRepository;
+            mapper = _mapper;
+            userRepository = _userRepository;
         }
 
         /// <summary>
@@ -29,22 +30,48 @@ namespace CJ.Services.Users
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public bool CheckUser(UserDto userDto)
+        public UserOutput Login(UserDto userDto)
         {
             try
             {
-                //User user = _userRepository.GetAll().Where(c => c.UserName == userDto.UserName && c.Password == MD5Encrypt.Getmd5(RSAHelper.Decrypt(WebConfig.PrivateKey, userDto.Password))).FirstOrDefault();
-
-                User user = _userRepository.GetAll().Where(c => c.UserName == userDto.UserName && c.Password == userDto.Password).FirstOrDefault();
-
-                return user == null ? false : true;
+                User user = userRepository.GetAll()
+                    .Where(c => c.UserName == userDto.UserName)
+                    .FirstOrDefault();
+                if (user == null)
+                {
+                    return new UserOutput
+                    {
+                        Msg = "用户不存在",
+                        Flag = false
+                    };
+                }
+                if (user.Password != userDto.Password)
+                {
+                    return new UserOutput
+                    {
+                        Msg = "密码错误",
+                        Flag = false
+                    };
+                }
+                else
+                {
+                    string token = Guid.NewGuid().ToString();
+                    CacheHelper.SetCache(token, user, DateTime.Now.AddDays(7));
+                    return new UserOutput
+                    {
+                        Msg = "登录成功",
+                        Flag = true,
+                        Token = token
+                    };
+                }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return false;
+                return new UserOutput {
+                    Msg = "登录异常",
+                    Flag = false
+                };
             }
-
-            
         }
         
         /// <summary>
@@ -56,14 +83,23 @@ namespace CJ.Services.Users
         {
             try
             {
-                User user = _userRepository.Get(id);
-                UserDto userDto = _mapper.Map<UserDto>(user);
+                User user = userRepository.Get(id);
+                UserDto userDto = mapper.Map<UserDto>(user);
                 return userDto;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
+        }
+
+        public bool AddUser()
+        {
+            userRepository.Insert(new User {
+                UserName = "ddddd",
+                Password = "xucj"
+            }); 
+            return true;
         }
 
         /// <summary>
@@ -77,7 +113,7 @@ namespace CJ.Services.Users
                 SessionHelper.RemoveSession("user");
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }
@@ -87,10 +123,10 @@ namespace CJ.Services.Users
         /// 判断登录状态
         /// </summary>
         /// <returns></returns>
-        public bool IsLogin()
+        public int IsLogin(string token)
         {
-            var user = SessionHelper.GetSession<string>("user");
-            return String.IsNullOrEmpty(user) || user == "" ? false: true;
+            var user = CacheHelper.GetCache<User>(token);
+            return user == null ? 0 : user.Id;
         }
 
         /// <summary>

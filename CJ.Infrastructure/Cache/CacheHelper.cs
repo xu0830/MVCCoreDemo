@@ -15,14 +15,21 @@ namespace CJ.Infrastructure.Cache
     {
         public static IMemoryCache _cache = new MemoryCache(new MemoryCacheOptions());
 
+        public static object GetCache(string key)
+        {
+            object value;
+            _cache.TryGetValue(key, out value);
+            return value;
+        }
+
         /// <summary>
         /// 通过键名获取缓存值
         /// </summary>
         /// <param name="key">缓存键名</param>
         /// <returns></returns>
-        public static object GetCache(string key)
+        public static T GetCache<T>(string key)
         {
-            object value;
+            T value;
             _cache.TryGetValue(key, out value);
             return value;
         }

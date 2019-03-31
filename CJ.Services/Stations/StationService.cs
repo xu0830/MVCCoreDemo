@@ -1,6 +1,9 @@
-﻿using CJ.Infrastructure;
+﻿using AutoMapper;
+using CJ.Entities;
+using CJ.Infrastructure;
 using CJ.Infrastructure.Cache;
 using CJ.Infrastructure.Json;
+using CJ.Infrastructure.Repositories;
 using CJ.Services.Stations.Dtos;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -14,34 +17,88 @@ namespace CJ.Services.Stations
 {
     public class StationService : IStationService
     {
+        private IRepository<TicketTask> stationTaskRepository;
+
+        private IMapper mapper;
+
+        public StationService(IRepository<TicketTask> _stationTaskRepository,
+            IMapper _mapper)
+        {
+            stationTaskRepository = _stationTaskRepository;
+            mapper = _mapper;
+        }
+
         /// <summary>
         /// 获取图片验证码的URL
         /// </summary>
         /// <returns></returns>
-        public object GetValidatePicUrl()
+        public ValidatePicOutput GetValidatePicUrl()
         {
-            var client = new RestClient("https://kyfw.12306.cn/passport/captcha/captcha-image64");
-            var request = new RestRequest(Method.POST);
-            request.AddHeader("cache-control", "no-cache");
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            try
+            {
+                var client = new RestClient("https://kyfw.12306.cn/passport/captcha/captcha-image64");
+                var request = new RestRequest(Method.POST);
+                request.AddHeader("cache-control", "no-cache");
+                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+                request.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0");
 
-            IRestResponse response = client.Execute(request);
-            CaptchaImageDto captchaImage = JsonConvert.DeserializeObject<CaptchaImageDto>(response.Content);
 
-            StringBuilder sb = new StringBuilder();
+                IRestResponse response = client.Execute(request);
+                CaptchaImageDto captchaImage = JsonConvert.DeserializeObject<CaptchaImageDto>(response.Content);
 
-            sb.Append("data:image/jpg;base64,");
+                StringBuilder sb = new StringBuilder();
 
-            sb.Append(captchaImage.Image);
+                sb.Append("data:image/jpg;base64,");
 
-            string token = Guid.NewGuid().ToString();
-            CacheHelper.SetCache(token, response.Cookies);
+                sb.Append(captchaImage.Image);
 
-            return new {
-                token,
-                ImgUrl = sb.ToString(),
-                Cookie = response.Cookies
+                string token = Guid.NewGuid().ToString();
+                CacheHelper.SetCache(token, response.Cookies);
+
+                return new ValidatePicOutput
+                {
+                    Flag = true,
+                    Token = token,
+                    ImgUrl = sb.ToString(),
+                    Msg = "success"
+                };
+
+            }
+            catch (Exception)
+            {
+                return new ValidatePicOutput
+                {
+                    Flag = false,
+                    Msg = "异常错误"
+                };
+            }
+        }
+
+        public bool SubmitOrder(TicketTaskDto dto)
+        {
+            TicketTask model = new TicketTask()
+            {
+                LeftStation = dto.LeftStation,
+                ArriveStation = dto.ArriveStation,
+                LeftDate = dto.LeftDate,
+                TrainCode = dto.TrainCode,
+                UserName = dto.UserName,
+                SeatType = dto.SeatType,
+                CreatedTime = DateTime.Now
             };
+            //TicketTask ticketTask = mapper.Map<TicketTask>(dto);
+            //bool isNull = ticketTask == null;
+            //ticketTask.CreatedTime = DateTime.Now;
+            stationTaskRepository.Insert(model);
+            return true;
+            //try
+            //{
+               
+            //}
+            //catch (Exception ex)
+            //{
+            //    return false;
+            //}
         }
 
         /// <summary>
@@ -144,7 +201,7 @@ namespace CJ.Services.Stations
             {
                 loginResponseDto = JsonConvert.DeserializeObject<LoginResponseDto>(response_2.Content);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new LoginServiceDto
                 {

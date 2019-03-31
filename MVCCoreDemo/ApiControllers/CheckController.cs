@@ -19,16 +19,16 @@ using Newtonsoft.Json;
 namespace MVCCoreDemo.ApiControllers
 {
     [Route("api/[controller]")]
-    public class CheckController : BaseController
+    public class CheckController : Controller
     {
-        private IUserService _userService;
+        private IUserService userService;
 
-        private IRoleService _roleService;
+        private IRoleService roleService;
 
-        public CheckController(IUserService userService, IRoleService roleService)
+        public CheckController(IUserService _userService, IRoleService _roleService)
         {
-            _roleService = roleService;
-            _userService = userService;
+            roleService = _roleService;
+            userService = _userService;
         }
 
         /// <summary>
@@ -119,6 +119,23 @@ namespace MVCCoreDemo.ApiControllers
             return response;
         }
 
+
+        [HttpPost("getUserSession")]
+        public OutputModel GetUserSession()
+        {
+            var token = HttpContext.Request.Headers["Authorization"].ToString() ?? "";
+            int userId = userService.IsLogin(token);
+            return new OutputModel()
+            {
+                Code = userId > 0 ? 200 : 204,
+                Result = userId > 0 ? "success" : "fail",
+                Data = new
+                {
+                    userId
+                }
+            };
+        }
+
         /// <summary>
         /// 登录请求接口
         /// </summary>
@@ -146,22 +163,14 @@ namespace MVCCoreDemo.ApiControllers
                 Password = MD5Encrypt.Getmd5(user.Password)
             };
 
-            if (_userService.CheckUser(userDto))
-            {
-                string Token = Guid.NewGuid().ToString();
-                response.Code = 200;
-                response.Result = "success";
-            }
-            else
-            {
-                response.Code = 502;
-                response.Result = "fail";
-            }
-            //response.Data = _userService.GetUserById(1);
+            var output = userService.Login(userDto);
+            
+            response.Code = output.Flag? 200 : 204;
+            response.Result = output.Msg;
+            response.Data = output.Token;
 
             return response;
         }
-
 
         //// PUT api/<controller>/5
         //[HttpPut("{id}")]
@@ -174,6 +183,12 @@ namespace MVCCoreDemo.ApiControllers
         //public void Delete(int id)
         //{
         //}
-        
+
+        [HttpPost("addUser")]
+        public bool AddUser()
+        {
+            userService.GetUserById(1);
+            return true;
+        }
     }
 }

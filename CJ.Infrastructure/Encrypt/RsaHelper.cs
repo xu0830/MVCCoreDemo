@@ -220,7 +220,7 @@ namespace CJ.Infrastructure
             {
                 decryptStr = Encoding.UTF8.GetString(rsa.Decrypt(System.Convert.FromBase64String(cipher), RSAEncryptionPadding.Pkcs1));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 decryptStr = "";
             }

@@ -40,3 +40,5 @@ F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\lin
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\linux-x64\MVCCoreDemo
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\linux-x64\CJ.Entities.dll
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Release\netcoreapp2.1\linux-x64\CJ.Entities.pdb
+C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\linux-x64\MVCCoreDemo.dll
+C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\obj\Release\netcoreapp2.1\linux-x64\MVCCoreDemo.pdb

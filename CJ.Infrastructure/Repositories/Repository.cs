@@ -1,5 +1,7 @@
 ﻿using CJ.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,9 +17,7 @@ namespace CJ.Infrastructure.Repositories
         public Repository(DbContext _Context)
         {
             Context = _Context;
-        }
-
-        
+        }       
 
         public void Delete(Entity entity)
         {
@@ -52,12 +52,23 @@ namespace CJ.Infrastructure.Repositories
 
         public Entity Insert(Entity entity)
         {
-            return Table.Add(entity).Entity;
+            try
+            {
+                var result = Table.Add(entity).Entity;
+                Context.SaveChanges();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
+            
         }
 
-        public Task<Entity> InsertAsync(Entity entity)
+        public Entity InsertAsync(Entity entity)
         {
-            return Task.FromResult(Insert(entity));
+            return Table.AddAsync(entity).Result.Entity;
         }
 
         public Entity Update(Entity entity)

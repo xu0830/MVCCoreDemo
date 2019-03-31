@@ -11,7 +11,7 @@ namespace CJ.Services.Stations
         /// 获取验证码图片URL
         /// </summary>
         /// <returns></returns>
-        object GetValidatePicUrl();
+        ValidatePicOutput GetValidatePicUrl();
 
         /// <summary>
         /// 登录接口
@@ -19,6 +19,8 @@ namespace CJ.Services.Stations
         /// <returns></returns>
         LoginServiceDto ValidateLogin(StationServiceInput input);
 
+
+        bool SubmitOrder(TicketTaskDto dto);
         /// <summary>
         /// 车票查询
         /// </summary>
