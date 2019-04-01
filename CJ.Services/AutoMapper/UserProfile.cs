@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using CJ.Entities;
 using CJ.Services.Users.Dtos;
+using CJ.Services.Stations.Dtos;
 
 namespace CJ.Services.AutoMapper
 {
@@ -16,6 +17,8 @@ namespace CJ.Services.AutoMapper
             CreateMap<UserDto, User>();
             CreateMap<Role, RoleDto>();
             CreateMap<RoleDto, Role>();
+            CreateMap<TicketTask, TicketTaskDto>();
+            CreateMap<TicketTaskDto, TicketTask>();
         }
     }
 }

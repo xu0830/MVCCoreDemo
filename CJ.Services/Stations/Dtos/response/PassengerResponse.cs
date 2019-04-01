@@ -4,21 +4,6 @@ using System.Text;
 
 namespace CJ.Services.Stations.Dtos
 {
-    public class PassengerResponse
-    {
-        public string ValidateMessagesShowId { get; set; }
-
-        public bool Status { get; set; }
-
-        public int Httpstatus { get; set; }
-
-        public PassengerData Data { get; set; }
-
-        public List<string> Message { get; set; }
-
-        public Object ValidateMessage { get; set; }
-    }
-
     /// <summary>
     /// 乘客信息
     /// </summary>

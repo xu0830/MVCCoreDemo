@@ -10,6 +10,7 @@ using CJ.Infrastructure;
 using Microsoft.Net.Http.Headers;
 using MVCCoreDemo.Models;
 using CJ.Services.Users.Dtos;
+using CJ.Infrastructure.Cache;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -41,26 +42,35 @@ namespace MVCCoreDemo.Controllers
         }
 
         ///// <summary>
-        ///// referer && 登录状态验证
+        ///// 登录状态验证 && referer  
         ///// </summary>
         ///// <param name="context"></param>
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             base.OnActionExecuting(context);
 
-            var user = SessionHelper.GetSession<UserDto>("user");
-      
+            string token = context.HttpContext.Request.Headers["Authorization"].ToString();
+
+            if (string.IsNullOrEmpty(token) || CacheHelper.GetCache(token) == null)
+            {
+                context.Result = Json(new OutputModel
+                {
+                    Code = 204,
+                    Result = "用户未登录"
+                });
+            }
+
             //if (String.IsNullOrEmpty(user) || "".Equals(user))
             //{
             //    context.Result = new RedirectResult("/Login/Index");
             //    return;
             //}
-            if (!IsRefererValid(context)) {
-                context.Result = Json(new OutputModel
-                {
-                    Code = 202
-                });
-            }
+            //if (!IsRefererValid(context)) {
+            //    context.Result = Json(new OutputModel
+            //    {
+            //        Code = 202
+            //    });
+            //}
         } 
     }
 }

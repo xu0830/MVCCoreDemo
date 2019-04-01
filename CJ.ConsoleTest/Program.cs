@@ -15,6 +15,11 @@ using System.Net;
 using RestSharp;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.Collections.Specialized;
+using Quartz.Impl;
+using Quartz;
+using System.Threading.Tasks;
+using CJ.Infrastructure.Encode;
 
 namespace CJ.ConsoleTest
 {
@@ -44,79 +49,141 @@ namespace CJ.ConsoleTest
 
 
             #region 获取火车站编码Json格式数据
-            string response = HttpHelper.SendGetRequest("https://kyfw.12306.cn/otn/resources/js/framework/favorite_name.js", new CookieContainer());
+            //string response = HttpHelper.SendGetRequest("https://kyfw.12306.cn/otn/resources/js/framework/favorite_name.js", new CookieContainer());
 
-            string jsonData = response.Substring(response.IndexOf("@") + 1, response.LastIndexOf("'") - response.IndexOf("@"));
+            //string jsonData = response.Substring(response.IndexOf("@") + 1, response.LastIndexOf("'") - response.IndexOf("@"));
 
-            var StationArr = jsonData.Split("@");
+            //var StationArr = jsonData.Split("@");
 
-            StationJson stationJson = new StationJson();
-            stationJson.Stations = new List<Station>();
+            //StationJson stationJson = new StationJson();
+            //stationJson.Stations = new List<Station>();
 
-            foreach (var item in StationArr)
-            {
-                var StationItem = item.Split("|");
+            //foreach (var item in StationArr)
+            //{
+            //    var StationItem = item.Split("|");
 
-                Station station = new Station()
-                {
-                    CNAbbr = StationItem[0],
-                    CNName = StationItem[1],
-                    Code = StationItem[2],
-                    Index = StationItem[3]
-                };
-                stationJson.Stations.Add(station);
+            //    Station station = new Station()
+            //    {
+            //        CNAbbr = StationItem[0],
+            //        CNName = StationItem[1],
+            //        Code = StationItem[2],
+            //        Index = StationItem[3]
+            //    };
+            //    stationJson.Stations.Add(station);
 
-            }
+            //}
 
-            string path = Directory.GetCurrentDirectory();
+            //string path = Directory.GetCurrentDirectory();
 
-            string directoryPath = path + "\\json";
+            //string directoryPath = path + "\\json";
 
-            string FilePath = directoryPath + "\\favoritestation.json";
+            //string FilePath = directoryPath + "\\favoritestation.json";
 
-            if (!Directory.Exists(directoryPath))
-            {
-                // Create the directory it does not exist.
-                Directory.CreateDirectory(directoryPath);
-            }
+            //if (!Directory.Exists(directoryPath))
+            //{
+            //    // Create the directory it does not exist.
+            //    Directory.CreateDirectory(directoryPath);
+            //}
 
-            if (!File.Exists(FilePath))  // 判断是否已有相同文件 
-            {
-                FileStream fs1 = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite);
+            //if (!File.Exists(FilePath))  // 判断是否已有相同文件 
+            //{
+            //    FileStream fs1 = new FileStream(FilePath, FileMode.Create, FileAccess.ReadWrite);
 
-                fs1.Close();
-            }
+            //    fs1.Close();
+            //}
 
-            using (StreamWriter sw = new StreamWriter(FilePath))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                serializer.Converters.Add(new JavaScriptDateTimeConverter());
-                serializer.NullValueHandling = NullValueHandling.Ignore;
+            //using (StreamWriter sw = new StreamWriter(FilePath))
+            //{
+            //    JsonSerializer serializer = new JsonSerializer();
+            //    serializer.Converters.Add(new JavaScriptDateTimeConverter());
+            //    serializer.NullValueHandling = NullValueHandling.Ignore;
 
-                //构建Json.net的写入流
-                JsonWriter writer = new JsonTextWriter(sw)
-                {
-                    Formatting = Formatting.Indented,//格式化缩进
-                    Indentation = 4,  //缩进四个字符
-                    IndentChar = ' '  //缩进的字符是空格
-                };
+            //    //构建Json.net的写入流
+            //    JsonWriter writer = new JsonTextWriter(sw)
+            //    {
+            //        Formatting = Formatting.Indented,//格式化缩进
+            //        Indentation = 4,  //缩进四个字符
+            //        IndentChar = ' '  //缩进的字符是空格
+            //    };
 
-                //把模型数据序列化并写入Json.net的JsonWriter流中
-                serializer.Serialize(writer, stationJson);
-                //ser.Serialize(writer, ht);
-                writer.Close();
-                sw.Close();
-            }
+            //    //把模型数据序列化并写入Json.net的JsonWriter流中
+            //    serializer.Serialize(writer, stationJson);
+            //    //ser.Serialize(writer, ht);
+            //    writer.Close();
+            //    sw.Close();
+            //}
 
-            Console.WriteLine("文件输出成功");
+            //Console.WriteLine("文件输出成功");
 
             #endregion
 
-            string Path = Directory.GetCurrentDirectory() + "\\json\\favoritestation.json";
-            var obj = JsonHelper.Import(Path);
-            Console.ReadKey();
+           
+            
+            // trigger async evaluation
+            RunProgram().GetAwaiter().GetResult();
+            
+
+           
+
         }
-    }
+
+        private static async Task RunProgram()
+        {
+            try
+            {
+                // Grab the Scheduler instance from the Factory
+                NameValueCollection props = new NameValueCollection
+                {
+                    { "quartz.serializer.type", "binary" }
+                };
+                StdSchedulerFactory factory = new StdSchedulerFactory(props);
+                IScheduler scheduler = await factory.GetScheduler();
+
+                // and start it off
+                await scheduler.Start();
+
+                // some sleep to show what's happening
+                await Task.Delay(TimeSpan.FromSeconds(3));
+
+                // and last shut down the scheduler when you are ready to close your program
+                await scheduler.Shutdown();
+            }
+            catch (SchedulerException se)
+            {
+                await Console.Error.WriteLineAsync(se.ToString());
+            }
+        }
+
+        //public async static void QuickTask()
+        //{
+        //    // construct a scheduler factory
+        //    NameValueCollection props = new NameValueCollection
+        //    {
+        //        { "quartz.serializer.type", "binary" }
+        //    };
+        //    StdSchedulerFactory factory = new StdSchedulerFactory(props);
+
+        //    // get a scheduler
+        //    IScheduler sched = await factory.GetScheduler();
+        //    await sched.Start();
+
+        //    // define the job and tie it to our HelloJob class
+        //    IJobDetail job = JobBuilder.Create<HelloJob>()
+        //        .WithIdentity("myJob", "group1")
+        //        .Build();
+
+        //    // Trigger the job to run now, and then every 40 seconds
+        //    ITrigger trigger = TriggerBuilder.Create()
+        //        .WithIdentity("myTrigger", "group1")
+        //        .StartNow()
+        //        .WithSimpleSchedule(x => x
+        //            .WithIntervalInSeconds(1)
+        //            .RepeatForever())
+        //    .Build();
+
+        //    await sched.ScheduleJob(job, trigger);
+        //}
+    } 
 
     public class StationJson
     {

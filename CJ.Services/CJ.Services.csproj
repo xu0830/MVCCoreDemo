@@ -21,4 +21,8 @@
     <ProjectReference Include="..\CJ.Infrastructure\CJ.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Quartz\Dtos\" />
+  </ItemGroup>
+
 </Project>

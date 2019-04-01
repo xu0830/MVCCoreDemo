@@ -13,7 +13,7 @@ namespace CJ.Services.Stations.Dtos
         public int Httpstatus { get; set; }
 
         public string Messages { get; set; }
-
+        
         public bool Status { get; set; }
 
         public TicketModel Data { get; set; }

@@ -14,6 +14,8 @@ namespace CJ.Infrastructure
 
         public virtual DbSet<Role> Roles { get; set; }
 
+        public virtual DbSet<TicketTask> TicketTasks { get; set; }
+
         public DefaultDbContext()
         {
 

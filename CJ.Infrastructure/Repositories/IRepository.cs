@@ -53,7 +53,7 @@ namespace CJ.Infrastructure.Repositories
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task<Entity> InsertAsync(Entity entity);
+        Entity InsertAsync(Entity entity);
 
         /// <summary>
         /// 更新实体

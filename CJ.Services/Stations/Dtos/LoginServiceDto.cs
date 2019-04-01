@@ -10,6 +10,6 @@ namespace CJ.Services.Stations.Dtos
 
         public string Result { get; set; }
 
-        public Passenger passenger { get; set; }
+        public PassengerOutput Passenger { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using CJ.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,19 +17,20 @@ namespace CJ.Infrastructure.Repositories
         public Repository(DbContext _Context)
         {
             Context = _Context;
-        }
-
-        
+        }       
 
         public void Delete(Entity entity)
         {
             Table.Remove(entity);
+            Context.SaveChanges();
         }
 
         public Task DeleteAsync(Entity entity)
         {
-            Delete(entity);
+            Table.Remove(entity);
+            Context.SaveChanges();
             return Task.FromResult(0);
+
         }
 
         public Entity Get(int id)
@@ -52,23 +55,37 @@ namespace CJ.Infrastructure.Repositories
 
         public Entity Insert(Entity entity)
         {
-            return Table.Add(entity).Entity;
+            try
+            {
+                var result = Table.Add(entity).Entity;
+                Context.SaveChanges();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+            
         }
 
-        public Task<Entity> InsertAsync(Entity entity)
+        public Entity InsertAsync(Entity entity)
         {
-            return Task.FromResult(Insert(entity));
+            var result = Table.AddAsync(entity).Result.Entity;
+            Context.SaveChanges();
+            return result;
         }
 
         public Entity Update(Entity entity)
         {
             Context.Entry(entity).State = EntityState.Modified;
+            Context.SaveChanges();
             return entity;
         }
 
         public Task<Entity> UpdateAsync(Entity entity)
         {
             Context.Entry(entity).State = EntityState.Modified;
+            Context.SaveChanges();
             return Task.FromResult(entity);
         }
     }

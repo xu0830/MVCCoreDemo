@@ -38,7 +38,7 @@ namespace CJ.Infrastructure
 
                     CacheHelper.SetCache(settingKey, configurationRoot, path, jsonFileName);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     LogHelper.Error("读取配置文件失败");
                 }
@@ -57,7 +57,7 @@ namespace CJ.Infrastructure
                 {
                     return GetConfigurationRoot().GetSection("DBConnectionString").Value;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     LogHelper.Error("读取配置文件失败");
                     return "";
@@ -76,7 +76,7 @@ namespace CJ.Infrastructure
                 {
                     return GetConfigurationRoot().GetSection("ClientRootAddress").Value;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     LogHelper.Error("读取配置文件失败");
                     return "";
@@ -92,7 +92,7 @@ namespace CJ.Infrastructure
                 {
                     return GetConfigurationRoot().GetSection("ServerRootAddress").Value;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     LogHelper.Error("读取配置文件失败");
                     return "";
@@ -111,7 +111,7 @@ namespace CJ.Infrastructure
                 {
                     return GetConfigurationRoot().GetSection("PublicKey").Value;
                 }
-                catch(Exception ex)
+                catch(Exception)
                 {
                     LogHelper.Error("读取配置文件失败");
                     return "";
@@ -130,7 +130,7 @@ namespace CJ.Infrastructure
                 {
                     return GetConfigurationRoot().GetSection("PrivateKey").Value;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     LogHelper.Error("读取配置文件失败");
                     return "";
@@ -148,7 +148,7 @@ namespace CJ.Infrastructure
                     bool.TryParse(GetConfigurationRoot().GetSection("RefererVerify").Value, out result);
                     return result;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     LogHelper.Error("读取配置文件失败");
                     return false;
@@ -163,7 +163,7 @@ namespace CJ.Infrastructure
                 {
                     return GetConfigurationRoot().GetSection("CorsOrigins").Value.Split(",", StringSplitOptions.RemoveEmptyEntries);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     LogHelper.Error("读取配置文件失败");
                     return null;
