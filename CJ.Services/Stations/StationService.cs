@@ -312,7 +312,7 @@ namespace CJ.Services.Stations
             var client_5 = new RestClient("https://kyfw.12306.cn/otn/confirmPassenger/getQueueCount");
             var request_5 = new RestRequest(Method.POST);
             request_5.AddHeader("Cache-Control", "no-cache");
-            request_5.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request_5.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
             request_5.AddHeader("Connection", "true");
             request_5.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0");
             if (cookieContainer != null && cookieContainer.Count > 0)
@@ -324,12 +324,14 @@ namespace CJ.Services.Stations
             }
 
             request_5.AddParameter("application/x-www-form-urlencoded; charset=UTF-8",
-                "train_date=" + input.LeftDateJs +
-                "&train_no=" + orderQuestDTO.Train_no + "&stationTrainCode=" + orderQuestDTO.Station_train_code + "&seatType=O" +
+                "undefined=&train_date=" + input.LeftDateJs +
+                "&train_no=" + orderQuestDTO.Train_no +
+                "&stationTrainCode=" + orderQuestDTO.Station_train_code + 
+                "&seatType=O" +
                 "&fromStationTelecode=" + orderQuestDTO.From_station_telecode
                 + "&toStationTelecode=" + orderQuestDTO.To_station_telecode +
                 "&leftTicket=" + ticketInfoForPassengerForm.QueryLeftTicketRequestDTO.YpInfoDetail +
-                "&purpose_codes=00&train_location=" + ticketInfoForPassengerForm.Train_location, ParameterType.RequestBody);
+                "&purpose_codes=00&train_location=" + ticketInfoForPassengerForm.Train_location + "&undefined=", ParameterType.RequestBody);
 
 
             IRestResponse response_5 = client_5.Execute(request_5);
@@ -356,7 +358,7 @@ namespace CJ.Services.Stations
             }
 
 
-            if (!checkOrderResponse.Data.Choose_Seats.Contains(input.SeatType))
+            if (checkOrderResponse.Data.CanChooseSeats=="Y" && !checkOrderResponse.Data.Choose_Seats.Contains(input.SeatType))
             {
                 input.SeatType = checkOrderResponse.Data.Choose_Seats[0].ToString();
             }
@@ -567,7 +569,7 @@ namespace CJ.Services.Stations
                 LoginStatus = true,
                 Result = "登录成功",
                 Passenger = new PassengerOutput(){
-                    Name = passengerResponse.Data.Normal_passengers[0].Passenger_name,
+                    Name = passengerResponse.Normal_passengers[0].Passenger_name,
                     Account = input.UserName
                 }
             };
