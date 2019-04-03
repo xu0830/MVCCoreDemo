@@ -5,6 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Quartz\Dtos\**" />
+    <EmbeddedResource Remove="Quartz\Dtos\**" />
+    <None Remove="Quartz\Dtos\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="ITransientDependency.cs" />
   </ItemGroup>
 
@@ -22,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Quartz\Dtos\" />
+    <Folder Include="Quartz\Jobs\" />
   </ItemGroup>
 
 </Project>

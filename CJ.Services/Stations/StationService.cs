@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 
 namespace CJ.Services.Stations
 {
@@ -230,6 +231,10 @@ namespace CJ.Services.Stations
 
             IRestResponse response_2 = client_2.Execute(request_2);
 
+            int init_seatTypes_index = response_2.Content.IndexOf("init_seatTypes");
+
+            int init_seatTypes_lastIndex = response_2.Content.IndexOf("defaultTicketTypes");
+
             int FormIndex = response_2.Content.IndexOf("ticketInfoForPassengerForm");
 
             int FormLastIndex = response_2.Content.LastIndexOf("orderRequestDTO");
@@ -240,10 +245,17 @@ namespace CJ.Services.Stations
 
             int global_lang_index = response_2.Content.IndexOf("global_lang");
 
-            if (FormIndex<0 || FormLastIndex<0 || limit_ticket_num_index<0 || SubmitTokenIndex<0 || global_lang_index<0)
+            if (init_seatTypes_lastIndex < 0 || init_seatTypes_index < 0 || FormIndex < 0 || FormLastIndex<0 || limit_ticket_num_index<0 || SubmitTokenIndex<0 || global_lang_index<0)
             {
                 return false;
             }
+
+            string init_seatTypesTemp = response_2.Content.Substring(init_seatTypes_index, init_seatTypes_lastIndex-init_seatTypes_index);
+
+            string init_seatTypesStr = init_seatTypesTemp.Substring(init_seatTypesTemp.IndexOf("=") + 1,
+                init_seatTypesTemp.LastIndexOf("]") - init_seatTypesTemp.IndexOf("="));
+
+            List<Init_seatType> init_SeatTypes = JsonConvert.DeserializeObject<List<Init_seatType>>(init_seatTypesStr);
 
             StringBuilder passengerForm = new StringBuilder();
 
@@ -326,13 +338,13 @@ namespace CJ.Services.Stations
             }
 
             string dateStr = input.LeftDateJs.Replace(":", "%3A").Replace("+", "%2B");
-
+            
             //  "Tue%20Apr%2030%202019%2000%3A00%3A00%20GMT%2B0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)" 
             request_5.AddParameter("application/x-www-form-urlencoded; charset=UTF-8 ",
                 "train_date=" + dateStr +
                 "&train_no=" + orderQuestDTO.Train_no +
                 "&stationTrainCode=" + orderQuestDTO.Station_train_code + 
-                "&seatType=O" +
+                "&seatType=" + input.SeatType + 
                 "&fromStationTelecode=" + orderQuestDTO.From_station_telecode
                 + "&toStationTelecode=" + orderQuestDTO.To_station_telecode +
                 "&leftTicket=" + ticketInfoForPassengerForm.QueryLeftTicketRequestDTO.YpInfoDetail +
@@ -345,6 +357,7 @@ namespace CJ.Services.Stations
                 (response_5.Content);
 
             #endregion
+            Thread.Sleep(2);
 
             #region confirmSingleForQueue
             var client_6 = new RestClient("https://kyfw.12306.cn/otn/confirmPassenger/confirmSingleForQueue");
@@ -362,14 +375,16 @@ namespace CJ.Services.Stations
                 }
             }
 
-
-            if (checkOrderResponse.Data.CanChooseSeats=="Y" && !checkOrderResponse.Data.Choose_Seats.Contains(input.SeatType))
-            {
-                input.SeatType = checkOrderResponse.Data.Choose_Seats[0].ToString();
-            }
-
-            request_6.AddParameter("application/x-www-form-urlencoded; charset=UTF-8",
-            $"passengerTicketStr={input.SeatType},0,1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},{passengerDTOResponse.Data.Normal_passengers[0].Mobile_no},N&oldPassengerStr={passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},1_&randCode=&purpose_codes=00&key_check_isChange={ticketInfoForPassengerForm.Key_check_isChange}&leftTicketStr={ticketInfoForPassengerForm.LeftTicketStr}&train_location={ticketInfoForPassengerForm.Train_location}&choose_seats=&seatDetailType=000&whatsSelect=1&roomType=00&dwAll=N", ParameterType.RequestBody);
+            string passengerTicketStrEncode = Uri.EscapeDataString($"{input.SeatType},0,1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},{passengerDTOResponse.Data.Normal_passengers[0].Mobile_no},N");
+            string oldPassengerStrEncode = Uri.EscapeDataString($"{passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},1_");
+           
+            request_6.AddParameter("undefined",
+            $"passengerTicketStr={input.SeatType},0,1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},{passengerDTOResponse.Data.Normal_passengers[0].Mobile_no},N" +
+            $"&oldPassengerStr={passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},1_" +
+            $"&randCode=&purpose_codes=00&" +
+            $"key_check_isChange={ticketInfoForPassengerForm.Key_check_isChange}" +
+            $"&leftTicketStr={ticketInfoForPassengerForm.LeftTicketStr}&train_location={ticketInfoForPassengerForm.Train_location}" +
+            $"&choose_seats=&seatDetailType=000&whatsSelect=1&roomType=00&dwAll=N", ParameterType.RequestBody);
 
             IRestResponse response_6 = client_6.Execute(request_6);
 

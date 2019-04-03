@@ -17,6 +17,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.Caching.Redis;
 using Microsoft.Extensions.Caching.Distributed;
+using Quartz;
+using Quartz.Impl;
 
 namespace MVCCoreDemo.Startup
 {
@@ -41,6 +43,8 @@ namespace MVCCoreDemo.Startup
             services.AddMemoryCache();
 
             services.AddAutoMapper();
+
+            services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

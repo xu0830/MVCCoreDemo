@@ -117,13 +117,13 @@ namespace CJ.ConsoleTest
 
             #endregion
 
-           
-            
-            // trigger async evaluation
-            RunProgram().GetAwaiter().GetResult();
-            
 
-           
+
+            // trigger async evaluation
+            string encodeStr = Uri.EscapeDataString("O,0,1,许灿杰,1,445281199508301071,13428108149,N");
+
+            Console.WriteLine(encodeStr);
+
 
         }
 
