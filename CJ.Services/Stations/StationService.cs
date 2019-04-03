@@ -240,9 +240,10 @@ namespace CJ.Services.Stations
 
             int global_lang_index = response_2.Content.IndexOf("global_lang");
 
-            string REPEAT_SUBMIT_TOKEN_Str_temp = response_2.Content.Substring(SubmitTokenIndex, global_lang_index - SubmitTokenIndex);
-
-            string REPEAT_SUBMIT_TOKEN_Str = REPEAT_SUBMIT_TOKEN_Str_temp.Substring(REPEAT_SUBMIT_TOKEN_Str_temp.IndexOf("'") + 1, REPEAT_SUBMIT_TOKEN_Str_temp.LastIndexOf("'") - REPEAT_SUBMIT_TOKEN_Str_temp.IndexOf("'"));
+            if (FormIndex<0 || FormLastIndex<0 || limit_ticket_num_index<0 || SubmitTokenIndex<0 || global_lang_index<0)
+            {
+                return false;
+            }
 
             StringBuilder passengerForm = new StringBuilder();
 
@@ -251,14 +252,15 @@ namespace CJ.Services.Stations
             string passengerFormStr = passengerForm.ToString();
 
             TicketInfoForPassengerForm ticketInfoForPassengerForm = JsonConvert.DeserializeObject<TicketInfoForPassengerForm>
-                (passengerFormStr.Substring(passengerFormStr.IndexOf("=") + 1,
-                passengerFormStr.LastIndexOf("}") - passengerFormStr.IndexOf("=")));
+                    (passengerFormStr.Substring(passengerFormStr.IndexOf("=") + 1,
+                    passengerFormStr.LastIndexOf("}") - passengerFormStr.IndexOf("=")));
 
             string OrderRequestDTOStr = response_2.Content.Substring(FormLastIndex, limit_ticket_num_index - FormLastIndex);
 
             OrderQuestDto orderQuestDTO = JsonConvert.DeserializeObject<OrderQuestDto>(
                 OrderRequestDTOStr.Substring(OrderRequestDTOStr.IndexOf("=") + 1,
                     OrderRequestDTOStr.LastIndexOf("}") - OrderRequestDTOStr.IndexOf("=")));
+
             #endregion
 
             #region GetPassengerDto
@@ -323,8 +325,11 @@ namespace CJ.Services.Stations
                 }
             }
 
-            request_5.AddParameter("application/x-www-form-urlencoded; charset=UTF-8",
-                "undefined=&train_date=" + input.LeftDateJs +
+            string dateStr = input.LeftDateJs.Replace(":", "%3A").Replace("+", "%2B");
+
+            //  "Tue%20Apr%2030%202019%2000%3A00%3A00%20GMT%2B0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)" 
+            request_5.AddParameter("application/x-www-form-urlencoded; charset=UTF-8 ",
+                "train_date=" + dateStr +
                 "&train_no=" + orderQuestDTO.Train_no +
                 "&stationTrainCode=" + orderQuestDTO.Station_train_code + 
                 "&seatType=O" +

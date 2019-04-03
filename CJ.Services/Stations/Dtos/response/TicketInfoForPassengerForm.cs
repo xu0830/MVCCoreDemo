@@ -4,6 +4,21 @@ using System.Text;
 
 namespace CJ.Services.Stations.Dtos.response
 {
+    public class Init_seatType
+    {
+        public object End_station_name { get; set; }
+
+        public object End_time { get; set; }
+
+        public string Id { get; set; }
+
+        public object Start_station_name { get; set; }
+
+        public object Start_time { get; set; }
+
+        public string Value { get; set; }
+    }
+
     public class TicketInfoForPassengerForm
     {
         public List<CardType> CardTypes { get; set; }
