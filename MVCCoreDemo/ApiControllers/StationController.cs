@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using MVCCoreDemo.Controllers;
 using MVCCoreDemo.Models;
 using MVCCoreDemo.Models.Station;
+using RestSharp;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -83,7 +84,12 @@ namespace MVCCoreDemo.ApiControllers
         [HttpGet("{userName}")]
         public object Get(string userName)
         {
-            return stationService.GetPassengerDto(userName);
+            var passenger = stationService.GetPassengerDto(userName);
+                return Json(new {
+                    data = passenger,
+                    cookies = (IList<RestResponseCookie>)CacheHelper.GetCache(userName + "_loginStatus"),
+                    flag = passenger.IsExist? true : false
+                });
         }
 
         // POST api/<controller>

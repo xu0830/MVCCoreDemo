@@ -188,7 +188,6 @@ namespace MVCCoreDemo.ApiControllers
         [HttpPost("addUser")]
         public bool AddUser()
         {
-            EmailHelper.Send("1126818689@qq.com", "订票成功", "恭喜订票成功,登录你的12306完成支付");
             return true;
         }
     }

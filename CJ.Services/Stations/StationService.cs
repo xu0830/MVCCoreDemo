@@ -585,6 +585,14 @@ namespace CJ.Services.Stations
         /// </summary>
         public PassengerData GetPassengerDto(string userName)
         {
+            #region Query
+            var client_1 = new RestClient($"https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.train_date=2019-04-30&leftTicketDTO.from_station=IOQ&leftTicketDTO.to_station=PEQ&purpose_codes=ADULT");
+            var request_1 = new RestRequest(Method.GET);
+            request_1.AddHeader("cache-control", "no-cache");
+            request_1.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0");
+            IRestResponse response_1 = client_1.Execute(request_1);
+            #endregion
+
             var client = new RestClient("https://kyfw.12306.cn/otn/confirmPassenger/getPassengerDTOs");
             var request = new RestRequest(Method.POST);
             request.AddHeader("cache-control", "no-cache");
@@ -593,15 +601,15 @@ namespace CJ.Services.Stations
             request.AddHeader("Referer", "https://kyfw.12306.cn/otn/confirmPassenger/initDc");
             request.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0");
 
-            request.AddParameter("_jc_save_fromDate", "2019-04-08", ParameterType.Cookie);
+            request.AddParameter("_jc_save_fromDate", "2019-04-30", ParameterType.Cookie);
             request.AddParameter("_jc_save_fromStation", "%u6DF1%u5733%u5317%2CIOQ", ParameterType.Cookie);
-            request.AddParameter("_jc_save_toDate", "2019-04-08", ParameterType.Cookie);
+            request.AddParameter("_jc_save_toDate", "2019-04-30", ParameterType.Cookie);
             request.AddParameter("_jc_save_toStation", "%u666E%u5B81%2CPEQ", ParameterType.Cookie);
             request.AddParameter("_jc_save_wfdc_flag", "dc", ParameterType.Cookie);
 
             IList<RestResponseCookie> cookieContainer = (IList<RestResponseCookie>)CacheHelper.GetCache( userName + "_loginStatus");
 
-            if (cookieContainer.Count > 0)
+            if (cookieContainer != null && cookieContainer.Count > 0)
             {
                 foreach (var cookie in cookieContainer)
                 {
@@ -610,9 +618,16 @@ namespace CJ.Services.Stations
             }
 
             IRestResponse response = client.Execute(request);
-            CommonResponse<PassengerData> passengerResponse = JsonConvert.DeserializeObject<CommonResponse<PassengerData>>(response.Content);
-            CacheHelper.SetCache("passenger_" + userName, passengerResponse);
-            return passengerResponse.Data;
+            try
+            {
+                CommonResponse<PassengerData> passengerResponse = JsonConvert.DeserializeObject<CommonResponse<PassengerData>>(response.Content);
+                CacheHelper.SetCache("passenger_" + userName, passengerResponse);
+                return passengerResponse.Data;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         /// <summary>
