@@ -1404,6 +1404,7 @@
           "Castle.Windsor": "4.1.0",
           "Microsoft.Extensions.Configuration.Json": "2.1.0",
           "Pomelo.EntityFrameworkCore.MySql": "2.1.0",
+          "Quartz": "3.0.7",
           "RestSharp": "106.6.3"
         },
         "runtime": {

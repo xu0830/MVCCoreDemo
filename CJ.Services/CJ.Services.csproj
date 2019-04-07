@@ -19,16 +19,13 @@
     <PackageReference Include="Castle.Windsor" Version="4.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.0" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.1.0" />
+    <PackageReference Include="Quartz" Version="3.0.7" />
     <PackageReference Include="RestSharp" Version="106.6.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CJ.Entities\CJ.Entities.csproj" />
     <ProjectReference Include="..\CJ.Infrastructure\CJ.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Quartz\Jobs\" />
   </ItemGroup>
 
 </Project>

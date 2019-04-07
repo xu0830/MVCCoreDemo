@@ -72,10 +72,11 @@ namespace MVCCoreDemo.ApiControllers
         [HttpPost("submitOrder")]
         public OutputModel SubmitOrder([FromBody]TicketTaskDto dto)
         {
-            stationService.SubmitOrder(dto);
+            var res = stationService.SubmitOrder(dto);
             return new OutputModel()
             {
-
+                Result = res.Msg,
+                Code = res.Flag? 200 : 204 
             };
         }
 

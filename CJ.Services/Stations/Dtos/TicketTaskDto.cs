@@ -25,6 +25,10 @@ namespace CJ.Services.Stations.Dtos
         public DateTime CreatedTime { get; set; }
 
         public string PassengerToken { get; set; }
+
+        public int Status { get; set; }
+
+        public string NoticeEmail { get; set; }
     }
 
     public class Station

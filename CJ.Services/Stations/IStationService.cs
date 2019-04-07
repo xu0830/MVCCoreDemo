@@ -19,8 +19,13 @@ namespace CJ.Services.Stations
         /// <returns></returns>
         LoginServiceDto ValidateLogin(StationServiceInput input);
 
+        /// <summary>
+        /// 提交订单
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        OrderOutput SubmitOrder(TicketTaskDto dto);
 
-        bool SubmitOrder(TicketTaskDto dto);
         /// <summary>
         /// 车票查询
         /// </summary>
