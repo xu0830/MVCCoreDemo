@@ -20,6 +20,7 @@ using Quartz.Impl;
 using Quartz;
 using System.Threading.Tasks;
 using CJ.Infrastructure.Encode;
+using CJ.Services.Stations.Dtos;
 
 namespace CJ.ConsoleTest
 {
@@ -117,13 +118,13 @@ namespace CJ.ConsoleTest
 
             #endregion
 
-           
-            
+            RunProgram();
             // trigger async evaluation
-            RunProgram().GetAwaiter().GetResult();
-            
 
-           
+            CacheHelper.SetCache("cacheKey", "xucanjie", new TimeSpan(0, 0, 2));
+
+            Console.WriteLine("任务执行完成");
+            Console.ReadLine();
 
         }
 
@@ -142,11 +143,29 @@ namespace CJ.ConsoleTest
                 // and start it off
                 await scheduler.Start();
 
-                // some sleep to show what's happening
-                await Task.Delay(TimeSpan.FromSeconds(3));
+                TicketTaskDto dto = new TicketTaskDto();
 
-                // and last shut down the scheduler when you are ready to close your program
-                await scheduler.Shutdown();
+                string dtoStr = JsonConvert.SerializeObject(dto);
+
+                var trigger = TriggerBuilder.Create()
+                            .WithSimpleSchedule(x => x.WithIntervalInSeconds(15).RepeatForever())//每两秒执行一次
+                            .UsingJobData("key1", dtoStr)
+                            .WithIdentity("trigger", "group")
+                            .Build();
+                //4、创建任务
+                var jobDetail = JobBuilder.Create<MyJob>()
+                                .UsingJobData("key1", 321)  //通过在Trigger中添加参数值
+                                .UsingJobData("key2", "123")
+                                .WithIdentity("job", "group")
+                                .Build();
+                //5、将触发器和任务器绑定到调度器中
+                await scheduler.ScheduleJob(jobDetail, trigger);
+
+                //// some sleep to show what's happening
+                //await Task.Delay(TimeSpan.FromSeconds(3));
+
+                //// and last shut down the scheduler when you are ready to close your program
+                //await scheduler.Shutdown();
             }
             catch (SchedulerException se)
             {
@@ -154,36 +173,43 @@ namespace CJ.ConsoleTest
             }
         }
 
-        //public async static void QuickTask()
-        //{
-        //    // construct a scheduler factory
-        //    NameValueCollection props = new NameValueCollection
-        //    {
-        //        { "quartz.serializer.type", "binary" }
-        //    };
-        //    StdSchedulerFactory factory = new StdSchedulerFactory(props);
+       
+    }
 
-        //    // get a scheduler
-        //    IScheduler sched = await factory.GetScheduler();
-        //    await sched.Start();
+    [PersistJobDataAfterExecution]
+    public class MyJob : IJob//创建IJob的实现类，并实现Excute方法。
+    {
+        public Task Execute(IJobExecutionContext context)
+        {
+            var jobData = context.JobDetail.JobDataMap;//获取Job中的参数
 
-        //    // define the job and tie it to our HelloJob class
-        //    IJobDetail job = JobBuilder.Create<HelloJob>()
-        //        .WithIdentity("myJob", "group1")
-        //        .Build();
+            var triggerData = context.Trigger.JobDataMap;//获取Trigger中的参数
 
-        //    // Trigger the job to run now, and then every 40 seconds
-        //    ITrigger trigger = TriggerBuilder.Create()
-        //        .WithIdentity("myTrigger", "group1")
-        //        .StartNow()
-        //        .WithSimpleSchedule(x => x
-        //            .WithIntervalInSeconds(1)
-        //            .RepeatForever())
-        //    .Build();
+            var data = context.MergedJobDataMap;//获取Job和Trigger中合并的参数
 
-        //    await sched.ScheduleJob(job, trigger);
-        //}
-    } 
+            var value1 = jobData.GetInt("key1");
+            var value2 = jobData.GetString("key2");
+
+           
+
+            var dtoStr = triggerData.GetString("key1");
+
+            var dto = JsonConvert.DeserializeObject<TicketTaskDto>(dtoStr);
+
+            jobData["key1"] = ++value1; 
+
+            return Task.Run(() =>
+            {
+                //using (StreamWriter sw = new StreamWriter(@"C:\Users\Administrator\Desktop\error.log", true, Encoding.UTF8))
+                //{
+                //    sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
+                //}
+                Console.WriteLine(dto);
+                Console.WriteLine(dto.GetType());
+                Console.WriteLine($"value1: {value1}");
+            });
+        }
+    }
 
     public class StationJson
     {

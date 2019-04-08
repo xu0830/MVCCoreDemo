@@ -21,5 +21,14 @@ namespace CJ.Entities
         public string SeatType { get; set; }
 
         public DateTime CreatedTime { get; set; }
+
+        /// <summary>
+        /// 任务状态
+        ///     0: 进行中
+        ///     1: 完成
+        ///     2: 失败
+        /// </summary>
+        public int Status { get; set; }
+
     }
 }
