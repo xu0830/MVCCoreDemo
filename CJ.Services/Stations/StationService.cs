@@ -50,11 +50,76 @@ namespace CJ.Services.Stations
         {
             try
             {
-                var client = new RestClient("https://kyfw.12306.cn/passport/captcha/captcha-image64");
-                var request = new RestRequest(Method.POST);
+                #region logdevice回调函数
+                var client_0 = new RestClient("https://kyfw.12306.cn/otn/HttpZF/logdevice?algID=ozy7Gbfya4&hashCode=WfH7dJnFd1fsVPyp7w5waSpXKQX_Mz9Eg7kEMgvMQ6I&FMQw=0&q4f3=zh-CN&VySQ=FGEbgvFhJ2TiuUR5kdZvKllDSsfJHQJZ&VPIf=1&custID=133&VEek=unknown&dzuS=0&yD16=0&EOQP=4902a61a235fbb59700072139347967d&lEnu=3232235642&jp76=52d67b2a5aa5e031084733d5006cc664&hAqN=Win32&platform=WEB&ks0Q=d22ca0b81584fbea62237b14bd04c866&TeRS=1040x1920&tOHY=24xx1080x1920&Fvje=i1l1o1s1&q5aJ=-8&wNLf=99115dfb07133750ba677d055874de87&0aew=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A66.0)%20Gecko%2F20100101%20Firefox%2F66.0&E3gR=556abc357c181c7e407b7183cd421c5c&timestamp=" + (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000);
+                var request_0 = new RestRequest(Method.GET);
+                request_0.AddHeader("Referer", "https://www.12306.cn/index/index.html");
+                request_0.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
+
+                IRestResponse response_0 = client_0.Execute(request_0);
+
+                string resJsonStr = response_0.Content.Substring(response_0.Content.IndexOf("'") + 1, response_0.Content.LastIndexOf("'") - response_0.Content.IndexOf("'") - 1);
+
+                CallBackResponse callBackFunction = JsonConvert.DeserializeObject<CallBackResponse>(resJsonStr);
+
+                #endregion
+
+                string token = Guid.NewGuid().ToString();
+
+                IList<RestResponseCookie> cookieContainer = new List<RestResponseCookie>();
+
+                #region https://kyfw.12306.cn/otn/resources/login.html
+
+                var client_0_1 = new RestClient("https://kyfw.12306.cn/otn/resources/login.html");
+                var request_0_1 = new RestRequest(Method.GET);
+                request_0_1.AddHeader("cache-control", "no-cache");
+                request_0_1.AddHeader("Connection", "true");
+                request_0_1.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
+                IRestResponse response_0_1 = client_0_1.Execute(request_0_1);
+
+                #endregion
+
+                
+
+                #region https://kyfw.12306.cn/otn/login/conf
+                var client_1 = new RestClient("https://kyfw.12306.cn/otn/login/conf");
+                var request_1 = new RestRequest(Method.POST);
+                request_1.AddHeader("cache-control", "no-cache");
+                request_1.AddHeader("Connection", "true");
+                request_1.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
+                IRestResponse response_1 = client_1.Execute(request_1);
+
+                //cookieContainer.Add();
+
+                #endregion
+
+                #region https://kyfw.12306.cn/otn/index12306/getLoginBanner
+
+                var client_2 = new RestClient("https://kyfw.12306.cn/otn/index12306/getLoginBanner");
+                var request_2 = new RestRequest(Method.GET);
+                request_2.AddHeader("cache-control", "no-cache");
+                request_2.AddHeader("Connection", "true");
+                request_2.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
+                IRestResponse response_2 = client_2.Execute(request_2);
+
+                #endregion
+
+                #region https://kyfw.12306.cn/passport/web/auth/uamtk-static
+                var client_3 = new RestClient("https://kyfw.12306.cn/otn/login/conf");
+                var request_3 = new RestRequest(Method.POST);
+                request_3.AddHeader("cache-control", "no-cache");
+                request_3.AddHeader("Connection", "true");
+                request_3.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
+                request_3.AddParameter("application/x-www-form-urlencoded", "appid=otn", ParameterType.RequestBody);
+
+                IRestResponse response_3 = client_3.Execute(request_3);
+                #endregion
+
+
+                var client = new RestClient("https://kyfw.12306.cn/passport/captcha/captcha-image64?login_site=E&module=login&rand=sjrand");
+                var request = new RestRequest(Method.GET);
                 request.AddHeader("cache-control", "no-cache");
                 request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                request.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0");
 
 
                 IRestResponse response = client.Execute(request);
@@ -66,7 +131,7 @@ namespace CJ.Services.Stations
 
                 sb.Append(captchaImage.Image);
 
-                string token = Guid.NewGuid().ToString();
+                
                 CacheHelper.SetCache(token, response.Cookies);
 
                 return new ValidatePicOutput
@@ -502,9 +567,9 @@ namespace CJ.Services.Stations
             }
 
             #region logdevice回调函数
-            var client_0 = new RestClient("https://kyfw.12306.cn/otn/HttpZF/logdevice?algID=ozy7Gbfya4&hashCode=WfH7dJnFd1fsVPyp7w5waSpXKQX_Mz9Eg7kEMgvMQ6I&FMQw=0&q4f3=zh-CN&VySQ=FGEbgvFhJ2TiuUR5kdZvKllDSsfJHQJZ&VPIf=1&custID=133&VEek=unknown&dzuS=0&yD16=0&EOQP=4902a61a235fbb59700072139347967d&lEnu=3232235642&jp76=52d67b2a5aa5e031084733d5006cc664&hAqN=Win32&platform=WEB&ks0Q=d22ca0b81584fbea62237b14bd04c866&TeRS=1040x1920&tOHY=24xx1080x1920&Fvje=i1l1o1s1&q5aJ=-8&wNLf=99115dfb07133750ba677d055874de87&0aew=Mozilla/5.0%20(Windows%20NT%2010.0;%20Win64;%20x64)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/71.0.3578.98%20Safari/537.36&E3gR=556abc357c181c7e407b7183cd421c5c&timestamp=" + (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000);
+            var client_0 = new RestClient("https://kyfw.12306.cn/otn/HttpZF/logdevice?algID=ozy7Gbfya4&hashCode=WfH7dJnFd1fsVPyp7w5waSpXKQX_Mz9Eg7kEMgvMQ6I&FMQw=0&q4f3=zh-CN&VySQ=FGEbgvFhJ2TiuUR5kdZvKllDSsfJHQJZ&VPIf=1&custID=133&VEek=unknown&dzuS=0&yD16=0&EOQP=4902a61a235fbb59700072139347967d&lEnu=3232235642&jp76=52d67b2a5aa5e031084733d5006cc664&hAqN=Win32&platform=WEB&ks0Q=d22ca0b81584fbea62237b14bd04c866&TeRS=1040x1920&tOHY=24xx1080x1920&Fvje=i1l1o1s1&q5aJ=-8&wNLf=99115dfb07133750ba677d055874de87&0aew=Mozilla%2F5.0%20(Windows%20NT%2010.0%3B%20Win64%3B%20x64%3B%20rv%3A66.0)%20Gecko%2F20100101%20Firefox%2F66.0&E3gR=556abc357c181c7e407b7183cd421c5c&timestamp=" + (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000);
             var request_0 = new RestRequest(Method.GET);
-            request_0.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request_0.AddHeader("Referer", "https://www.12306.cn/index/index.html");
             request_0.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
 
             IRestResponse response_0 = client_0.Execute(request_0);
@@ -528,20 +593,26 @@ namespace CJ.Services.Stations
             #region https://kyfw.12306.cn/otn/login/conf
             var client_1 = new RestClient("https://kyfw.12306.cn/otn/login/conf");
             var request_1 = new RestRequest(Method.GET);
-            //request_1.AddHeader("cache-control", "no-cache");
+            request_1.AddHeader("cache-control", "no-cache");
             request_1.AddHeader("Connection", "true");
             request_1.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
             IRestResponse response_1 = client_1.Execute(request_1);
 
             #endregion
 
+            #region https://kyfw.12306.cn/passport/web/auth/uamtk-static
+
+            #endregion
+
             #region 验证码校验
             var client = new RestClient("https://kyfw.12306.cn/passport/captcha/captcha-check?answer=" + answer + "&rand=sjran&login_site=E");
-            var request = new RestRequest(Method.POST);
-            //request.AddHeader("cache-control", "no-cache");
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
+            var request = new RestRequest(Method.GET);
+            request.AddHeader("Cache-Control", "no-cache");
             request.AddHeader("Connection", "true");
+            request.AddHeader("Referer", "https://kyfw.12306.cn/otn/resources/login.html");
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            //request.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
             if (cookieContainer.Count > 0)
             {
                 foreach (var cookie in cookieContainer)
@@ -581,15 +652,15 @@ namespace CJ.Services.Stations
             var loginAnswer = answer.Replace(",", "%2C");
             var client_2 = new RestClient("https://kyfw.12306.cn/passport/web/login");
             var request_2 = new RestRequest(Method.POST);
-            request_2.AddHeader("Accept", "application/json");
-            //request_2.AddHeader("cache-control", "no-cache");
+            //request_2.AddHeader("Accept", "application/json");
+            request_2.AddHeader("Cache-Control", "no-cache");
+            //request_2.AddHeader("Connection", "true");
             request_2.AddHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-            request_2.AddHeader("Connection", "true");
-
+            request_2.AddHeader("Host", "kyfw.12306.cn");
             request_2.AddHeader("Referer", "https://kyfw.12306.cn/otn/resources/login.html");
             request_2.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
-            request_2.AddParameter("application/x-www-form-urlencoded", "username=" + input.UserName + "&password=" + input.Password + "&appid=otn" + "&answer=" + answer,
-                ParameterType.RequestBody);
+            request_2.AddParameter("application/x-www-form-urlencoded", "username=" + input.UserName + "&password=" 
+                + input.Password + "&appid=otn" + "&answer=" + answer, ParameterType.RequestBody);
 
             if (cookieContainer.Count > 0)
             {
