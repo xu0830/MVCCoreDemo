@@ -118,12 +118,23 @@ namespace CJ.ConsoleTest
 
             #endregion
 
-            RunProgram();
             // trigger async evaluation
 
-            CacheHelper.SetCache("cacheKey", "xucanjie", new TimeSpan(0, 0, 2));
+            var client_getjs = new RestClient("https://kyfw.12306.cn/otn/HttpZF/GetJS");
+            var request_getjs = new RestRequest(Method.GET);
+            request_getjs.AddHeader("Accept", "*/*");
+            request_getjs.AddHeader("Referer", "https://www.12306.cn/index/");
+            request_getjs.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
 
-            Console.WriteLine("任务执行完成");
+            IRestResponse response_getjs = client_getjs.Execute(request_getjs);
+
+            int startIndex = response_getjs.Content.IndexOf("logdevice");
+            int endIndex = response_getjs.Content.IndexOf("x26hashCode");
+
+            string algIDStr = response_getjs.Content.Substring(startIndex, endIndex - startIndex);
+            startIndex = algIDStr.IndexOf("x3d") + 3;
+            endIndex = algIDStr.LastIndexOf("\\");
+            string algID = algIDStr.Substring(startIndex, endIndex - startIndex);
             Console.ReadLine();
 
         }
