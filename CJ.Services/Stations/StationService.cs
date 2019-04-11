@@ -241,11 +241,37 @@ namespace CJ.Services.Stations
                     Value = response_3.Cookies.Where(c => c.Name == "_passport_session").FirstOrDefault().Value
                 });
 
-                cookieContainer.Add(new RestResponseCookie
+                //cookieContainer.Add(new RestResponseCookie
+                //{
+                //    Name = "BIGipServerpassport",
+                //    Value = response_3.Cookies.Where(c => c.Name == "BIGipServerpassport").FirstOrDefault().Value
+                //});
+
+                if (response_3.Cookies.Where(c => c.Name == "BIGipServerpassport").FirstOrDefault() != null)
                 {
-                    Name = "BIGipServerpassport",
-                    Value = response_3.Cookies.Where(c => c.Name == "BIGipServerpassport").FirstOrDefault().Value
-                });
+                    cookieContainer.Add(new RestResponseCookie
+                    {
+                        Name = "BIGipServerpassport",
+                        Value = response_3.Cookies.Where(c => c.Name == "BIGipServerpassport").FirstOrDefault().Value
+                    });
+                }
+
+                if (response_3.Cookies.Where(c => c.Name == "BIGipServerpassport").FirstOrDefault() != null)
+                {
+                    cookieContainer.Add(new RestResponseCookie
+                    {
+                        Name = "BIGipServerpassport",
+                        Value = response_3.Cookies.Where(c => c.Name == "BIGipServerpassport").FirstOrDefault().Value
+                    });
+                }
+                if (response_3.Cookies.Where(c => c.Name == "BIGipServerpool_passport").FirstOrDefault() != null)
+                {
+                    cookieContainer.Add(new RestResponseCookie
+                    {
+                        Name = "BIGipServerpool_passport",
+                        Value = response_3.Cookies.Where(c => c.Name == "BIGipServerpool_passport").FirstOrDefault().Value
+                    });
+                }
 
                 #endregion
 
@@ -300,7 +326,7 @@ namespace CJ.Services.Stations
                 };
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return new ValidatePicOutput
                 {
