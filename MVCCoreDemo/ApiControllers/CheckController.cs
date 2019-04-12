@@ -147,7 +147,8 @@ namespace MVCCoreDemo.ApiControllers
                 Result = "fail",
                 Data = new
                 {
-                    
+                    userId = 0,
+                    userName = ""
                 }
             };
 
