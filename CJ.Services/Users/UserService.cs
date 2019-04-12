@@ -45,6 +45,7 @@ namespace CJ.Services.Users
                         Flag = false
                     };
                 }
+
                 if (user.Password != userDto.Password)
                 {
                     return new UserOutput
@@ -56,7 +57,7 @@ namespace CJ.Services.Users
                 else
                 {
                     string token = Guid.NewGuid().ToString();
-                    CacheHelper.SetCache(token, user, DateTime.Now.AddDays(7));
+                    CacheHelper.SetCache(token, user, new TimeSpan(7, 0, 0, 0));
                     return new UserOutput
                     {
                         Msg = "登录成功",
@@ -121,10 +122,10 @@ namespace CJ.Services.Users
         /// 判断登录状态
         /// </summary>
         /// <returns></returns>
-        public int IsLogin(string token)
+        public UserDto IsLogin(string token)
         {
-            var user = CacheHelper.GetCache<User>(token);
-            return user == null ? 0 : user.Id;
+            var user = CacheHelper.GetCache<UserDto>(token);
+            return user;
         }
 
         /// <summary>

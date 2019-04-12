@@ -75,7 +75,7 @@ namespace CJ.Services.Stations
 
                 #region https://kyfw.12306.cn/otn/HttpZF/logdevice
 
-                var client_0 = new RestClient("https://kyfw.12306.cn/otn/HttpZF/logdevice?algID="+ algID + "&hashCode=Gkw-Y_y6wBSc16GWzx-e02qAfIa_5EG4L0AuRZB6Crg&FMQw=0&q4f3=zh-CN&VySQ=FGFLDAChjTm6conxJL29tPitliq2W5Be&VPIf=1&custID=133&VEek=unspecified&dzuS=0&yD16=0&EOQP=485390435c136bdc557f204512e80047&lEnu=3232235642&jp76=d41d8cd98f00b204e9800998ecf8427e&hAqN=Win32&platform=WEB&ks0Q=d41d8cd98f00b204e9800998ecf8427e&TeRS=1040x1920&tOHY=24xx1080x1920&Fvje=i1l1s1&q5aJ=-8&wNLf=99115dfb07133750ba677d055874de87&0aew=Mozilla/5.0%20(Windows%20NT%2010.0;%20Win64;%20x64;%20rv:66.0)%20Gecko/20100101%20Firefox/66.0&E3gR=5d0f2ccc799dc71ec8dff936c65ac4d4&timestamp=" + (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000);
+                var client_0 = new RestClient(WebConfig.LogDeviceUrl + (DateTime.Now.ToUniversalTime().Ticks - 621355968000000000) / 10000);
                 var request_0 = new RestRequest(Method.GET);
                 request_0.AddHeader("Referer", "https://www.12306.cn/index/");
                 request_0.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
@@ -241,21 +241,6 @@ namespace CJ.Services.Stations
                     Value = response_3.Cookies.Where(c => c.Name == "_passport_session").FirstOrDefault().Value
                 });
 
-                //cookieContainer.Add(new RestResponseCookie
-                //{
-                //    Name = "BIGipServerpassport",
-                //    Value = response_3.Cookies.Where(c => c.Name == "BIGipServerpassport").FirstOrDefault().Value
-                //});
-
-                if (response_3.Cookies.Where(c => c.Name == "BIGipServerpassport").FirstOrDefault() != null)
-                {
-                    cookieContainer.Add(new RestResponseCookie
-                    {
-                        Name = "BIGipServerpassport",
-                        Value = response_3.Cookies.Where(c => c.Name == "BIGipServerpassport").FirstOrDefault().Value
-                    });
-                }
-
                 if (response_3.Cookies.Where(c => c.Name == "BIGipServerpassport").FirstOrDefault() != null)
                 {
                     cookieContainer.Add(new RestResponseCookie
@@ -315,7 +300,7 @@ namespace CJ.Services.Stations
                 sb.Append(captchaImage.Image);
 
                 
-                CacheHelper.SetCache(token, cookieContainer);
+                CacheHelper.SetCache(token, cookieContainer,new TimeSpan(0, 2, 0));
 
                 return new ValidatePicOutput
                 {
@@ -359,15 +344,17 @@ namespace CJ.Services.Stations
                 string dtoStr = JsonConvert.SerializeObject(dto);
 
                 var trigger = TriggerBuilder.Create()
-                            .WithSimpleSchedule(x => x.WithIntervalInSeconds(60).RepeatForever())//每两秒执行一次
+                            .WithSimpleSchedule(x => x.WithIntervalInSeconds(60).RepeatForever())//每60秒执行一次
                             .WithIdentity("trigger", "group")
                             .Build();
+
                 //4、创建任务
                 var jobDetail = JobBuilder.Create<TicketOrderJob>()
                                 .UsingJobData("taskRunNum", 0)  //通过在Trigger中添加参数值
                                 .UsingJobData("ticketTask", dtoStr)
                                 .WithIdentity(dto.UserName, "ticketTask")
                                 .Build();
+
                 //5、将触发器和任务器绑定到调度器中
                 await scheduler.ScheduleJob(jobDetail, trigger);
             }
@@ -724,6 +711,7 @@ namespace CJ.Services.Stations
             //#endregion
 
             #endregion
+
         }
 
         /// <summary>

@@ -30,5 +30,6 @@ namespace CJ.Entities
         /// </summary>
         public int Status { get; set; }
 
+        public string NoticeEmail { get; set; }
     }
 }

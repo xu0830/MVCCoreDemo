@@ -125,16 +125,32 @@ namespace MVCCoreDemo.ApiControllers
         public OutputModel GetUserSession()
         {
             var token = HttpContext.Request.Headers["Authorization"].ToString() ?? "";
-            int userId = userService.IsLogin(token);
+            var userDto = userService.IsLogin(token);
+
+            if (userDto != null)
+            {
+                return new OutputModel()
+                {
+                    Code = 200,
+                    Result = "success",
+                    Data = new
+                    {
+                        userId = userDto.Id,
+                        userName = userDto.NickName
+                    }
+                };
+            }
+
             return new OutputModel()
             {
-                Code = userId > 0 ? 200 : 204,
-                Result = userId > 0 ? "success" : "fail",
+                Code = 204,
+                Result = "fail",
                 Data = new
                 {
-                    userId
+                    
                 }
             };
+
         }
 
         /// <summary>

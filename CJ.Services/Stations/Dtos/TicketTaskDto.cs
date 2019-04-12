@@ -18,7 +18,7 @@ namespace CJ.Services.Stations.Dtos
 
         public string LeftDateJs { get; set; }
 
-        public string TrainCode { get; set; }
+        public List<string> TrainCodes { get; set; }
 
         public string SeatType { get; set; }
 

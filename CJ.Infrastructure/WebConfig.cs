@@ -138,6 +138,9 @@ namespace CJ.Infrastructure
             }
         }
 
+        /// <summary>
+        /// 是否启用Referer验证
+        /// </summary>
         public static bool RefererVerify
         {
             get
@@ -156,6 +159,9 @@ namespace CJ.Infrastructure
             }
         }
 
+        /// <summary>
+        /// 允许跨域地址
+        /// </summary>
         public static string[] CorsOrigins
         {
             get {
@@ -167,6 +173,22 @@ namespace CJ.Infrastructure
                 {
                     LogHelper.Error("读取配置文件失败");
                     return null;
+                }
+            }
+        }
+
+        public static string LogDeviceUrl
+        {
+            get
+            {
+                try
+                {
+                    return GetConfigurationRoot().GetSection("LogDeviceUrl").Value;
+                }
+                catch (Exception)
+                {
+                    LogHelper.Error("读取配置文件失败");
+                    return "";
                 }
             }
         }

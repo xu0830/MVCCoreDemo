@@ -8,7 +8,11 @@ namespace CJ.Services.Users.Dtos
 {
     public class UserDto : IEntityDto
     {
+        public int Id { get; set; }
+
         public string UserName { get; set; }
+
+        public string NickName { get; set; }
 
         public string Password { get; set; }
 

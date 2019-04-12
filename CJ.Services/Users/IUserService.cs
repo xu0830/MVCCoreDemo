@@ -35,7 +35,7 @@ namespace CJ.Services.Users
         /// 是否登录
         /// </summary>
         /// <returns></returns>
-        int IsLogin(string token);
+        UserDto IsLogin(string token);
 
         /// <summary>
         /// 重设密码
