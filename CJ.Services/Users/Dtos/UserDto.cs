@@ -21,5 +21,7 @@ namespace CJ.Services.Users.Dtos
         public string RoleId { get; set; }
 
         public string RoleName { get; set; }
+
+        public string Avatar { get; set; }
     }
 }

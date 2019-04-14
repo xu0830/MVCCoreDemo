@@ -16,5 +16,7 @@ namespace CJ.Entities
         public string NickName { get; set; }
 
         public string Password { get; set; }
+
+        public string Avatar { get; set; }
     }
 }

@@ -56,8 +56,9 @@ namespace CJ.Services.Users
                 }
                 else
                 {
+                    UserDto model = mapper.Map<UserDto>(user);
                     string token = Guid.NewGuid().ToString();
-                    CacheHelper.SetCache(token, user, new TimeSpan(7, 0, 0, 0));
+                    CacheHelper.SetCache(token, model, new TimeSpan(7, 0, 0, 0));
                     return new UserOutput
                     {
                         Msg = "登录成功",
@@ -66,7 +67,7 @@ namespace CJ.Services.Users
                     };
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return new UserOutput {
                     Msg = "登录异常",
