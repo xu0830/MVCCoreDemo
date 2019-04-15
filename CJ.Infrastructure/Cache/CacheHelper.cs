@@ -31,7 +31,26 @@ namespace CJ.Infrastructure.Cache
         {
             T value;
             _cache.TryGetValue(key, out value);
+            
             return value;
+        }
+
+        /// <summary>
+        /// 移除缓存
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static bool Remove(string key)
+        {
+            try
+            {
+                _cache.Remove(key);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         /// <summary>

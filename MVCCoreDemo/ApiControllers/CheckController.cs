@@ -202,6 +202,19 @@ namespace MVCCoreDemo.ApiControllers
         //{
         //}
 
+        [HttpPost("logout")]
+        public OutputModel Logout()
+        {
+            var token = HttpContext.Request.Headers["Authorization"].ToString() ?? "";
+            var flag = userService.Logout(token);
+
+            return new OutputModel() {
+                Code = flag ? 200 : 204,
+                Result = flag ? "退出成功": "退出异常"
+            };
+        }
+
+
         [HttpPost("addUser")]
         public bool AddUser()
         {

@@ -345,14 +345,14 @@ namespace CJ.Services.Stations
 
                 var trigger = TriggerBuilder.Create()
                             .WithSimpleSchedule(x => x.WithIntervalInSeconds(60).RepeatForever())//每60秒执行一次
-                            .WithIdentity("trigger", "group")
+                            .WithIdentity(dto.UserName)
                             .Build();
 
                 //4、创建任务
                 var jobDetail = JobBuilder.Create<TicketOrderJob>()
                                 .UsingJobData("taskRunNum", 0)  //通过在Trigger中添加参数值
                                 .UsingJobData("ticketTask", dtoStr)
-                                .WithIdentity(dto.UserName, "ticketTask")
+                                .WithIdentity(dto.UserName)
                                 .Build();
 
                 //5、将触发器和任务器绑定到调度器中
@@ -369,36 +369,24 @@ namespace CJ.Services.Stations
 
         public OrderOutput SubmitOrder(TicketTaskDto input)
         {
-            var ticketTask = ticketTaskRepository.GetAll().
-                Where(c => c.UserName == input.UserName && c.Status == 0).FirstOrDefault();
+            
+            TicketTask ticketTaskObj = mapper.Map<TicketTask>(input);
+            ticketTaskObj.CreatedTime = DateTime.Now;
+            ticketTaskObj.ArriveStation = input.ArriveStation.Name;
+            ticketTaskObj.LeftStation = input.LeftStation.Name;
+            ticketTaskObj.Status = 0;
+            ticketTaskObj = ticketTaskRepository.Insert(ticketTaskObj);
 
-            if (ticketTask != null)
+            input.Id = ticketTaskObj.Id;
+
+            StartScheduler(input);
+
+            return new OrderOutput()
             {
-                return new OrderOutput()
-                {
-                    Flag = false,
-                    Msg = "任务执行中！"
-                };
-            }
-            else
-            {
-                TicketTask ticketTaskObj = mapper.Map<TicketTask>(input);
-                ticketTaskObj.CreatedTime = DateTime.Now;
-                ticketTaskObj.ArriveStation = input.ArriveStation.Name;
-                ticketTaskObj.LeftStation = input.LeftStation.Name;
-                ticketTaskObj.Status = 0;
-                ticketTaskObj = ticketTaskRepository.Insert(ticketTaskObj);
-
-                input.Id = ticketTaskObj.Id;
-
-                StartScheduler(input);
-
-                return new OrderOutput()
-                {
-                    Flag = true,
-                    Msg = "任务提交完成， 请耐心等待结果"
-                };
-            }
+                Flag = true,
+                Msg = "任务提交完成， 请耐心等待结果"
+            };
+            
 
             #region taskExecute
             //#region Query
@@ -714,6 +702,22 @@ namespace CJ.Services.Stations
 
         }
 
+
+        public bool StopTask(string userName)
+        {
+            try
+            {
+                var ticketTaskDto = ticketTaskRepository.GetAll().
+                   Where(c => c.UserName == userName && c.Status == 0).FirstOrDefault();
+                ticketTaskDto.Status = 3;
+                ticketTaskRepository.Update(ticketTaskDto);
+                return true;
+            }
+            catch (Exception ex) {
+                return false;
+            }
+        }
+
         /// <summary>
         /// 验证登录
         /// </summary>
@@ -885,13 +889,17 @@ namespace CJ.Services.Stations
 
             PassengerData passengerResponse = GetPassengerDto(input.UserName);
 
+            bool IsTaskExist = ticketTaskRepository.GetAll().
+               Where(c => c.UserName == input.UserName && c.Status == 0).FirstOrDefault() != null;
+
             return new LoginServiceDto
             {
                 LoginStatus = true,
                 Result = "登录成功",
                 Passenger = new PassengerOutput(){
                     Name = passengerResponse.Normal_passengers[0].Passenger_name,
-                    Account = input.UserName
+                    Account = input.UserName,
+                    IsTaskExist = IsTaskExist
                 }
             };
         } 

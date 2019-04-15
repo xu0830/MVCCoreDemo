@@ -26,6 +26,8 @@ namespace CJ.Services.Stations
         /// <returns></returns>
         OrderOutput SubmitOrder(TicketTaskDto dto);
 
+        bool StopTask(string userName);
+
         /// <summary>
         /// 车票查询
         /// </summary>

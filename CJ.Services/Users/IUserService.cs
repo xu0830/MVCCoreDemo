@@ -29,7 +29,7 @@ namespace CJ.Services.Users
         /// 退出登录
         /// </summary>
         /// <returns></returns>
-        bool Logout();
+        bool Logout(string token);
 
         /// <summary>
         /// 是否登录

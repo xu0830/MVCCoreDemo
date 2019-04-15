@@ -106,17 +106,12 @@ namespace CJ.Services.Users
         /// 用户登出
         /// </summary>
         /// <returns></returns>
-        public bool Logout()
+        public bool Logout(string token)
         {
-            try
-            {
-                SessionHelper.RemoveSession("user");
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            
+            var flag = CacheHelper.Remove(token);
+            return flag;
+           
         }
 
         /// <summary>

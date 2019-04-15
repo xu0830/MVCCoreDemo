@@ -27,6 +27,7 @@ namespace CJ.Entities
         ///     0: 进行中
         ///     1: 完成
         ///     2: 失败
+        ///     3: 手动停止
         /// </summary>
         public int Status { get; set; }
 

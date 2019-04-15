@@ -9,5 +9,7 @@ namespace CJ.Services.Stations.Dtos
         public string Name { get; set; }
 
         public string Account { get; set; }
+
+        public bool IsTaskExist { get; set; }
     }
 }

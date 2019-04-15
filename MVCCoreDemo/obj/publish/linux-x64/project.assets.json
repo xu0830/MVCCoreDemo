@@ -2965,6 +2965,29 @@
           "lib/netstandard1.3/Pomelo.JsonObject.dll": {}
         }
       },
+      "Quartz/3.0.7": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "System.Collections.NonGeneric": "4.3.0",
+          "System.Collections.Specialized": "4.3.0",
+          "System.ComponentModel.TypeConverter": "4.3.0",
+          "System.Configuration.ConfigurationManager": "4.5.0",
+          "System.Data.Common": "4.3.0",
+          "System.Data.SqlClient": "4.5.1",
+          "System.Net.NameResolution": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.5.0",
+          "System.Runtime.Serialization.Xml": "4.3.0",
+          "System.Threading.Thread": "4.3.0",
+          "System.Xml.XmlSerializer": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Quartz.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Quartz.dll": {}
+        }
+      },
       "Remotion.Linq/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -3617,7 +3640,7 @@
           "System.Security.Permissions": "4.5.0"
         },
         "compile": {
-          "ref/netstandard2.0/_._": {}
+          "ref/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
@@ -3636,7 +3659,26 @@
           "ref/netstandard1.3/System.Console.dll": {}
         }
       },
-      "System.Data.SqlClient/4.5.0": {
+      "System.Data.Common/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading.Tasks": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.2/System.Data.Common.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.2/System.Data.Common.dll": {}
+        }
+      },
+      "System.Data.SqlClient/4.5.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.Win32.Registry": "4.5.0",
@@ -4204,23 +4246,23 @@
           }
         }
       },
-      "System.Net.NameResolution/4.0.0": {
+      "System.Net.NameResolution/4.3.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.0.1",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Tracing": "4.1.0",
-          "System.Globalization": "4.0.11",
-          "System.Net.Primitives": "4.0.11",
-          "System.Resources.ResourceManager": "4.0.1",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Runtime.Handles": "4.0.1",
-          "System.Runtime.InteropServices": "4.1.0",
-          "System.Security.Principal.Windows": "4.0.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11",
-          "runtime.native.System": "4.0.0"
+          "Microsoft.NETCore.Platforms": "1.1.0",
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Tracing": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.Net.Primitives": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Runtime.Handles": "4.3.0",
+          "System.Runtime.InteropServices": "4.3.0",
+          "System.Security.Principal.Windows": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Threading.Tasks": "4.3.0",
+          "runtime.native.System": "4.3.0"
         },
         "compile": {
           "ref/netstandard1.3/System.Net.NameResolution.dll": {}
@@ -4514,17 +4556,13 @@
           "ref/netstandard1.0/System.Reflection.Primitives.dll": {}
         }
       },
-      "System.Reflection.TypeExtensions/4.3.0": {
+      "System.Reflection.TypeExtensions/4.5.0": {
         "type": "package",
-        "dependencies": {
-          "System.Reflection": "4.3.0",
-          "System.Runtime": "4.3.0"
-        },
         "compile": {
-          "ref/netstandard1.5/System.Reflection.TypeExtensions.dll": {}
+          "ref/netcoreapp2.0/_._": {}
         },
         "runtime": {
-          "lib/netstandard1.5/System.Reflection.TypeExtensions.dll": {}
+          "lib/netcoreapp2.0/_._": {}
         }
       },
       "System.Resources.ResourceManager/4.3.0": {
@@ -5318,7 +5356,7 @@
           "System.Xml.XmlDocument": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
@@ -5409,6 +5447,7 @@
           "Castle.Windsor": "4.1.0",
           "Microsoft.Extensions.Configuration.Json": "2.1.0",
           "Pomelo.EntityFrameworkCore.MySql": "2.1.0",
+          "Quartz": "3.0.7",
           "RestSharp": "106.6.3"
         },
         "compile": {
@@ -8379,6 +8418,29 @@
           "lib/netstandard1.3/Pomelo.JsonObject.dll": {}
         }
       },
+      "Quartz/3.0.7": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "System.Collections.NonGeneric": "4.3.0",
+          "System.Collections.Specialized": "4.3.0",
+          "System.ComponentModel.TypeConverter": "4.3.0",
+          "System.Configuration.ConfigurationManager": "4.5.0",
+          "System.Data.Common": "4.3.0",
+          "System.Data.SqlClient": "4.5.1",
+          "System.Net.NameResolution": "4.3.0",
+          "System.Reflection.TypeExtensions": "4.5.0",
+          "System.Runtime.Serialization.Xml": "4.3.0",
+          "System.Threading.Thread": "4.3.0",
+          "System.Xml.XmlSerializer": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Quartz.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Quartz.dll": {}
+        }
+      },
       "Remotion.Linq/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -9158,7 +9220,7 @@
           "System.Security.Permissions": "4.5.0"
         },
         "compile": {
-          "ref/netstandard2.0/_._": {}
+          "ref/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
@@ -9177,7 +9239,26 @@
           "ref/netstandard1.3/System.Console.dll": {}
         }
       },
-      "System.Data.SqlClient/4.5.0": {
+      "System.Data.Common/4.3.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Collections": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.IO": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Text.RegularExpressions": "4.3.0",
+          "System.Threading.Tasks": "4.3.0"
+        },
+        "compile": {
+          "ref/netstandard1.2/System.Data.Common.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.2/System.Data.Common.dll": {}
+        }
+      },
+      "System.Data.SqlClient/4.5.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.Win32.Registry": "4.5.0",
@@ -9672,23 +9753,23 @@
           "runtimes/unix/lib/netstandard1.6/System.Net.Http.dll": {}
         }
       },
-      "System.Net.NameResolution/4.0.0": {
+      "System.Net.NameResolution/4.3.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.NETCore.Platforms": "1.0.1",
-          "System.Collections": "4.0.11",
-          "System.Diagnostics.Tracing": "4.1.0",
-          "System.Globalization": "4.0.11",
-          "System.Net.Primitives": "4.0.11",
-          "System.Resources.ResourceManager": "4.0.1",
-          "System.Runtime": "4.1.0",
-          "System.Runtime.Extensions": "4.1.0",
-          "System.Runtime.Handles": "4.0.1",
-          "System.Runtime.InteropServices": "4.1.0",
-          "System.Security.Principal.Windows": "4.0.0",
-          "System.Threading": "4.0.11",
-          "System.Threading.Tasks": "4.0.11",
-          "runtime.native.System": "4.0.0"
+          "Microsoft.NETCore.Platforms": "1.1.0",
+          "System.Collections": "4.3.0",
+          "System.Diagnostics.Tracing": "4.3.0",
+          "System.Globalization": "4.3.0",
+          "System.Net.Primitives": "4.3.0",
+          "System.Resources.ResourceManager": "4.3.0",
+          "System.Runtime": "4.3.0",
+          "System.Runtime.Extensions": "4.3.0",
+          "System.Runtime.Handles": "4.3.0",
+          "System.Runtime.InteropServices": "4.3.0",
+          "System.Security.Principal.Windows": "4.3.0",
+          "System.Threading": "4.3.0",
+          "System.Threading.Tasks": "4.3.0",
+          "runtime.native.System": "4.3.0"
         },
         "compile": {
           "ref/netstandard1.3/System.Net.NameResolution.dll": {}
@@ -9961,17 +10042,13 @@
           "ref/netstandard1.0/System.Reflection.Primitives.dll": {}
         }
       },
-      "System.Reflection.TypeExtensions/4.3.0": {
+      "System.Reflection.TypeExtensions/4.5.0": {
         "type": "package",
-        "dependencies": {
-          "System.Reflection": "4.3.0",
-          "System.Runtime": "4.3.0"
-        },
         "compile": {
-          "ref/netstandard1.5/System.Reflection.TypeExtensions.dll": {}
+          "ref/netcoreapp2.0/_._": {}
         },
         "runtime": {
-          "lib/netstandard1.5/System.Reflection.TypeExtensions.dll": {}
+          "lib/netcoreapp2.0/_._": {}
         }
       },
       "System.Resources.ResourceManager/4.3.0": {
@@ -10670,7 +10747,7 @@
           "System.Xml.XmlDocument": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
@@ -10761,6 +10838,7 @@
           "Castle.Windsor": "4.1.0",
           "Microsoft.Extensions.Configuration.Json": "2.1.0",
           "Pomelo.EntityFrameworkCore.MySql": "2.1.0",
+          "Quartz": "3.0.7",
           "RestSharp": "106.6.3"
         },
         "compile": {
@@ -13880,6 +13958,22 @@
         "pomelo.jsonobject.nuspec"
       ]
     },
+    "Quartz/3.0.7": {
+      "sha512": "3vCJ/eJQzEne1ZocNftmPBjuA0vFHs8rOG3bQcSsB9fbQuZpmkrmOH+0Iq7mlibSbR9f1VV4TUMnkkbPUd7Kqw==",
+      "type": "package",
+      "path": "quartz/3.0.7",
+      "files": [
+        ".signature.p7s",
+        "lib/net452/Quartz.dll",
+        "lib/net452/Quartz.pdb",
+        "lib/net452/Quartz.xml",
+        "lib/netstandard2.0/Quartz.dll",
+        "lib/netstandard2.0/Quartz.pdb",
+        "lib/netstandard2.0/Quartz.xml",
+        "quartz.3.0.7.nupkg.sha512",
+        "quartz.nuspec"
+      ]
+    },
     "Remotion.Linq/2.2.0": {
       "sha512": "fK/76UmpC0FXBlGDFVPLJHQlDLYnGC+XY3eoDgCgbtrhi0vzbXDQ3n/IYHhqSKqXQfGw/u04A1drWs7rFVkRjw==",
       "type": "package",
@@ -15339,10 +15433,59 @@
         "system.console.nuspec"
       ]
     },
-    "System.Data.SqlClient/4.5.0": {
-      "sha512": "q6xYImrsNz+WZCa4/zvgUUihMQUxdI3S6e2gPsCA8TB8Ott7/frxxoeIoyjp3dsmvolA9StFD/Ib6tDPf5sHVA==",
+    "System.Data.Common/4.3.0": {
+      "sha512": "lm6E3T5u7BOuEH0u18JpbJHxBfOJPuCyl4Kg1RH10ktYLp5uEEE1xKrHW56/We4SnZpGAuCc9N0MJpSDhTHZGQ==",
       "type": "package",
-      "path": "system.data.sqlclient/4.5.0",
+      "path": "system.data.common/4.3.0",
+      "files": [
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net451/System.Data.Common.dll",
+        "lib/netstandard1.2/System.Data.Common.dll",
+        "lib/portable-net451+win8+wp8+wpa81/System.Data.Common.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net451/System.Data.Common.dll",
+        "ref/netstandard1.2/System.Data.Common.dll",
+        "ref/netstandard1.2/System.Data.Common.xml",
+        "ref/netstandard1.2/de/System.Data.Common.xml",
+        "ref/netstandard1.2/es/System.Data.Common.xml",
+        "ref/netstandard1.2/fr/System.Data.Common.xml",
+        "ref/netstandard1.2/it/System.Data.Common.xml",
+        "ref/netstandard1.2/ja/System.Data.Common.xml",
+        "ref/netstandard1.2/ko/System.Data.Common.xml",
+        "ref/netstandard1.2/ru/System.Data.Common.xml",
+        "ref/netstandard1.2/zh-hans/System.Data.Common.xml",
+        "ref/netstandard1.2/zh-hant/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/System.Data.Common.dll",
+        "ref/portable-net451+win8+wp8+wpa81/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/de/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/es/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/fr/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/it/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/ja/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/ko/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/ru/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/zh-hans/System.Data.Common.xml",
+        "ref/portable-net451+win8+wp8+wpa81/zh-hant/System.Data.Common.xml",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.data.common.4.3.0.nupkg.sha512",
+        "system.data.common.nuspec"
+      ]
+    },
+    "System.Data.SqlClient/4.5.1": {
+      "sha512": "qXTvTFkBds7bnN+ntBMHGvmH3pCAkfT4TE1z2Xvfqo4wKMQC77O4aXsYCc7dzCESC+/Gom6l0GLuebpFx7MDvg==",
+      "type": "package",
+      "path": "system.data.sqlclient/4.5.1",
       "files": [
         ".signature.p7s",
         "LICENSE.TXT",
@@ -15406,8 +15549,7 @@
         "runtimes/win/lib/netstandard1.3/System.Data.SqlClient.dll",
         "runtimes/win/lib/netstandard2.0/System.Data.SqlClient.dll",
         "runtimes/win/lib/uap10.0.16299/System.Data.SqlClient.dll",
-        "runtimes/win/lib/uap10.0.16300/System.Data.SqlClient.dll",
-        "system.data.sqlclient.4.5.0.nupkg.sha512",
+        "system.data.sqlclient.4.5.1.nupkg.sha512",
         "system.data.sqlclient.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -16817,10 +16959,10 @@
         "system.net.http.nuspec"
       ]
     },
-    "System.Net.NameResolution/4.0.0": {
-      "sha512": "JdqRdM1Qym3YehqdKIi5LHrpypP4JMfxKQSNCJ2z4WawkG0il+N3XfNeJOxll2XrTnG7WgYYPoeiu/KOwg0DQw==",
+    "System.Net.NameResolution/4.3.0": {
+      "sha512": "+/XD2afF0C+aBRLp+oCxVrF46WNkpS6Gmj0s+Z8W4Bklqv1dM0KFIj1dKkmYa29nkmgQV6kST36NcDJwKDDq+w==",
       "type": "package",
-      "path": "system.net.nameresolution/4.0.0",
+      "path": "system.net.nameresolution/4.3.0",
       "files": [
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
@@ -16853,7 +16995,7 @@
         "runtimes/win/lib/net46/System.Net.NameResolution.dll",
         "runtimes/win/lib/netcore50/System.Net.NameResolution.dll",
         "runtimes/win/lib/netstandard1.3/System.Net.NameResolution.dll",
-        "system.net.nameresolution.4.0.0.nupkg.sha512",
+        "system.net.nameresolution.4.3.0.nupkg.sha512",
         "system.net.nameresolution.nuspec"
       ]
     },
@@ -17602,19 +17744,25 @@
         "system.reflection.primitives.nuspec"
       ]
     },
-    "System.Reflection.TypeExtensions/4.3.0": {
-      "sha512": "2zQfyX7pBdtjV5+ilQn0hn2HVCUXQohGpzQ20uYxT8+gGOkiu8plOGtCVN2KPPU8+YchIFaA07UELwhdk+G39w==",
+    "System.Reflection.TypeExtensions/4.5.0": {
+      "sha512": "Si8PkGGxxDKLm6ap31x4hoDBsL3yX+gwmGJWqVJUwHofyTubjj8MjC6ckhAmjGWszWLA1wGNC+QAQMQkWG8qbw==",
       "type": "package",
-      "path": "system.reflection.typeextensions/4.3.0",
+      "path": "system.reflection.typeextensions/4.5.0",
       "files": [
-        "ThirdPartyNotices.txt",
-        "dotnet_library_license.txt",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
         "lib/MonoAndroid10/_._",
         "lib/MonoTouch10/_._",
         "lib/net46/System.Reflection.TypeExtensions.dll",
-        "lib/net462/System.Reflection.TypeExtensions.dll",
+        "lib/net461/System.Reflection.TypeExtensions.dll",
         "lib/netcore50/System.Reflection.TypeExtensions.dll",
+        "lib/netcoreapp1.0/System.Reflection.TypeExtensions.dll",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.3/System.Reflection.TypeExtensions.dll",
         "lib/netstandard1.5/System.Reflection.TypeExtensions.dll",
+        "lib/netstandard2.0/System.Reflection.TypeExtensions.dll",
+        "lib/uap10.0.16299/_._",
         "lib/xamarinios10/_._",
         "lib/xamarinmac20/_._",
         "lib/xamarintvos10/_._",
@@ -17622,7 +17770,9 @@
         "ref/MonoAndroid10/_._",
         "ref/MonoTouch10/_._",
         "ref/net46/System.Reflection.TypeExtensions.dll",
-        "ref/net462/System.Reflection.TypeExtensions.dll",
+        "ref/net461/System.Reflection.TypeExtensions.dll",
+        "ref/net461/System.Reflection.TypeExtensions.xml",
+        "ref/netcoreapp2.0/_._",
         "ref/netstandard1.3/System.Reflection.TypeExtensions.dll",
         "ref/netstandard1.3/System.Reflection.TypeExtensions.xml",
         "ref/netstandard1.3/de/System.Reflection.TypeExtensions.xml",
@@ -17645,13 +17795,19 @@
         "ref/netstandard1.5/ru/System.Reflection.TypeExtensions.xml",
         "ref/netstandard1.5/zh-hans/System.Reflection.TypeExtensions.xml",
         "ref/netstandard1.5/zh-hant/System.Reflection.TypeExtensions.xml",
+        "ref/netstandard2.0/System.Reflection.TypeExtensions.dll",
+        "ref/netstandard2.0/System.Reflection.TypeExtensions.xml",
+        "ref/uap10.0.16299/_._",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
         "runtimes/aot/lib/netcore50/System.Reflection.TypeExtensions.dll",
-        "system.reflection.typeextensions.4.3.0.nupkg.sha512",
-        "system.reflection.typeextensions.nuspec"
+        "runtimes/aot/lib/uap10.0.16299/_._",
+        "system.reflection.typeextensions.4.5.0.nupkg.sha512",
+        "system.reflection.typeextensions.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Resources.ResourceManager/4.3.0": {
@@ -19909,6 +20065,7 @@
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.0",
       "Newtonsoft.Json >= 12.0.1",
       "Pomelo.EntityFrameworkCore.MySql >= 2.1.0",
+      "Quartz >= 3.0.7",
       "StackExchange.Redis >= 2.0.571",
       "Swashbuckle.AspNetCore >= 2.2.0"
     ]
@@ -19998,6 +20155,10 @@
           "Pomelo.EntityFrameworkCore.MySql": {
             "target": "Package",
             "version": "[2.1.0, )"
+          },
+          "Quartz": {
+            "target": "Package",
+            "version": "[3.0.7, )"
           },
           "StackExchange.Redis": {
             "target": "Package",

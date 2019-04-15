@@ -63,7 +63,7 @@ using MVCCoreDemo.Models;
             WriteLiteral("<!DOCTYPE html>\r\n<html>\r\n");
             EndContext();
             BeginContext(86, 159, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ecce01f66e9643548c829364ee7ccda1", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3d77c39078b445fdb60f6b142f9ded00", async() => {
                 BeginContext(92, 146, true);
                 WriteLiteral("\r\n    <meta charset=\"UTF-8\">\r\n    <!-- import CSS -->\r\n    <link rel=\"stylesheet\" href=\"https://unpkg.com/element-ui/lib/theme-chalk/index.css\">\r\n");
                 EndContext();
@@ -83,7 +83,7 @@ using MVCCoreDemo.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(247, 513, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b960a4ba28ea4bc9b07dde53cc99fbfc", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb0860cbcea24e8fb6b525a595a2bc26", async() => {
                 BeginContext(253, 462, true);
                 WriteLiteral(@"
     <div id=""app"">
@@ -100,7 +100,7 @@ using MVCCoreDemo.Models;
     ");
                 EndContext();
                 BeginContext(715, 36, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cfcff22076fc461186ef1da24a868b91", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "858b15a391434ed4a4e8ef71f6b11c19", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

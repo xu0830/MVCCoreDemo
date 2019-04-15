@@ -81,6 +81,17 @@ namespace MVCCoreDemo.ApiControllers
             };
         }
 
+        [HttpPost("stopTask")]
+        public OutputModel StopTask([FromBody]TicketTaskDto dto)
+        {
+            var flag = stationService.StopTask(dto.UserName);
+            return new OutputModel()
+            {
+                Code = flag? 200: 204,
+                Result = flag? "停止任务成功" : "停止异常异常"
+            };
+        }
+
         // GET api/<controller>/5
         [HttpGet("{userName}")]
         public object Get(string userName)
