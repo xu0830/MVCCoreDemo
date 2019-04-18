@@ -265,7 +265,7 @@ namespace CJ.Services.Quartz.Jobs
 
                                     if (init_seatTypes_lastIndex < 0 || init_seatTypes_index < 0 || FormIndex < 0 || FormLastIndex < 0 || limit_ticket_num_index < 0 || SubmitTokenIndex < 0 || global_lang_index < 0)
                                     {
-                                        throw new Exception("api https://kyfw.12306.cn/otn/confirmPassenger/initDc 接口异常" + response_2.Content);
+                                        throw new Exception("api https://kyfw.12306.cn/otn/confirmPassenger/initDc 接口异常" + response_1.Content + response_2.Content);
                                     }
 
                                     string init_seatTypesTemp = response_2.Content.Substring(init_seatTypes_index, init_seatTypes_lastIndex - init_seatTypes_index);
@@ -435,7 +435,7 @@ namespace CJ.Services.Quartz.Jobs
                                     string passengerTicketStrEncode = Uri.EscapeDataString($"{input.SeatType},0,1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},{passengerDTOResponse.Data.Normal_passengers[0].Mobile_no},N");
                                     string oldPassengerStrEncode = Uri.EscapeDataString($"{passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},1_");
 
-                                    request_6.AddParameter("undefined",
+                                    request_6.AddParameter("application/x-www-form-urlencoded",
                                     $"passengerTicketStr={input.SeatType},0,1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},{passengerDTOResponse.Data.Normal_passengers[0].Mobile_no},N" +
                                     $"&oldPassengerStr={passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},1_" +
                                     $"&randCode=&purpose_codes=00&" +
@@ -479,10 +479,10 @@ namespace CJ.Services.Quartz.Jobs
                     }
                     catch (Exception ex)
                     {
-                        var model = ticketTaskRepository.Get(input.Id);
-                        model.Status = 2;
-                        ticketTaskRepository.Update(model);
-                        context.Scheduler.Shutdown();
+                        //var model = ticketTaskRepository.Get(input.Id);
+                        //model.Status = 2;
+                        //ticketTaskRepository.Update(model);
+                        //context.Scheduler.Shutdown();
                         LogHelper.Error($"任务{input.UserName}执行异常 异常信息: " + ex.Message);
                     }
                 }

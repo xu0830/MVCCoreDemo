@@ -861,8 +861,13 @@ namespace CJ.Services.Stations
             IRestResponse response_4 = client_4.Execute(request_4);
 
             //  保存登录状态
-
-            cookieContainer.Clear();
+            foreach (var item in cookieContainer)
+            {
+                if (item.Name != "RAIL_DEVICEID" || item.Name != "RAIL_EXPIRATION")
+                {
+                    cookieContainer.Remove(item);
+                }
+            }
             foreach (var item in response_4.Cookies)
             {
                 cookieContainer.Add(item);
