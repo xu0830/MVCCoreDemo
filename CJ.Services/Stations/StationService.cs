@@ -376,7 +376,7 @@ namespace CJ.Services.Stations
             ticketTaskObj.LeftStation = input.LeftStation.Name;
             ticketTaskObj.Status = 0;
             ticketTaskObj = ticketTaskRepository.Insert(ticketTaskObj);
-
+            ticketTaskObj.TrainCode = string.Join(",", input.TrainCodes.ToArray());
             input.Id = ticketTaskObj.Id;
 
             StartScheduler(input);
@@ -860,20 +860,41 @@ namespace CJ.Services.Stations
 
             IRestResponse response_4 = client_4.Execute(request_4);
 
+            AuthClientResponse authClientResponse;
+            try
+            {
+                authClientResponse = JsonConvert.DeserializeObject<AuthClientResponse>(response_4.Content);
+            }
+            catch (Exception)
+            {
+                authClientResponse = null;
+            }
+
+            if (authClientResponse == null)
+            {
+                return new LoginServiceDto
+                {
+                    LoginStatus = false,
+                    Result = "登录异常"
+                };
+            }
+
+            IList<RestResponseCookie> loginStatusCookies = new List<RestResponseCookie>();
+
             //  保存登录状态
             foreach (var item in cookieContainer)
             {
-                if (item.Name != "RAIL_DEVICEID" || item.Name != "RAIL_EXPIRATION")
+                if (item.Name == "RAIL_DEVICEID" || item.Name == "RAIL_EXPIRATION")
                 {
-                    cookieContainer.Remove(item);
+                    loginStatusCookies.Add(item);
                 }
             }
             foreach (var item in response_4.Cookies)
             {
-                cookieContainer.Add(item);
+                loginStatusCookies.Add(item);
             }
           
-            CacheHelper.SetCache(input.UserName + "_loginStatus", cookieContainer, new TimeSpan(0, 30, 0));
+            CacheHelper.SetCache(input.UserName + "_loginStatus", loginStatusCookies, new TimeSpan(0, 30, 0));
 
             #endregion
 
@@ -892,7 +913,7 @@ namespace CJ.Services.Stations
             IRestResponse response_5 = client_5.Execute(request_5);
             #endregion
 
-            PassengerData passengerResponse = GetPassengerDto(input.UserName);
+           
 
             bool IsTaskExist = ticketTaskRepository.GetAll().
                Where(c => c.UserName == input.UserName && c.Status == 0).FirstOrDefault() != null;
@@ -902,7 +923,7 @@ namespace CJ.Services.Stations
                 LoginStatus = true,
                 Result = "登录成功",
                 Passenger = new PassengerOutput(){
-                    Name = passengerResponse.Normal_passengers[0].Passenger_name,
+                    Name = authClientResponse.Username,
                     Account = input.UserName,
                     IsTaskExist = IsTaskExist
                 }

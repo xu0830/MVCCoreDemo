@@ -227,8 +227,21 @@ namespace CJ.Services.Quartz.Jobs
                                     }
                                     if (!submitOrderRequestResponse.Status)
                                     {
-                                        LogHelper.Info($"任务{input.UserName}submitOrderRequest提交失败" + response_1.Content);
-                                        continue;
+                                        if (submitOrderRequestResponse.Messages[0].ToString().IndexOf("您还有未处理的订单")>-1)
+                                        {
+                                            EmailHelper.Send("1126818689@qq.com", "订票成功", "订票成功,登录你的12306完成支付");
+                                            var model = ticketTaskRepository.Get(input.Id);
+                                            model.Status = 1;
+                                            ticketTaskRepository.Update(model);
+                                            context.Scheduler.Shutdown();
+                                            LogHelper.Info("任务执行完成");
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            LogHelper.Info($"任务{input.UserName}submitOrderRequest提交失败" + response_1.Content);
+                                            continue;
+                                        }
                                     }
                                     #endregion
 
@@ -435,7 +448,14 @@ namespace CJ.Services.Quartz.Jobs
                                     string passengerTicketStrEncode = Uri.EscapeDataString($"{input.SeatType},0,1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},{passengerDTOResponse.Data.Normal_passengers[0].Mobile_no},N");
                                     string oldPassengerStrEncode = Uri.EscapeDataString($"{passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},1_");
 
-                                    request_6.AddParameter("application/x-www-form-urlencoded",
+                                    var submitForm = $"passengerTicketStr={input.SeatType},0,1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},{passengerDTOResponse.Data.Normal_passengers[0].Mobile_no},N" +
+                                    $"&oldPassengerStr={passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},1_" +
+                                    $"&randCode=&purpose_codes=00&" +
+                                    $"key_check_isChange={ticketInfoForPassengerForm.Key_check_isChange}" +
+                                    $"&leftTicketStr={ticketInfoForPassengerForm.LeftTicketStr}&train_location={ticketInfoForPassengerForm.Train_location}" +
+                                    $"&choose_seats=&seatDetailType=000&whatsSelect=1&roomType=00&dwAll=N";
+
+                                    request_6.AddParameter("x-www-form-urlencoded; charset=UTF-8 ",
                                     $"passengerTicketStr={input.SeatType},0,1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},{passengerDTOResponse.Data.Normal_passengers[0].Mobile_no},N" +
                                     $"&oldPassengerStr={passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},1_" +
                                     $"&randCode=&purpose_codes=00&" +
@@ -457,12 +477,12 @@ namespace CJ.Services.Quartz.Jobs
 
                                     if (confirmSingleForQueueResponse == null)
                                     {
-                                        throw new Exception("https://kyfw.12306.cn/otn/confirmPassenger/confirmSingleForQueue 接口异常" + response_6.Content);
+                                        throw new Exception("https://kyfw.12306.cn/otn/confirmPassenger/confirmSingleForQueue 接口异常" + response_6.Content + submitForm);
                                     }
 
                                     if (confirmSingleForQueueResponse.Data.SubmitStatus)
                                     {
-                                        EmailHelper.Send("1126818689@qq.com", "订票成功", "恭喜订票成功,登录你的12306完成支付");
+                                        EmailHelper.Send("1126818689@qq.com", "订票成功", "订票成功,登录你的12306完成支付");
                                         var model = ticketTaskRepository.Get(input.Id);
                                         model.Status = 1;
                                         ticketTaskRepository.Update(model);
