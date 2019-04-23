@@ -177,7 +177,7 @@ namespace CJ.Services.Quartz.Jobs
                                         cookieContainer.Add(new RestResponseCookie()
                                         {
                                             Name = "_jc_save_fromStation",
-                                            Value = UnicodeHelper.String2Unicode(input.LeftStation.Name).Replace("\\", "%") + "%2C" + input.LeftStation.Code
+                                            Value = UnicodeHelper.String2Unicode(input.LeftStation.Name).Replace("\\", "%") + "%2C" + orderTicket.From_station_telecode
                                         });
 
                                         cookieContainer.Add(new RestResponseCookie()
@@ -208,7 +208,7 @@ namespace CJ.Services.Quartz.Jobs
                                         "secretStr=" +
                                         orderTicket.SecretStr +
                                         "&train_date=" + input.LeftDate + "&back_train_date=" + input.LeftDate + "&tour_flag=dc&purpose_codes=ADULT" +
-                                        "&query_from_station_name=" + input.LeftStation.Name + "&query_to_station_name=" + input.ArriveStation.Name,
+                                        "&query_from_station_name=" + orderTicket.From_station_name + "&query_to_station_name=" + orderTicket.From_station_name,
                                         ParameterType.RequestBody);
                                     IRestResponse response_1 = client_1.Execute(request_1);
 
@@ -400,11 +400,11 @@ namespace CJ.Services.Quartz.Jobs
                                     //  "Tue%20Apr%2030%202019%2000%3A00%3A00%20GMT%2B0800%20(%E4%B8%AD%E5%9B%BD%E6%A0%87%E5%87%86%E6%97%B6%E9%97%B4)" 
                                     request_5.AddParameter("application/x-www-form-urlencoded; charset=UTF-8 ",
                                         "train_date=" + dateStr +
-                                        "&train_no=" + orderQuestDTO.Train_no +
-                                        "&stationTrainCode=" + orderQuestDTO.Station_train_code +
+                                        "&train_no=" + orderTicket.Train_no +
+                                        "&stationTrainCode=" + orderTicket.Station_train_code +
                                         "&seatType=" + input.SeatType +
-                                        "&fromStationTelecode=" + orderQuestDTO.From_station_telecode
-                                        + "&toStationTelecode=" + orderQuestDTO.To_station_telecode +
+                                        "&fromStationTelecode=" + orderTicket.From_station_telecode
+                                        + "&toStationTelecode=" + orderTicket.To_station_telecode +
                                         "&leftTicket=" + ticketInfoForPassengerForm.QueryLeftTicketRequestDTO.YpInfoDetail +
                                         "&purpose_codes=00&train_location=" + ticketInfoForPassengerForm.Train_location + "&undefined=", ParameterType.RequestBody);
 
@@ -432,6 +432,7 @@ namespace CJ.Services.Quartz.Jobs
                                     #region confirmSingleForQueue
                                     var client_6 = new RestClient("https://kyfw.12306.cn/otn/confirmPassenger/confirmSingleForQueue");
                                     var request_6 = new RestRequest(Method.POST);
+                                    request_6.AddHeader("Accept", "application/json");
                                     request_6.AddHeader("Cache-Control", "no-cache");
                                     request_6.AddHeader("Connection", "true");
                                     request_6.AddHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
@@ -455,7 +456,7 @@ namespace CJ.Services.Quartz.Jobs
                                     $"&leftTicketStr={ticketInfoForPassengerForm.LeftTicketStr}&train_location={ticketInfoForPassengerForm.Train_location}" +
                                     $"&choose_seats=&seatDetailType=000&whatsSelect=1&roomType=00&dwAll=N";
 
-                                    request_6.AddParameter("x-www-form-urlencoded; charset=UTF-8 ",
+                                    request_6.AddParameter("application/x-www-form-urlencoded; charset=UTF-8",
                                     $"passengerTicketStr={input.SeatType},0,1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},{passengerDTOResponse.Data.Normal_passengers[0].Mobile_no},N" +
                                     $"&oldPassengerStr={passengerDTOResponse.Data.Normal_passengers[0].Passenger_name},1,{passengerDTOResponse.Data.Normal_passengers[0].Passenger_id_no},1_" +
                                     $"&randCode=&purpose_codes=00&" +

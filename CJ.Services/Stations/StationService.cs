@@ -884,7 +884,7 @@ namespace CJ.Services.Stations
             //  保存登录状态
             foreach (var item in cookieContainer)
             {
-                if (item.Name == "RAIL_DEVICEID" || item.Name == "RAIL_EXPIRATION")
+                if (item.Name == "RAIL_DEVICEID" || item.Name == "RAIL_EXPIRATION" || item.Name == "BIGipServerpool_passport")
                 {
                     loginStatusCookies.Add(item);
                 }
