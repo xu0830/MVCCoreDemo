@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CJ.Infrastructure.Cache;
+using CJ.Infrastructure.EmailHelper;
 using CJ.Services.Stations;
 using CJ.Services.Stations.Dtos;
 using Microsoft.AspNetCore.Mvc;
@@ -102,6 +103,20 @@ namespace MVCCoreDemo.ApiControllers
                     cookies = (IList<RestResponseCookie>)CacheHelper.GetCache(userName + "_loginStatus"),
                     flag = passenger.IsExist? true : false
                 });
+        }
+
+        // GET api/<controller>/5
+        [HttpPost("email")]
+        public string Email()
+        {
+            try
+            {
+                EmailHelper.Send("1126818689@qq.com", "订票成功", "订票成功,登录你的12306完成支付");
+            } catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+            return "";
         }
 
         // POST api/<controller>

@@ -58,18 +58,17 @@ namespace CJ.Services.Stations
 
                 var client_getjs = new RestClient("https://kyfw.12306.cn/otn/HttpZF/GetJS");
                 var request_getjs = new RestRequest(Method.GET);
-                request_getjs.AddHeader("Accept", "*/*");
                 request_getjs.AddHeader("Referer", "https://www.12306.cn/index/");
                 request_getjs.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
 
                 IRestResponse response_getjs = client_getjs.Execute(request_getjs);
-                int startIndex = response_getjs.Content.IndexOf("logdevice");
-                int endIndex = response_getjs.Content.IndexOf("x26hashCode");
+                //int startIndex = response_getjs.Content.IndexOf("logdevice");
+                //int endIndex = response_getjs.Content.IndexOf("x26hashCode");
 
-                string algIDStr = response_getjs.Content.Substring(startIndex, endIndex - startIndex);
-                startIndex = algIDStr.IndexOf("x3d") + 3;
-                endIndex = algIDStr.LastIndexOf("\\");
-                string algID = algIDStr.Substring(startIndex, endIndex - startIndex);
+                //string algIDStr = response_getjs.Content.Substring(startIndex, endIndex - startIndex);
+                //startIndex = algIDStr.IndexOf("x3d") + 3;
+                //endIndex = algIDStr.LastIndexOf("\\");
+                //string algID = algIDStr.Substring(startIndex, endIndex - startIndex);
 
                 #endregion
 
@@ -107,7 +106,6 @@ namespace CJ.Services.Stations
                 var client_0_1 = new RestClient("https://kyfw.12306.cn/otn/resources/login.html");
                 var request_0_1 = new RestRequest(Method.GET);
                 request_0_1.AddHeader("cache-control", "no-cache");
-                request_0_1.AddHeader("Connection", "true");
                 request_0_1.AddHeader("Host", "kyfw.12306.cn");
                 request_0_1.AddHeader("Referer", "https://kyfw.12306.cn/otn/resources/login.html");
                 request_0_1.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
@@ -119,21 +117,15 @@ namespace CJ.Services.Stations
                         request_0_1.AddParameter(cookie.Name, cookie.Value, ParameterType.Cookie);
                     }
                 }
-                /*
-                    MomBPBwgfrZqn2o0S1UmP5nTy4Gogq378uLfa4CMBey1VIYSASzf_SaTa8svTgOwbGiwbPQuqkVKUotLdoyl6k8Jdht7KChp9UDK0nx-V2er9i7SqmT38BWZmu9aGvdimgnoriLSDaXeZWvHag3_E8SYlObbDVCf
-                    1555255119707
-                 */
+              
                 IRestResponse response_0_1 = client_0_1.Execute(request_0_1);
 
                 #endregion
                
-                
-
                 #region https://kyfw.12306.cn/otn/login/conf
                 var client_1 = new RestClient("https://kyfw.12306.cn/otn/login/conf");
                 var request_1 = new RestRequest(Method.POST);
                 request_1.AddHeader("cache-control", "no-cache");
-                request_1.AddHeader("Connection", "true");
                 request_1.AddHeader("Host", "kyfw.12306.cn");
                 request_1.AddHeader("Referer", "https://kyfw.12306.cn/otn/resources/login.html");
                 request_1.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
@@ -170,7 +162,6 @@ namespace CJ.Services.Stations
                 var client_2 = new RestClient("https://kyfw.12306.cn/otn/index12306/getLoginBanner");
                 var request_2 = new RestRequest(Method.GET);
                 request_2.AddHeader("cache-control", "no-cache");
-                request_2.AddHeader("Connection", "true");
                 request_2.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
 
                 request_2.AddParameter("RAIL_DEVICEID", callBackFunction.Dfp, ParameterType.Cookie);
@@ -204,7 +195,6 @@ namespace CJ.Services.Stations
                 var client_3 = new RestClient("https://kyfw.12306.cn/passport/web/auth/uamtk-static");
                 var request_3 = new RestRequest(Method.POST);
                 request_3.AddHeader("cache-control", "no-cache");
-                request_3.AddHeader("Connection", "true");
                 request_3.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
 
                 if (cookieContainer.Count > 0)
@@ -291,6 +281,7 @@ namespace CJ.Services.Stations
 
 
                 #endregion
+
                 CaptchaImageDto captchaImage = JsonConvert.DeserializeObject<CaptchaImageDto>(response.Content);
 
                 StringBuilder sb = new StringBuilder();
@@ -352,7 +343,7 @@ namespace CJ.Services.Stations
                 var jobDetail = JobBuilder.Create<TicketOrderJob>()
                                 .UsingJobData("taskRunNum", 0)  //通过在Trigger中添加参数值
                                 .UsingJobData("ticketTask", dtoStr)
-                                .WithIdentity(dto.UserName)
+                                .WithIdentity(new JobKey(dto.UserName))
                                 .Build();
 
                 //5、将触发器和任务器绑定到调度器中
@@ -374,6 +365,7 @@ namespace CJ.Services.Stations
             ticketTaskObj.CreatedTime = DateTime.Now;
             ticketTaskObj.ArriveStation = input.ArriveStation.Name;
             ticketTaskObj.LeftStation = input.LeftStation.Name;
+            ticketTaskObj.TrainCode = string.Join(',', input.TrainCodes.ToArray());
             ticketTaskObj.Status = 0;
             ticketTaskObj = ticketTaskRepository.Insert(ticketTaskObj);
             ticketTaskObj.TrainCode = string.Join(",", input.TrainCodes.ToArray());

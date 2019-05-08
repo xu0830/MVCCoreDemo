@@ -36,7 +36,6 @@ F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\MVCCo
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\MVCCoreDemo.Views.pdb
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\Razor\Views\Login\Index.g.cshtml.cs
 F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\Razor\Views\Login\ResetPassword.g.cshtml.cs
-F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\MVCCoreDemo.dll
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\MVCCoreDemo.pdb
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\MVCCoreDemo.deps.json
@@ -80,3 +79,4 @@ F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.En
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.Entities.dll
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\bin\Debug\netcoreapp2.1\CJ.Entities.pdb
 C:\projects\vsprojects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+F:\vs_projects\my_projects\MVCCoreDemo\MVCCoreDemo\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs

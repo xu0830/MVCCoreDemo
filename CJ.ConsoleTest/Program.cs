@@ -21,6 +21,8 @@ using Quartz;
 using System.Threading.Tasks;
 using CJ.Infrastructure.Encode;
 using CJ.Services.Stations.Dtos;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace CJ.ConsoleTest
 {
@@ -119,24 +121,48 @@ namespace CJ.ConsoleTest
             #endregion
 
             // trigger async evaluation
+            StartScheduler("first");
 
-            var client_getjs = new RestClient("https://kyfw.12306.cn/otn/HttpZF/GetJS");
-            var request_getjs = new RestRequest(Method.GET);
-            request_getjs.AddHeader("Accept", "*/*");
-            request_getjs.AddHeader("Referer", "https://www.12306.cn/index/");
-            request_getjs.AddHeader("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0");
+            StartScheduler("second");
 
-            IRestResponse response_getjs = client_getjs.Execute(request_getjs);
-
-            int startIndex = response_getjs.Content.IndexOf("logdevice");
-            int endIndex = response_getjs.Content.IndexOf("x26hashCode");
-
-            string algIDStr = response_getjs.Content.Substring(startIndex, endIndex - startIndex);
-            startIndex = algIDStr.IndexOf("x3d") + 3;
-            endIndex = algIDStr.LastIndexOf("\\");
-            string algID = algIDStr.Substring(startIndex, endIndex - startIndex);
             Console.ReadLine();
 
+        }
+
+        private static async Task StartScheduler(string str)
+        {
+            try
+            {
+                // Grab the Scheduler instance from the Factory
+                NameValueCollection props = new NameValueCollection
+                {
+                    { "quartz.serializer.type", "binary" }
+                };
+                var schedulerFactory = new StdSchedulerFactory(props);
+                IScheduler scheduler = await schedulerFactory.GetScheduler();
+
+                // and start it off
+                await scheduler.Start();
+
+                var trigger = TriggerBuilder.Create()
+                            .WithSimpleSchedule(x => x.WithIntervalInSeconds(3).RepeatForever())//每60秒执行一次
+                            .WithIdentity(str)
+                            .Build();
+
+                //4、创建任务
+                var jobDetail = JobBuilder.Create<HelloJob>()
+                                .UsingJobData("taskRunNum", 0)  //通过在Trigger中添加参数值
+                                .UsingJobData("ticketTask", str)
+                                .WithIdentity(new JobKey(str))
+                                .Build();
+
+                //5、将触发器和任务器绑定到调度器中
+                await scheduler.ScheduleJob(jobDetail, trigger);
+            }
+            catch (SchedulerException ex)
+            {
+
+            }
         }
 
         private static async Task RunProgram()
@@ -164,7 +190,7 @@ namespace CJ.ConsoleTest
                             .WithIdentity("trigger", "group")
                             .Build();
                 //4、创建任务
-                var jobDetail = JobBuilder.Create<MyJob>()
+                var jobDetail = JobBuilder.Create<HelloJob>()
                                 .UsingJobData("key1", 321)  //通过在Trigger中添加参数值
                                 .UsingJobData("key2", "123")
                                 .WithIdentity("job", "group")
@@ -183,12 +209,12 @@ namespace CJ.ConsoleTest
                 await Console.Error.WriteLineAsync(se.ToString());
             }
         }
-
        
     }
 
+    [DisallowConcurrentExecution]
     [PersistJobDataAfterExecution]
-    public class MyJob : IJob//创建IJob的实现类，并实现Excute方法。
+    public class HelloJob : IJob//创建IJob的实现类，并实现Excute方法。
     {
         public Task Execute(IJobExecutionContext context)
         {
@@ -198,16 +224,10 @@ namespace CJ.ConsoleTest
 
             var data = context.MergedJobDataMap;//获取Job和Trigger中合并的参数
 
-            var value1 = jobData.GetInt("key1");
-            var value2 = jobData.GetString("key2");
+            var taskRunNum = jobData.GetInt("taskRunNum");
+            var ticketTask = jobData.GetString("ticketTask");
 
-           
-
-            var dtoStr = triggerData.GetString("key1");
-
-            var dto = JsonConvert.DeserializeObject<TicketTaskDto>(dtoStr);
-
-            jobData["key1"] = ++value1; 
+            jobData["taskRunNum"] = ++taskRunNum;
 
             return Task.Run(() =>
             {
@@ -215,9 +235,12 @@ namespace CJ.ConsoleTest
                 //{
                 //    sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss"));
                 //}
-                Console.WriteLine(dto);
-                Console.WriteLine(dto.GetType());
-                Console.WriteLine($"value1: {value1}");
+                Console.WriteLine($"taskRunNum: {taskRunNum}");
+                Console.WriteLine($"ticketTask: {ticketTask}");
+                if (taskRunNum == 4)
+                {
+                    context.Scheduler.DeleteJob(new JobKey("first"));
+                }
             });
         }
     }
